@@ -20,27 +20,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
-<meta name="description" content="! function () {     function o(w, v, i) {         return w.getAttribute(v) || i     }      function j(i) {         return document.getElementsByTagName(i)     }      function l() {         var i &#x3D; j(&quot;">
+<meta name="description" content="在做化学键分析时经常会用到径向分布函数RDF，为了省事，写了个Python脚本快速计算出相应原子或离子的RDF。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jonyafei&#39;s blog">
-<meta property="og:url" content="http://jonyafei.com/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/jquery_dotStar/index.html">
+<meta property="og:title" content="Python脚本计算RDF">
+<meta property="og:url" content="http://jonyafei.com/2021/06/07/Python%E8%84%9A%E6%9C%AC%E8%AE%A1%E7%AE%97RDF/index.html">
 <meta property="og:site_name" content="Jonyafei&#39;s blog">
-<meta property="og:description" content="! function () {     function o(w, v, i) {         return w.getAttribute(v) || i     }      function j(i) {         return document.getElementsByTagName(i)     }      function l() {         var i &#x3D; j(&quot;">
+<meta property="og:description" content="在做化学键分析时经常会用到径向分布函数RDF，为了省事，写了个Python脚本快速计算出相应原子或离子的RDF。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-06-06T12:33:20.002Z">
-<meta property="article:modified_time" content="2019-03-22T02:50:51.635Z">
+<meta property="og:image" content="http://jonyafei.com/2021/06/07/Python%E8%84%9A%E6%9C%AC%E8%AE%A1%E7%AE%97RDF/RDF.jpg">
+<meta property="article:published_time" content="2021-06-07T12:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-07T14:37:10.494Z">
 <meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jonyafei.com/2021/06/07/Python%E8%84%9A%E6%9C%AC%E8%AE%A1%E7%AE%97RDF/RDF.jpg">
 
 
-<link rel="canonical" href="http://jonyafei.com/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/jquery_dotStar/">
+<link rel="canonical" href="http://jonyafei.com/2021/06/07/Python%E8%84%9A%E6%9C%AC%E8%AE%A1%E7%AE%97RDF/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2021&#x2F;06&#x2F;06&#x2F;Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329&#x2F;jquery_dotStar&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;06&#x2F;Markdown常用语法20190329&#x2F;jquery_dotStar&#x2F;&quot;,&quot;title&quot;:&quot;&quot;}</script>
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2021&#x2F;06&#x2F;07&#x2F;Python%E8%84%9A%E6%9C%AC%E8%AE%A1%E7%AE%97RDF&#x2F;&quot;,&quot;path&quot;:&quot;2021&#x2F;06&#x2F;07&#x2F;Python脚本计算RDF&#x2F;&quot;,&quot;title&quot;:&quot;Python脚本计算RDF&quot;}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
-<title> | Jonyafei's blog</title>
+<title>Python脚本计算RDF | Jonyafei's blog</title>
   
 
 
@@ -106,7 +109,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -119,6 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">脚本下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD-1"><span class="nav-number">2.</span> <span class="nav-text">脚本下载</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,7 +190,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/jquery_dotStar/">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2021/06/07/Python%E8%84%9A%E6%9C%AC%E8%AE%A1%E7%AE%97RDF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/nezha.jpg">
@@ -199,7 +203,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          Python脚本计算RDF
         </h1>
 
         <div class="post-meta-container">
@@ -209,16 +213,19 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2021-06-06 20:33:20" itemprop="dateCreated datePublished" datetime="2021-06-06T20:33:20+08:00">2021-06-06</time>
+      <time title="创建时间：2021-06-07 20:00:00 / 修改时间：22:37:10" itemprop="dateCreated datePublished" datetime="2021-06-07T20:00:00+08:00">2021-06-07</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2019-03-22 10:50:51" itemprop="dateModified" datetime="2019-03-22T10:50:51+08:00">2019-03-22</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
       </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
 
   
 </div>
@@ -230,87 +237,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        ! function () {
-    function o(w, v, i) {
-        return w.getAttribute(v) || i
-    }
+        <p>在做化学键分析时经常会用到径向分布函数RDF，为了省事，写了个Python脚本快速计算出相应原子或离子的RDF。</p>
+<span id="more"></span>
 
-    function j(i) {
-        return document.getElementsByTagName(i)
-    }
+<p>待更新。。。<br><img src="RDF.jpg" width = "90%" alt="RDF"></p>
+<h2 id="脚本下载"><a href="#脚本下载" class="headerlink" title="脚本下载"></a>脚本下载</h2><p><a href="RDF.py">点击下载代码RDF.py</a></p>
+<h2 id="脚本下载-1"><a href="#脚本下载-1" class="headerlink" title="脚本下载"></a>脚本下载</h2><p><a href="RDF_analysis.py">点击下载代码RDF_analysis.py</a></p>
 
-    function l() {
-        var i = j("script"),
-            w = i.length,
-            v = i[w - 1];
-        return {
-            l: w,
-            z: o(v, "zIndex", -1),
-            o: o(v, "opacity", 0.5),
-            c: o(v, "color", "0,0,0"),
-            n: o(v, "count", 99)
-        }
-    }
-
-    function k() {
-        r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
-    }
-
-    function b() {
-        e.clearRect(0, 0, r, n);
-        var w = [f].concat(t);
-        var x, v, A, B, z, y;
-        t.forEach(function (i) {
-            i.x += i.xa, i.y += i.ya, i.xa *= i.x > r || i.x < 0 ? -1 : 1, i.ya *= i.y > n || i.y < 0 ? -1 : 1, e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);
-            for (v = 0; v < w.length; v++) {
-                x = w[v];
-                if (i !== x && null !== x.x && null !== x.y) {
-                    B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;
-                    y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
-                }
-            }
-            w.splice(w.indexOf(i), 1)
-        }), m(b)
-    }
-    var u = document.createElement("canvas"),
-        s = l(),
-        c = "c_n" + s.l,
-        e = u.getContext("2d"),
-        r, n, m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
-            window.setTimeout(i, 1000 / 45)
-        },
-        a = Math.random,
-        f = {
-            x: null,
-            y: null,
-            max: 20000
-        };
-    u.id = c;
-    u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
-    j("body")[0].appendChild(u);
-    k(), window.onresize = k;
-    window.onmousemove = function (i) {
-        i = i || window.event, f.x = i.clientX, f.y = i.clientY
-    }, window.onmouseout = function () {
-        f.x = null, f.y = null
-    };
-    for (var t = [], p = 0; s.n > p; p++) {
-        var h = a() * r,
-            g = a() * n,
-            q = 2 * a() - 1,
-            d = 2 * a() - 1;
-        t.push({
-            x: h,
-            y: g,
-            xa: q,
-            ya: d,
-            max: 6000
-        })
-    }
-    setTimeout(function () {
-        b()
-    }, 100)
-}();
     </div>
 
     
@@ -318,19 +251,19 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/operator/" rel="prev" title="">
+                <a href="/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/specialCharacters/" rel="prev" title="">
                   <i class="fa fa-chevron-left"></i> 
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/specialCharacters/" rel="next" title="">
-                   <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -397,7 +330,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;jonyafei&quot;,&quot;repo&quot;:&quot;Gitalk&quot;,&quot;client_id&quot;:&quot;d9a2a9434ba8c423af8a&quot;,&quot;client_secret&quot;:&quot;f2d0031fa8e51a0ef017c34647e5404d020d4920&quot;,&quot;admin_user&quot;:&quot;jonyafei&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.azm.workers.dev&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:null,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;gitalk@1.7.2&#x2F;dist&#x2F;gitalk.min.js&quot;,&quot;integrity&quot;:&quot;sha256-Pmj85ojLaPOWwRtlMJwmezB&#x2F;Qg8BzvJp5eTzvXaYAfA&#x3D;&quot;},&quot;path_md5&quot;:&quot;3d514404982b0061d3d2bd669ef6fe75&quot;}</script>
+<script class="next-config" data-name="gitalk" type="application/json">{&quot;enable&quot;:true,&quot;github_id&quot;:&quot;jonyafei&quot;,&quot;repo&quot;:&quot;Gitalk&quot;,&quot;client_id&quot;:&quot;d9a2a9434ba8c423af8a&quot;,&quot;client_secret&quot;:&quot;f2d0031fa8e51a0ef017c34647e5404d020d4920&quot;,&quot;admin_user&quot;:&quot;jonyafei&quot;,&quot;distraction_free_mode&quot;:true,&quot;proxy&quot;:&quot;https:&#x2F;&#x2F;cors-anywhere.azm.workers.dev&#x2F;https:&#x2F;&#x2F;github.com&#x2F;login&#x2F;oauth&#x2F;access_token&quot;,&quot;language&quot;:null,&quot;js&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;gitalk@1.7.2&#x2F;dist&#x2F;gitalk.min.js&quot;,&quot;integrity&quot;:&quot;sha256-Pmj85ojLaPOWwRtlMJwmezB&#x2F;Qg8BzvJp5eTzvXaYAfA&#x3D;&quot;},&quot;path_md5&quot;:&quot;b02f015378a77c96963ff562c2c3f29c&quot;}</script>
 <script src="/js/third-party/comments/gitalk.js"></script>
 <script src="/js/third-party/comments/livere.js"></script>
 
