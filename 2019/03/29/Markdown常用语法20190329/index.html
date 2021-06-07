@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="简介 Markdown文件以.md为后缀名，语法简单清晰，是Hexo博客环境下博客写作的常用文件。本文将简要介绍Markdown常用的语法结构，希望能对读者有所帮助。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Markdown 常用语法">
+<meta property="og:url" content="http://jonyafei.com/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="简介 Markdown文件以.md为后缀名，语法简单清晰，是Hexo博客环境下博客写作的常用文件。本文将简要介绍Markdown常用的语法结构，希望能对读者有所帮助。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jonyafei.com/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/icon-next.png">
+<meta property="og:image" content="http://jonyafei.com/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/icon-next.png">
+<meta property="article:published_time" content="2019-03-29T11:10:55.000Z">
+<meta property="article:modified_time" content="2019-09-02T14:45:11.039Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="Markdown">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jonyafei.com/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/icon-next.png">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;03&#x2F;29&#x2F;Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;03&#x2F;29&#x2F;Markdown常用语法20190329&#x2F;&quot;,&quot;title&quot;:&quot;Markdown 常用语法&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Markdown 常用语法 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">字体设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BA%A7%E6%A0%87%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">分级标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-number">4.1.</span> <span class="nav-text">有序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E5%BA%8F%E5%88%97%E8%A1%A8"><span class="nav-number">4.2.</span> <span class="nav-text">无序列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%B5%8C%E5%A5%97"><span class="nav-number">4.3.</span> <span class="nav-text">列表嵌套</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE%E6%98%BE%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">代码高亮显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">引用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E5%B5%8C%E5%A5%97%E5%90%84%E7%A7%8D%E6%A0%87%E9%A2%98%E5%92%8C%E5%88%97%E8%A1%A8-gt-gt-%E5%8F%AF%E5%B5%8C%E5%A5%97%E5%90%84%E7%A7%8D%E6%A0%87%E9%A2%98%E5%92%8C%E5%88%97%E8%A1%A8"><span class="nav-number">6.1.</span> <span class="nav-text">可嵌套各种标题和列表,  &gt;&gt; ### 可嵌套各种标题和列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%89%B2%E7%BA%BF"><span class="nav-number">7.</span> <span class="nav-text">分割线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD"><span class="nav-number">8.</span> <span class="nav-text">图片加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown%E5%86%99%E6%B3%95"><span class="nav-number">8.1.</span> <span class="nav-text">Markdown写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML%E6%A0%87%E7%AD%BE%E5%86%99%E6%B3%95"><span class="nav-number">8.2.</span> <span class="nav-text">HTML标签写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E6%8F%92%E4%BB%B6%E5%86%99%E6%B3%95"><span class="nav-number">8.3.</span> <span class="nav-text">标签插件写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9F%E6%9C%89%E5%8F%82%E6%95%B0%E5%BC%8F%E5%86%99%E6%B3%95%EF%BC%8C%E4%B8%8E%E9%93%BE%E6%8E%A5%E7%9A%84%E5%8F%82%E6%95%B0%E5%BC%8F%E5%86%99%E6%B3%95%E7%B1%BB%E4%BC%BC%EF%BC%8C%E6%B3%A8%E6%84%8F%E5%8A%A0%E6%84%9F%E5%8F%B9%E5%8F%B7"><span class="nav-number">8.4.</span> <span class="nav-text">也有参数式写法，与链接的参数式写法类似，注意加感叹号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E9%9F%B3%E9%A2%91"><span class="nav-number">9.</span> <span class="nav-text">插入视频音频</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html%E6%A0%87%E7%AD%BE%E5%86%99%E6%B3%95iframe"><span class="nav-number">9.1.</span> <span class="nav-text">html标签写法iframe</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%9F%E5%8F%AF%E4%BD%BF%E7%94%A8video%E6%A0%87%E7%AD%BE%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91"><span class="nav-number">9.2.</span> <span class="nav-text">也可使用video标签插入视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#video%E6%A0%87%E7%AD%BE%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E8%A7%86%E9%A2%91"><span class="nav-number">9.3.</span> <span class="nav-text">video标签添加本地视频</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5pdf%E6%96%87%E4%BB%B6"><span class="nav-number">10.</span> <span class="nav-text">插入pdf文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E7%94%A8iframe%E6%A0%87%E7%AD%BE%E5%86%99%E6%B3%95%EF%BC%8C%E6%AF%94%E5%A6%82%EF%BC%9A"><span class="nav-number">10.1.</span> <span class="nav-text">直接用iframe标签写法，比如：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0pdf%E6%8F%92%E4%BB%B6"><span class="nav-number">10.2.</span> <span class="nav-text">添加pdf插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8html%E6%A0%87%E7%AD%BE"><span class="nav-number">10.3.</span> <span class="nav-text">使用html标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B6%85%E9%93%BE%E6%8E%A5"><span class="nav-number">11.</span> <span class="nav-text">超链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5LaTeX%E5%85%AC%E5%BC%8F"><span class="nav-number">12.</span> <span class="nav-text">插入LaTeX公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E8%A1%A8%E6%A0%BC"><span class="nav-number">13.</span> <span class="nav-text">插入表格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Markdown%E8%A1%A8%E6%A0%BC%E5%86%99%E6%B3%95"><span class="nav-number">13.1.</span> <span class="nav-text">Markdown表格写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML%E7%9A%84table%E6%A0%87%E7%AD%BE%E5%86%99%E6%B3%95"><span class="nav-number">13.2.</span> <span class="nav-text">HTML的table标签写法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown%E5%85%BC%E5%AE%B9HTML%E8%AF%AD%E6%B3%95"><span class="nav-number">14.</span> <span class="nav-text">Markdown兼容HTML语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Markdown%E7%89%B9%E6%AE%8A%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81"><span class="nav-number">15.</span> <span class="nav-text">Markdown特殊字符编码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E9%94%9A%E7%82%B9%E5%8F%8A%E8%B7%B3%E8%BD%AC"><span class="nav-number">16.</span> <span class="nav-text">页面锚点及跳转</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Markdown 常用语法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-29 19:10:55" itemprop="dateCreated datePublished" datetime="2019-03-29T19:10:55+08:00">2019-03-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-09-02 22:45:11" itemprop="dateModified" datetime="2019-09-02T22:45:11+08:00">2019-09-02</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Markdown/" itemprop="url" rel="index"><span itemprop="name">Markdown</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Markdown文件以.md为后缀名，语法简单清晰，是Hexo博客环境下博客写作的常用文件。本文将简要介绍Markdown常用的语法结构，希望能对读者有所帮助。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="字体设置"><a href="#字体设置" class="headerlink" title="字体设置"></a>字体设置</h2><ul>
+<li><strong>加粗</strong>，文字左右两侧加**, <code>**加粗**</code></li>
+<li><em>斜体</em>，文字左右两侧加*, <code>*斜体*</code></li>
+<li><em><strong>斜体加粗</strong></em>，文字左右两侧加***,  <code>***斜体加粗***</code></li>
+<li><del>删除线</del>，文字左右两侧加~~, <code>~~删除线~~</code></li>
+</ul>
+<h2 id="分级标题"><a href="#分级标题" class="headerlink" title="分级标题"></a>分级标题</h2><ul>
+<li>共6个级别的标题，N个#就表示N级标题，标题内容与#之间加空格<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><ol>
+<li>有序列表，<code>1. 以数字开头，点与列表内容之间加空格</code></li>
+<li>有序列表，<code>2. 以数字开头，点与列表内容之间加空格</code></li>
+<li>有序列表，<code>3. 以数字开头，点与列表内容之间加空格</code></li>
+</ol>
+<h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
+<li>以*，-，+ 任意一种符号开头均可以, 符号与列表内容间加空格</li>
+</ul>
+<ul>
+<li>无序列表，<code>* 无序列表</code></li>
+<li>无序列表，<code>* 无序列表</code></li>
+</ul>
+<ul>
+<li>无序列表，<code>- 无序列表</code></li>
+<li>无序列表，<code>- 无序列表</code></li>
+</ul>
+<ul>
+<li>无序列表，<code>+ 无序列表</code></li>
+<li>无序列表，<code>+ 无序列表</code></li>
+</ul>
+<h3 id="列表嵌套"><a href="#列表嵌套" class="headerlink" title="列表嵌套"></a>列表嵌套</h3><ul>
+<li>上一级<ul>
+<li>下一级符号前加三个空格<ul>
+<li>第三级，下一级相对于上一级，在符号前再加三个空格<ol>
+<li>第四级，有序列表与无序列表可相互嵌套</li>
+<li>第四级，有序列表</li>
+<li>第四级，有序列表</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="代码高亮显示"><a href="#代码高亮显示" class="headerlink" title="代码高亮显示"></a>代码高亮显示</h2><ul>
+<li>单行代码，代码内容用单个反引号包起来，`<code>代码内容</code>`</li>
+<li>多行代码，代码内容用三个反引号包起来，<br>` ` `<br>第一行代码<br>第二行代码<br>第三行代码<br>&#39;&#39;&#39;</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><ul>
+<li>以<code>&gt;</code>开头，注意加空格</li>
+</ul>
+<blockquote>
+<p>引用 <code>&gt; 引用</code></p>
+<blockquote>
+<p>嵌套引用，可无限次加<code>&gt;</code>,  <code>&gt;&gt; 嵌套引用</code></p>
+<blockquote>
+<h3 id="可嵌套各种标题和列表-gt-gt-可嵌套各种标题和列表"><a href="#可嵌套各种标题和列表-gt-gt-可嵌套各种标题和列表" class="headerlink" title="可嵌套各种标题和列表,  &gt;&gt; ### 可嵌套各种标题和列表"></a>可嵌套各种标题和列表,  <code>&gt;&gt; ### 可嵌套各种标题和列表</code></h3><ul>
+<li>可嵌套各种标题和列表,  <code>&gt;&gt; - 可嵌套各种标题和列表</code></li>
+</ul>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><ul>
+<li>分割线可以由 <code>*</code>  <code>-</code>  <code>_</code>这三种符号写三个以上，有空格也可以,<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">***</span><br><span class="line">----</span><br><span class="line">- - - - </span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="图片加载"><a href="#图片加载" class="headerlink" title="图片加载"></a>图片加载</h2><ul>
+<li>把主页配置文件_config.yml 里的post_asset_folder:这个选项设置为true</li>
+<li>在Git bash里执行命令<code>npm install https://github.com/CodeFalling/hexo-asset-image -- save</code>，下载安装一个可以上传本地图片的插件</li>
+<li>图片的路径是相对于/hexo/source/目录的；若是使用<code>hexo new blogName</code>创建的博客，图片可直接放在新创建的同名文件夹中，不必写图片路径</li>
+</ul>
+<h3 id="Markdown写法"><a href="#Markdown写法" class="headerlink" title="Markdown写法"></a>Markdown写法</h3><p>格式： <code>![图片描述title](图片路径url)</code><br>格式比较简单，但无法控制图片大小</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![icon-next01](icon-next.png)</span><br></pre></td></tr></table></figure>
+<p><img src="icon-next.png" alt="icon-next01"></p>
+<h3 id="HTML标签写法"><a href="#HTML标签写法" class="headerlink" title="HTML标签写法"></a>HTML标签写法</h3><p>格式：  <code>&lt;img src=&quot;/path/file_name&quot; width=&quot;100px&quot; alt=&quot;pic_discription&quot;&gt;</code><br>src为图片文件路径及名字，width控制显示的图片宽度（百分比，或者像素，比如200px），alt为图片描述信息。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;icon-next.png&quot; width = &quot;10%&quot; alt=&quot;icon-next&quot;&gt;</span><br></pre></td></tr></table></figure>
+<img src="icon-next.png" width = "10%" alt="next-icon02"> 
+
+<h3 id="标签插件写法"><a href="#标签插件写法" class="headerlink" title="标签插件写法"></a>标签插件写法</h3><p> 路径，图片尺寸（可选），替代文本（可选） </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式： &#123;% img /path/to/image [width] [height] [title text [alt text]] %&#125;</span><br><span class="line">示例： &#123;% img icon-next.png icon-next03 %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="也有参数式写法，与链接的参数式写法类似，注意加感叹号"><a href="#也有参数式写法，与链接的参数式写法类似，注意加感叹号" class="headerlink" title="也有参数式写法，与链接的参数式写法类似，注意加感叹号"></a>也有参数式写法，与链接的参数式写法类似，注意加感叹号</h3><hr>
+<h2 id="插入视频音频"><a href="#插入视频音频" class="headerlink" title="插入视频音频"></a>插入视频音频</h2><h3 id="html标签写法iframe"><a href="#html标签写法iframe" class="headerlink" title="html标签写法iframe"></a>html标签写法iframe</h3><p>将视频或音频链接及设置放入iframe标签内，可通过引入div标签控制视频排版位置</p>
+<ul>
+<li>在线视频获取方式：打开网页视频，点击分享按钮，可找到嵌入代码，复制即可。<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;//player.bilibili.com/player.html?aid=46549147&amp;cid=81547553&amp;page=1&quot;</span> <span class="attr">height</span>=<span class="string">&quot;300px&quot;</span> <span class="attr">width</span>=<span class="string">&quot;400px&quot;</span> <span class="attr">scrolling</span>=<span class="string">&quot;no&quot;</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;no&quot;</span> <span class="attr">framespacing</span>=<span class="string">&quot;0&quot;</span> <span class="attr">allowfullscreen</span>=<span class="string">&quot;true&quot;</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<div align="center">
+  <iframe src="//player.bilibili.com/player.html?aid=46549147&cid=81547553&page=1" height="300px" width="400px" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> 
+  </iframe>
+</div></li>
+</ul>
+<h3 id="也可使用video标签插入视频"><a href="#也可使用video标签插入视频" class="headerlink" title="也可使用video标签插入视频"></a>也可使用video标签插入视频</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">&quot;video&quot;</span> <span class="attr">width</span>=<span class="string">&quot;300px&quot;</span> <span class="attr">height</span>=<span class="string">&quot;200px&quot;</span> <span class="attr">controls</span>=<span class="string">&quot;&quot;</span> <span class="attr">preload</span>=<span class="string">&quot;none&quot;</span> <span class="attr">poster</span>=<span class="string">&quot;http://media.w3.org/2010/05/sintel/poster.png&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">source</span> <span class="attr">id</span>=<span class="string">&quot;mp4&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://media.w3.org/2010/05/sintel/trailer.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">source</span> <span class="attr">id</span>=<span class="string">&quot;webm&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://media.w3.org/2010/05/sintel/trailer.webm&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/webm&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">source</span> <span class="attr">id</span>=<span class="string">&quot;ogv&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://media.w3.org/2010/05/sintel/trailer.ogv&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/ogg&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Your user agent does not support the HTML5 Video element.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<video id="video" width="300px" height="200px" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+      <source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+      <source id="webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
+      <source id="ogv" src="http://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
+      <p>Your user agent does not support the HTML5 Video element.</p>
+</video>
+
+<h3 id="video标签添加本地视频"><a href="#video标签添加本地视频" class="headerlink" title="video标签添加本地视频"></a>video标签添加本地视频</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">&quot;300px&quot;</span> <span class="attr">height</span>=<span class="string">&quot;200px&quot;</span> <span class="attr">src</span>=<span class="string">&quot;property的使用.mkv&quot;</span> <span class="attr">controls</span>=<span class="string">&quot;controls&quot;</span>&gt;</span></span><br><span class="line">The `<span class="tag">&lt;<span class="name">video</span>&gt;</span>` tag is not supported by your browser.</span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<video width="300px" height="200px" src="property的使用.mkv" controls="controls">
+The `<video>` tag is not supported by your browser.
+</video>
+
+<hr>
+<h2 id="插入pdf文件"><a href="#插入pdf文件" class="headerlink" title="插入pdf文件"></a>插入pdf文件</h2><h3 id="直接用iframe标签写法，比如："><a href="#直接用iframe标签写法，比如：" class="headerlink" title="直接用iframe标签写法，比如："></a>直接用iframe标签写法，比如：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% iframe PyMol.pdf 800px %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加pdf插件"><a href="#添加pdf插件" class="headerlink" title="添加pdf插件"></a>添加pdf插件</h3><p>需安装pdf插件，安装命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-pdf</span><br></pre></td></tr></table></figure>
+<p>在md文件中的写法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% pdf PyMol.pdf 600px %&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用html标签"><a href="#使用html标签" class="headerlink" title="使用html标签"></a>使用html标签</h3><p>有两种写法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">embed</span> <span class="attr">src</span>=<span class="string">&quot;PyMol.pdf&quot;</span></span></span><br><span class="line"><span class="tag">         <span class="attr">id</span>=<span class="string">&quot;review&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:800px;  height:400px; margin-top:5px;margin-left:0px&quot;</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">embed</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">type</span>=<span class="string">&quot;application/pdf&quot;</span> <span class="attr">data</span>=<span class="string">&quot;PyMol.pdf&quot;</span></span></span><br><span class="line"><span class="tag">           <span class="attr">id</span>=<span class="string">&quot;review&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width:800px;  height:450px; margin-top:5px;  margin-left:0px&quot;</span> &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a><span id="jump">超链接</span></h2><ul>
+<li>格式与图片的Markdown写法类似，差别是不加 ! 符号，<code>[文字描述title](链接地址url)</code></li>
+<li>参数式写法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Bing]: https://cn.bing.com/</span><br><span class="line">[百度]: http://www.baidu.com/</span><br><span class="line">这是[Bing]，可使用[百度]搜索，支持中文</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>这是<a target="_blank" rel="noopener" href="https://cn.bing.com/">Bing</a>，可使用<a target="_blank" rel="noopener" href="http://www.baidu.com/">百度</a>搜索，支持中文</p>
+<ul>
+<li><p>也可以链接本地的html文档<br><code>[自建网页](operator.html)</code><br><a href="operator.html">自建网页</a></p>
+</li>
+<li><p>也可以使用html的a标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;specialCharacters.html&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>查看特殊字符编码<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>更多标签插件，请见<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins">https://hexo.io/zh-cn/docs/tag-plugins</a></p>
+</li>
+</ul>
+<hr>
+<h2 id="插入LaTeX公式"><a href="#插入LaTeX公式" class="headerlink" title="插入LaTeX公式"></a>插入LaTeX公式</h2><p>要想引入LaTeX公式，需要在文章开始部分加入MathJax.js的调用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">async</span></span></span><br><span class="line"><span class="tag">  <span class="attr">src</span>=<span class="string">&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>MarkDown中使用标识符<font face="Arial" color=green size=3><code>$$$$</code></font>即可表示引入LaTeX语法，<code>$$$$</code>之间的公式为行间公式，会换行后居中。<br><code>$$</code>之间的公式为行内公式，即在所使用位置使用LaTeX的格式，但是，单个$也可表示美元符号等其它含义，默认情况下是不支持的，故可换一种写法<code>\\(...\\)</code>，省略号里是要写入的LaTeX公式。例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$</span><br><span class="line">f(x;\mu,\sigma^2) = \frac&#123;1&#125;&#123;\sigma\sqrt&#123;2\pi&#125;&#125; e^&#123; -\frac&#123;1&#125;&#123;2&#125;\left(\frac&#123;x-\mu&#125;&#123;\sigma&#125;\right)^2 &#125; \tag&#123;1&#125;</span><br><span class="line">$$</span><br><span class="line">where \\(\mu\\) is the mean value, \\(\sigma^2\\) is standard deviation.</span><br><span class="line">Schrödinger Equation can be written as</span><br><span class="line">$$</span><br><span class="line">i\hbar\frac&#123;\partial&#125;&#123;\partial t&#125;\Psi(r,t)=-\frac&#123;\hbar^2&#125;&#123;2m&#125;\nabla^2\Psi(r,t)+V(r,t)\Psi(r,t) \tag&#123;2&#125;</span><br><span class="line">$$</span><br></pre></td></tr></table></figure>
+
+<p>$$<br>f(x;\mu,\sigma^2) = \frac{1}{\sigma\sqrt{2\pi}} e^{ -\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2 } \tag{1}<br>$$<br>where \(\mu\) is the mean value, \(\sigma^2\) is standard deviation.<br>Schrödinger Equation can be written as<br>$$<br>i\hbar\frac{\partial}{\partial t}\Psi(r,t)=-\frac{\hbar^2}{2m}\nabla^2\Psi(r,t)+V(r,t)\Psi(r,t) \tag{2}<br>$$</p>
+<hr>
+<h2 id="插入表格"><a href="#插入表格" class="headerlink" title="插入表格"></a>插入表格</h2><h3 id="Markdown表格写法"><a href="#Markdown表格写法" class="headerlink" title="Markdown表格写法"></a>Markdown表格写法</h3><ul>
+<li>Markdown 制作表格使用竖线 <font face="黑体" color=blue size=4>|</font> 来分隔不同的单元格，使用 短横线 <font face="黑体" color=blue size=4>-</font> 来分隔表头和其他行。</li>
+<li>设置表格的对齐方式：</li>
+<li>: 设置内容和标题栏居右对齐。<br>:- 设置内容和标题栏居左对齐。<br>:-: 设置内容和标题栏居中对齐。</li>
+<li>表格内容须与上下内容用空行隔开</li>
+<li>若想在表格中打印 |，可输入<code>&amp;#124</code>，会自动转义为 |。</li>
+</ul>
+<p>例如，输入如下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 左对齐 | 居中对齐 | 右对齐 |</span><br><span class="line">| :-----| :----: | ----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br></pre></td></tr></table></figure>
+<p>会转成下面这样的表格：</p>
+<table>
+<thead>
+<tr>
+<th align="left">左对齐</th>
+<th align="center">居中对齐</th>
+<th align="right">右对齐</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">单元格</td>
+<td align="center">单元格</td>
+<td align="right">单元格</td>
+</tr>
+<tr>
+<td align="left">单元格</td>
+<td align="center">单元格</td>
+<td align="right">单元格</td>
+</tr>
+</tbody></table>
+<h3 id="HTML的table标签写法"><a href="#HTML的table标签写法" class="headerlink" title="HTML的table标签写法"></a>HTML的table标签写法</h3><p>把表格内容放到table标签内，行内容用tr标签，列内容用td标签<br>可以使用colspan和rowspan实现了单元格合并</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>序号<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>水果<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>价格<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>苹果<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>6.9<span class="tag">&lt;/<span class="name">td</span>&gt;</span>        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>2<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>香蕉<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>2.9<span class="tag">&lt;/<span class="name">td</span>&gt;</span>        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>但是，默认情况下Markdown打印出来会显示好多空行，这是由于导入的html中自带的回车符导致的，解决办法是把标签之间的换行符删除，所有内容写到一行里。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>序号<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>水果<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>价格<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>1<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>苹果<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>6.9<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>2<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>香蕉<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>2.9<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<table><tr><td>序号</td><td>水果</td><td>价格</td></tr><tr><td>1</td><td>苹果</td><td>6.9</td></tr><tr><td>2</td><td>香蕉</td><td>2.9</td></tr></table>
+
+<h2 id="Markdown兼容HTML语法"><a href="#Markdown兼容HTML语法" class="headerlink" title="Markdown兼容HTML语法"></a>Markdown兼容HTML语法</h2><ul>
+<li>如上面提到的图片及视频加载方法，表格写法，超链接等</li>
+<li>换行符 <code>&lt;br /&gt;</code> </li>
+<li>水平线 <code>&lt;hr /&gt;</code></li>
+<li>字体设置:字体类型，颜色，字号；颜色也可采用十六进制<br><code>&lt;font face=&quot;黑体&quot; color=green size=3&gt;我是黑体，绿色，尺寸为3&lt;/font&gt;</code><br /><br><font face="黑体" color=green size=3>我是黑体，绿色，尺寸为3</font><br><code>&lt;font face=&quot;宋体&quot; color=&quot;#9400D3&quot; size=3&gt;我是宋体，深紫罗兰色，尺寸为3&lt;/font&gt;</code><br><font face="宋体" color="#9400D3" size=3>我是宋体，深紫罗兰色，尺寸为3</font></li>
+</ul>
+<h2 id="Markdown特殊字符编码"><a href="#Markdown特殊字符编码" class="headerlink" title="Markdown特殊字符编码"></a>Markdown特殊字符编码</h2><p>想输入某个特殊字符时，可直接写以&amp;符号开头的对应的编码，与左右文字空格隔开。<br><a href="specialCharacters.html" target="_blank">查看特殊字符编码</a></p>
+<h2 id="页面锚点及跳转"><a href="#页面锚点及跳转" class="headerlink" title="页面锚点及跳转"></a>页面锚点及跳转</h2><p>在需要跳转至的地方设置锚点，“jump”即为锚点id，可以自定义，在需要跳转的位置，链接此id即可实现跳转。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">&quot;jump&quot;</span>&gt;</span>超链接<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在需要点击进行跳转的地方链接锚点id：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[点击跳转至超链接一节](#jump)</span><br></pre></td></tr></table></figure>
+<p><a href="#jump">点击跳转至超链接一节</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/03/29/Hexo%20Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE20190329/" rel="prev" title="Next 主题配置">
+                  <i class="fa fa-chevron-left"></i> Next 主题配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/26/linux%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="next" title="linux操作之常用命令">
+                  linux操作之常用命令 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

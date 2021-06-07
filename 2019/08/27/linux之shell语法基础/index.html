@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Shell脚本和编程语言很相似，也有变量和流程控制语句，但Shell脚本是解释执行的，不需要编译，Shell程序从脚本中一行一行读取并执行这些命令，相当于一个用户把脚本中的命令一行一行敲到Shell提示符下执行。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux之shell语法基础">
+<meta property="og:url" content="http://jonyafei.com/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="Shell脚本和编程语言很相似，也有变量和流程控制语句，但Shell脚本是解释执行的，不需要编译，Shell程序从脚本中一行一行读取并执行这些命令，相当于一个用户把脚本中的命令一行一行敲到Shell提示符下执行。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jonyafei.com/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/awk_operator.png">
+<meta property="article:published_time" content="2019-08-27T14:00:55.000Z">
+<meta property="article:modified_time" content="2020-05-29T09:17:19.554Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jonyafei.com/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/awk_operator.png">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;08&#x2F;27&#x2F;linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;08&#x2F;27&#x2F;linux之shell语法基础&#x2F;&quot;,&quot;title&quot;:&quot;linux之shell语法基础&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>linux之shell语法基础 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">脚本执行：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%B0%83%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">变量定义与调用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%B8%8E%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">环境变量与本地变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E5%8F%82%E6%95%B0%E5%8F%98%E9%87%8F%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%E4%B8%8E%E5%88%97%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">外部参数变量、自定义变量与列变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sed%E8%B0%83%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">sed调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#awk%E8%B0%83%E7%94%A8"><span class="nav-number">2.2.2.</span> <span class="nav-text">awk调用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E5%8F%B7%E4%B8%8E%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">引号与通配符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E9%85%8D%E7%AC%A6"><span class="nav-number">3.1.</span> <span class="nav-text">通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E4%BB%A3%E6%8D%A2%E4%B8%8E%E7%AE%97%E6%9C%AF%E4%BB%A3%E6%8D%A2"><span class="nav-number">3.2.</span> <span class="nav-text">命令代换与算术代换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%BC%95%E5%8F%B7%E4%B8%8E%E5%8F%8C%E5%BC%95%E5%8F%B7"><span class="nav-number">3.3.</span> <span class="nav-text">单引号与双引号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">grep命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#options-%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">[options]主要参数：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8F%82%E6%95%B0%E6%8E%A7%E5%88%B6"><span class="nav-number">4.1.1.</span> <span class="nav-text">正则表达式参数控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%8E%A7%E5%88%B6"><span class="nav-number">4.1.2.</span> <span class="nav-text">输出控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BE%93%E5%87%BA%E6%8E%A7%E5%88%B6"><span class="nav-number">4.1.3.</span> <span class="nav-text">上下文输出控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pattern%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%BB%E8%A6%81%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="nav-number">4.2.</span> <span class="nav-text">pattern正则表达式主要参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">4.3.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sed%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">sed命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#option%E5%8F%82%E6%95%B0"><span class="nav-number">5.1.</span> <span class="nav-text">option参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E6%8C%87%E4%BB%A4%E6%93%8D%E4%BD%9C"><span class="nav-number">5.2.</span> <span class="nav-text">脚本指令操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E7%94%A8%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">另一种用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#awk%E5%91%BD%E4%BB%A4"><span class="nav-number">6.</span> <span class="nav-text">awk命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#option%E5%8F%82%E6%95%B0-1"><span class="nav-number">6.1.</span> <span class="nav-text">option参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E7%94%A8%E6%B3%95"><span class="nav-number">6.3.</span> <span class="nav-text">高阶用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">shell之字符串常用操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.1.</span> <span class="nav-text">插入字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.2.</span> <span class="nav-text">替换字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E5%AD%97%E7%AC%A6"><span class="nav-number">7.2.1.</span> <span class="nav-text">替换字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E9%A6%96%E5%AD%97%E7%AC%A6"><span class="nav-number">7.2.2.</span> <span class="nav-text">删除首字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E8%A1%8C"><span class="nav-number">7.2.3.</span> <span class="nav-text">删除指定行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%A9%BA%E8%A1%8C"><span class="nav-number">7.2.4.</span> <span class="nav-text">删除空行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.3.</span> <span class="nav-text">提取字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E5%AD%90%E4%B8%B2%E5%88%86%E5%89%B2%E6%88%AA%E5%8F%96"><span class="nav-number">7.3.1.</span> <span class="nav-text">按子串分割截取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E4%BD%8D%E7%BD%AE%E5%8F%8A%E9%95%BF%E5%BA%A6%E6%8F%90%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.3.2.</span> <span class="nav-text">按位置及长度提取字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">7.3.3.</span> <span class="nav-text">单个指定字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%97%B4%E7%9A%84%E6%96%87%E6%9C%AC%EF%BC%88%E5%8D%95%E8%A1%8C%EF%BC%89"><span class="nav-number">7.3.4.</span> <span class="nav-text">两个指定字符串间的文本（单行）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%8C%87%E5%AE%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%97%B4%E7%9A%84%E6%96%87%E6%9C%AC%EF%BC%88%E5%A4%9A%E8%A1%8C%EF%BC%89"><span class="nav-number">7.3.5.</span> <span class="nav-text">两个指定字符串间的文本（多行）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E8%BE%93%E5%87%BA"><span class="nav-number">8.</span> <span class="nav-text">文本输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA"><span class="nav-number">8.1.</span> <span class="nav-text">格式化输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#echo-%E6%89%93%E5%8D%B0%E8%BE%93%E5%87%BA"><span class="nav-number">8.2.</span> <span class="nav-text">echo 打印输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printf%E6%89%93%E5%8D%B0%E8%BE%93%E5%87%BA"><span class="nav-number">8.3.</span> <span class="nav-text">printf打印输出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">9.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="nav-number">10.</span> <span class="nav-text">数学运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4"><span class="nav-number">10.1.</span> <span class="nav-text">运算执行命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.1.</span> <span class="nav-text">算数运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.2.</span> <span class="nav-text">关系运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.3.</span> <span class="nav-text">逻辑运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.4.</span> <span class="nav-text">字符串运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">10.2.5.</span> <span class="nav-text">文件测试运算符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-number">11.</span> <span class="nav-text">shell流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93"><span class="nav-number">11.1.</span> <span class="nav-text">管道|</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%8E%A7%E5%88%B6"><span class="nav-number">11.2.</span> <span class="nav-text">条件控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#if"><span class="nav-number">11.2.1.</span> <span class="nav-text">if</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if-else"><span class="nav-number">11.2.2.</span> <span class="nav-text">if else</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if-elif-else"><span class="nav-number">11.2.3.</span> <span class="nav-text">if elif else</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for%E5%BE%AA%E7%8E%AF"><span class="nav-number">11.3.</span> <span class="nav-text">for循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#while%E5%BE%AA%E7%8E%AF"><span class="nav-number">11.4.</span> <span class="nav-text">while循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case%E5%A4%9A%E9%80%89%E6%8B%A9%E8%AF%AD%E5%8F%A5"><span class="nav-number">11.5.</span> <span class="nav-text">case多选择语句</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell%E5%87%BD%E6%95%B0"><span class="nav-number">12.</span> <span class="nav-text">shell函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">13.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%96%E9%83%A8%E8%84%9A%E6%9C%AC%E5%BC%95%E7%94%A8"><span class="nav-number">13.1.</span> <span class="nav-text">外部脚本引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">13.2.</span> <span class="nav-text">输入输出重定向</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux之shell语法基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-27 22:00:55" itemprop="dateCreated datePublished" datetime="2019-08-27T22:00:55+08:00">2019-08-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-05-29 17:17:19" itemprop="dateModified" datetime="2020-05-29T17:17:19+08:00">2020-05-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Shell脚本和编程语言很相似，也有变量和流程控制语句，但Shell脚本是解释执行的，不需要编译，Shell程序从脚本中一行一行读取并执行这些命令，相当于一个用户把脚本中的命令一行一行敲到Shell提示符下执行。</p>
+<span id="more"></span>
+
+<h2 id="脚本执行："><a href="#脚本执行：" class="headerlink" title="脚本执行："></a>脚本执行：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x test.sh</span><br><span class="line">./test.sh</span><br></pre></td></tr></table></figure>
+<p>Shell脚本中用#表示注释，但第一行开头的#!则例外，它表示该脚本使用后面指定的解释器/bin/sh解释执行。</p>
+<h2 id="变量定义与调用"><a href="#变量定义与调用" class="headerlink" title="变量定义与调用"></a>变量定义与调用</h2><h3 id="环境变量与本地变量"><a href="#环境变量与本地变量" class="headerlink" title="环境变量与本地变量"></a>环境变量与本地变量</h3><p>按照惯例，Shell变量由全大写字母加下划线组成，有两种类型的Shell变量：</p>
+<ul>
+<li>环境变量<br>环境变量可以从父进程传给子进程。</li>
+<li>本地变量<br>只存在于当前Shell进程。定义或赋值一个变量时，等号两边都不能有空格。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VARNAME=value</span><br></pre></td></tr></table></figure>
+一个变量定义后仅存在于当前Shell进程，它是本地变量，用export命令可以把本地变量导出为环境变量，定义和导出环境变量通常可以一步完成，也可分两步完成：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> VARNAME=value</span><br><span class="line">PATH=<span class="string">&quot;/home/bin/&quot;</span></span><br><span class="line"><span class="built_in">export</span> PATH</span><br></pre></td></tr></table></figure>
+用unset命令可以删除已定义的环境变量或本地变量。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">unset</span> VARNAME</span><br></pre></td></tr></table></figure>
+Shell变量不需要明确定义类型，事实上Shell变量的值都是字符串。<br>注意，在定义变量时不用$，取变量值时要用$。用${VARNAME}可以表示它的值，在不引起歧义的情况下也可以用$VARNAME表示它的值。<h3 id="外部参数变量、自定义变量与列变量"><a href="#外部参数变量、自定义变量与列变量" class="headerlink" title="外部参数变量、自定义变量与列变量"></a>外部参数变量、自定义变量与列变量</h3>Shell语言的变量调用，有外部参数变量$1，内部自定义变量$variation，还有行和列变量$2。</li>
+</ul>
+<p>传入外部参数给脚本：例如./extract.sh Pt1 O1<br>$0 脚本本身<br>$1 第一个参数，值为Pt1<br>$2 第二个参数，值为O1</p>
+<p>awk列模式变量 $1, $2, … 表示第一列，第二列，，，，注意只在awk内部起作用</p>
+<h4 id="sed调用"><a href="#sed调用" class="headerlink" title="sed调用"></a>sed调用</h4><p>sed一般使用单引号，sed引用shell变量时使用双引号即可，因为双引号是弱转义，不会去除$的变量表示功能，而单引号为强转义，会把$作为一般符号表示，所以不会表示为变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s/$pattern1/$pattern2/g&quot; inputfile</span><br></pre></td></tr></table></figure>
+
+<h4 id="awk调用"><a href="#awk调用" class="headerlink" title="awk调用"></a>awk调用</h4><p>awk在调用shell变量时，需要使用参数-v,举例说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk  -v b=$count &#x27;&#123;sum += $1&#125;;END &#123;print sum/b&#125;&#x27;  filename</span><br></pre></td></tr></table></figure>
+<p>其中$count为自定义变量，每调用一次变量都要加一个-v参数，后面使用自定义变量的时候，就不用加$了，直接是b就好了；$1是列变量，只存在于awk命令的单引号中。</p>
+<h2 id="引号与通配符"><a href="#引号与通配符" class="headerlink" title="引号与通配符"></a>引号与通配符</h2><h3 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h3><ul>
+<li>* 匹配0个或多个任意字符</li>
+<li>? 匹配一个任意字符</li>
+<li>[若干字符] 匹配方括号中任意一个字符的一次出现</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp test* ../newfile/  # 匹配以test开头的文件</span><br><span class="line">cp test?.sh ../  </span><br><span class="line">cp test[0-2].sh ../</span><br><span class="line">cp test[012].py ../</span><br></pre></td></tr></table></figure>
+<h3 id="命令代换与算术代换"><a href="#命令代换与算术代换" class="headerlink" title="命令代换与算术代换"></a>命令代换与算术代换</h3><ul>
+<li>由`反引号括起来的也是一条命令，Shell先执行该命令，然后将输出结果立刻代换到当前命令行中；也可以用$()表示<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DATE=`date`</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$DATE</span></span><br><span class="line"></span><br><span class="line">DATE=$(date)</span><br></pre></td></tr></table></figure></li>
+<li>$(())或$[]中的Shell变量取值将转换成整数，只能用+-*/和()运算符，并且只能做整数运算。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VAR=21</span><br><span class="line"><span class="built_in">echo</span> $((<span class="variable">$VAR</span>+<span class="number">3</span>))</span><br><span class="line"><span class="built_in">echo</span> $[3*5+6]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="单引号与双引号"><a href="#单引号与双引号" class="headerlink" title="单引号与双引号"></a>单引号与双引号</h3><p>Shell脚本中的单引号和双引号一样都是字符串的界定符，单引号用于保持引号内所有字符的字面值，即使引号内的\和回车也不例外，但是字符串中不能出现单引号。</p>
+<h2 id="grep命令"><a href="#grep命令" class="headerlink" title="grep命令"></a>grep命令</h2><p>grep命令是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。<br><font face="Arial" color=blue size=4><strong>grep [options] pattern file</strong></font></p>
+<h3 id="options-主要参数："><a href="#options-主要参数：" class="headerlink" title="[options]主要参数："></a>[options]主要参数：</h3><h4 id="正则表达式参数控制"><a href="#正则表达式参数控制" class="headerlink" title="正则表达式参数控制"></a>正则表达式参数控制</h4><p><font face="Arial" color=blue size=4><strong>-E</strong></font>：扩展正则表达式，不用”\”号进行转义</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep ‘w\(es\)t.*\1′ aa </span><br><span class="line"><span class="comment"># 如果west被匹配，则es就被存储到内存中，并标记为1，然后搜索任意个字符(.*)，这些字符后面紧跟着 另外一个es(\1)，找到就显示该行。</span></span><br><span class="line">grep -E <span class="string">&#x27;w(es)t.*\1&#x27;</span> aa  <span class="comment"># 不用”\”号进行转义</span></span><br></pre></td></tr></table></figure>
+<p><font face="Arial" color=blue size=4><strong>-i</strong></font>：不区分大小写。<br><font face="Arial" color=blue size=4><strong>-w</strong></font> ：只匹配整个单词，而不是字符串的一部分(如匹配’magic’，而不是’magical’)，</p>
+<h4 id="输出控制"><a href="#输出控制" class="headerlink" title="输出控制"></a>输出控制</h4><p><font face="Arial" color=blue size=4><strong>-n</strong></font>：显示匹配行及行号。<br><font face="Arial" color=blue size=4><strong>-v</strong></font>：显示不包含匹配文本的所有行。<br><font face="Arial" color=blue size=4>- -color=auto</font>：可以将找到的关键词部分加上颜色的显示。<br><font face="Arial" color=blue size=4><strong>-h</strong></font>：查询多文件时不显示文件名。</p>
+<p><font face="Arial" color=blue size=4><strong>-r</strong></font>：要求搜索子目录<br><font face="Arial" color=blue size=4><strong>-l</strong></font>：查询多文件时只输出包含匹配字符的文件名。<br><font face="Arial" color=blue size=4><strong>-L</strong></font>：查询多文件时只输出不包含匹配字符的文件名。<br><font face="Arial" color=blue size=4><strong>-c</strong></font>：只输出匹配行的计数。</p>
+<h4 id="上下文输出控制"><a href="#上下文输出控制" class="headerlink" title="上下文输出控制"></a>上下文输出控制</h4><p><font face="Arial" color=blue size=4><strong>grep -C number pattern files</strong></font>：匹配的上下文分别显示number行，此处C是大写的<br><font face="Arial" color=blue size=4><strong>grep -A number pattern files</strong></font>：匹配的文本所在行后面显示number行，after<br><font face="Arial" color=blue size=4><strong>grep -B number pattern files</strong></font>：匹配的文本所在行前面显示number行，before</p>
+<h3 id="pattern正则表达式主要参数："><a href="#pattern正则表达式主要参数：" class="headerlink" title="pattern正则表达式主要参数："></a>pattern正则表达式主要参数：</h3><p>\： 忽略正则表达式中特殊字符的原有含义。<br>^：匹配正则表达式的开始行。<br>$: 匹配正则表达式的结束行。<br>&lt;：从匹配正则表达式的行开始。<br>\&gt;：到匹配正则表达式的行结束。<br>[ ]：单个字符，如[A]即A符合要求 。<br>[ - ]：范围，如[A-Z]，即A、B、C一直到Z都符合要求 。<br>.：所有的单个字符。<br>*：有字符，长度可以为0。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grep man *  <span class="comment"># 会匹配 ‘Batman’、’manic’、’man’等，</span></span><br><span class="line">grep <span class="string">&#x27;\&lt;man&#x27;</span> *  <span class="comment"># 匹配’manic’和’man’，但不是’Batman’，</span></span><br><span class="line">grep <span class="string">&#x27;\&lt;man\&gt;&#x27;</span> *  <span class="comment"># 只匹配’man’，而不是’Batman’或’manic’等其他的字符串。</span></span><br><span class="line">grep pattern1 files | grep pattern2 <span class="comment"># 显示既匹配 pattern1 又匹配 pattern2 的行。</span></span><br><span class="line">grep <span class="string">&quot;pattern1\|pattern2&quot;</span> files  <span class="comment"># 显示匹配 pattern1 或 pattern2 的行，须加反斜杠</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>用于搜索某些文件夹下包含想要找的信息的文件，比如搜索当前文件夹下及子目录中包含mag字符的文件，并输出文件名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; grep -lr <span class="string">&#x27;mag&#x27;</span> *</span><br><span class="line">bader_chg/OUTCAR</span><br><span class="line">bader_chg/INCAR</span><br><span class="line">bader_chg/OSZICAR</span><br><span class="line">INCAR</span><br><span class="line">OSZICAR</span><br><span class="line">OUTCAR</span><br></pre></td></tr></table></figure>
+<h2 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a>sed命令</h2><p>sed option ‘script’ file1 file2 …</p>
+<h3 id="option参数"><a href="#option参数" class="headerlink" title="option参数"></a>option参数</h3><p><font face="Arial" color=blue size=4><strong>-r</strong></font> 使用扩展正则表达式<br><font face="Arial" color=blue size=4><strong>-n</strong></font> 默认情况下，sed程序在所有的脚本指令执行完毕后，将自动打印模式空间中的内容，-n选项可以屏蔽自动打印。</p>
+<h3 id="脚本指令操作"><a href="#脚本指令操作" class="headerlink" title="脚本指令操作"></a>脚本指令操作</h3><p><font face="Arial" color=blue size=4><strong>a</strong></font> 追加append<br><font face="Arial" color=blue size=4><strong>i</strong></font> 插入insert<br><font face="Arial" color=blue size=4><strong>d</strong></font> 删除delete<br><font face="Arial" color=blue size=4><strong>s</strong></font> 替换substitution</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&quot;3a shell&quot;</span> file  <span class="comment"># 在输出file内容的第二行后添加&quot;shell&quot;</span></span><br><span class="line">sed <span class="string">&#x27;2,3d&#x27;</span> file  <span class="comment"># 删除file中的第二、三行</span></span><br><span class="line">sed <span class="string">&#x27;s/pattern1/pattern2/&#x27;</span> file  <span class="comment"># 将file中匹配pattern1的字符串替换为pattern2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>sed命令不会修改原文件，删除命令只表示某些行不打印输出，而不是从原文件中删去。</li>
+<li>使用查找替换命令时，可以把匹配pattern1的字符串复制到pattern2中。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; cat testfile</span><br><span class="line">123</span><br><span class="line">abc</span><br><span class="line">456</span><br><span class="line">&gt;&gt;&gt; sed <span class="string">&#x27;s/bc/-&amp;-/&#x27;</span> testfile</span><br><span class="line">123</span><br><span class="line">a-bc-</span><br><span class="line">456</span><br><span class="line">&gt;&gt;&gt; sed -r <span class="string">&#x27;s/([0-9])([0-9])/-\1-~\2~/&#x27;</span> testfile</span><br><span class="line">-1-~2~3</span><br><span class="line">abc</span><br><span class="line">-4-~5~6</span><br></pre></td></tr></table></figure>
+pattern2中的&amp;表示原文件的当前行中与pattern1相匹配的字符串<br>pattern2中的\1表示与pattern1的第一个()括号相匹配的内容，\2表示与pattern1的第二个()括号相匹配的内容。</li>
+<li>多条指令的话可以使用分号;隔开，也可以使用-e参数<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed  <span class="string">&#x27;s/pattern1/pattern2/;s/pattern3/pattern4/&#x27;</span>  ./testfile</span><br><span class="line">sed -e <span class="string">&#x27;s/pattern1/pattern2/&#x27;</span> -e <span class="string">&#x27;s/pattern3/pattern4/&#x27;</span> testfile</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="另一种用法"><a href="#另一种用法" class="headerlink" title="另一种用法"></a>另一种用法</h3><p><font face="Arial" color=blue size=4><strong>/pattern/action</strong></font><br>pattern为正则表达式，action为要执行的指令操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-n /pattern/p  <span class="comment"># 打印匹配pattern的行</span></span><br><span class="line">/pattern/d  <span class="comment"># 删除匹配pattern的行</span></span><br><span class="line">/pattern/s/pattern1/pattern2/  <span class="comment"># 查找符合pattern的行，将该行第一个匹配pattern1的字符串替换为pattern2</span></span><br><span class="line">/pattern/s/pattern1/pattern2/g  <span class="comment">#查找符合pattern的行，将该行所有匹配pattern1的字符串替换为pattern2</span></span><br></pre></td></tr></table></figure>
+<h2 id="awk命令"><a href="#awk命令" class="headerlink" title="awk命令"></a>awk命令</h2><p>非常强大的文本分析工具，列处理命令<br><font face="Arial" color=blue size=4><strong>awk [option] ‘script’ file</strong></font><br><font face="Arial" color=blue size=4><strong>awk [option] -f scriptfile file</strong></font></p>
+<h3 id="option参数-1"><a href="#option参数-1" class="headerlink" title="option参数"></a>option参数</h3><p>-F fs 或 –field-separator fs<br>指定输入文件折分隔符，fs是一个字符串或者是一个正则表达式，如-F:表示以冒号分割<br>-v var=value 或 –asign var=value<br>赋值一个用户定义变量。<br>-f scripfile 或 –file scriptfile<br>从脚本文件中读取awk命令。</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>awk ‘{[pattern] action}’ filenames # 只能用单引号</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;print $1,$4&#125;&#x27;</span> test.log <span class="comment"># 打印test.log文件中的第一列和第四列</span></span><br><span class="line">awk <span class="string">&#x27;&#123;printf &quot;%-8s %10s\n&quot;,$1,$4&#125;&#x27;</span> test.log <span class="comment"># 格式化打印，第一列占8个字符左对齐，第二列占10个字符右对齐</span></span><br><span class="line">awk -F, <span class="string">&#x27;&#123;print $1,$2&#125;&#x27;</span> test.log <span class="comment"># 指定test.log中列分隔符为逗号，打印第一列和第二列</span></span><br><span class="line">awk -F <span class="string">&#x27;[ ,]&#x27;</span>  <span class="string">&#x27;&#123;print $1,$3&#125;&#x27;</span> test.log <span class="comment"># 依次使用空格和逗号分割test.log中的列，</span></span><br><span class="line">awk -v a=1 <span class="string">&#x27;&#123;print $1,$1+a&#125;&#x27;</span> test.log <span class="comment"># 设置变量a=1，打印第一列和第一列加1后的内容</span></span><br><span class="line">awk -v a=2 <span class="string">&#x27;&#123;print $1,$(1+a)&#125;&#x27;</span> test.log <span class="comment"># 设置变量a=2，打印第一列和第三列</span></span><br><span class="line">awk -v a=1 -v b=sh <span class="string">&#x27;&#123;print $1+a,$1b&#125;&#x27;</span> test.log <span class="comment"># 设置变量a=1，b=s,打印第2列和第一列加sh字符后的内容</span></span><br></pre></td></tr></table></figure>
+<h3 id="高阶用法"><a href="#高阶用法" class="headerlink" title="高阶用法"></a>高阶用法</h3><img src="awk_operator.png" width = "90%" alt="awk_operator">
+<font face="Arial" color=blue size=4>**awk 'BEGIN{ }{ }END{ }'**</font>
+BEGIN{ }: 读入第一行文本之前执行的语句，一般用来初始化操作
+{ }: 逐行处理
+END{ }: 处理完最后一行文本后执行，一般用来处理输出结果
+awk可以引入各种条件、循环等，写出很复杂的用法。
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;$1&gt;2 &amp;&amp; $2==&quot;Are&quot; &#123;print $1,$2,$3&#125;&#x27;</span> test.log <span class="comment"># 过滤第一列大于2并且第二列等于Are的行，并打印前三列</span></span><br><span class="line">awk <span class="string">&#x27;$2 ~ /th/ &#123;print $2,$4&#125;&#x27;</span> test.log <span class="comment"># 输出第二列包含 &quot;th&quot;，并打印第二列与第四列</span></span><br><span class="line">awk <span class="string">&#x27;&#123;print $1,$2,$5&#125;&#x27;</span> OFS=<span class="string">&quot; $ &quot;</span> test.log <span class="comment"># 以$分割输出的第一二五列</span></span><br><span class="line">awk -F: <span class="string">&#x27;BEGIN&#123;i=0&#125;&#123;if($7~/bash$/)&#123;i++&#125;&#125;END&#123;print i&#125;&#x27;</span> /etc/passwd</span><br><span class="line">awk -F: <span class="string">&#x27;BEGIN&#123;i=0;j=0&#125;&#123;if($3&lt;=500)&#123;i++&#125;else&#123;j++&#125;&#125;END&#123;print i,j&#125;&#x27;</span> /etc/passwd</span><br><span class="line">awk <span class="string">&#x27;BEGIN&#123;for(i=1;i&lt;=5;i++)&#123;print i&#125;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; cat score.txt</span><br><span class="line">Marry   2143 78 84 77</span><br><span class="line">Jack    2321 66 78 45</span><br><span class="line">Tom     2122 48 77 71</span><br><span class="line">Mike    2537 87 97 95</span><br><span class="line">Bob     2415 40 57 62</span><br><span class="line">&gt;&gt;&gt; cat cal.awk</span><br><span class="line"><span class="comment">#!/bin/awk -f</span></span><br><span class="line"><span class="comment">#运行前</span></span><br><span class="line">BEGIN &#123;</span><br><span class="line">math = 0</span><br><span class="line">english = 0</span><br><span class="line">computer = 0</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL\n&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;---------------------------------------------\n&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#运行中</span></span><br><span class="line">&#123;</span><br><span class="line">math+=<span class="variable">$3</span></span><br><span class="line">english+=<span class="variable">$4</span></span><br><span class="line">computer+=<span class="variable">$5</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;%-6s %-6s %4d %8d %8d %8d\n&quot;</span>, <span class="variable">$1</span>,<span class="variable">$2</span>,<span class="variable">$3</span>,<span class="variable">$4</span>,<span class="variable">$5</span>,<span class="variable">$3</span>+<span class="variable">$4</span>+<span class="variable">$5</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#运行后</span></span><br><span class="line">END &#123;</span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;---------------------------------------------\n&quot;</span></span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;  TOTAL:%10d %8d %8d \n&quot;</span>, math, english, computer</span><br><span class="line"><span class="built_in">printf</span> <span class="string">&quot;AVERAGE:%10.2f %8.2f %8.2f\n&quot;</span>, math/NR, english/NR, computer/NR</span><br><span class="line">&#125;</span><br><span class="line">&gt;&gt;&gt; awk -f cal.awk score.txt</span><br><span class="line">NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL</span><br><span class="line">---------------------------------------------</span><br><span class="line">Marry  2143     78       84       77      239</span><br><span class="line">Jack   2321     66       78       45      189</span><br><span class="line">Tom    2122     48       77       71      196</span><br><span class="line">Mike   2537     87       97       95      279</span><br><span class="line">Bob    2415     40       57       62      159</span><br><span class="line">---------------------------------------------</span><br><span class="line">  TOTAL:       319      393      350</span><br><span class="line">AVERAGE:     63.80    78.60    70.00</span><br></pre></td></tr></table></figure>
+
+<h2 id="shell之字符串常用操作"><a href="#shell之字符串常用操作" class="headerlink" title="shell之字符串常用操作"></a>shell之字符串常用操作</h2><h3 id="插入字符串"><a href="#插入字符串" class="headerlink" title="插入字符串"></a>插入字符串</h3><p><font face="Arial" color=blue size=4><strong>sed “ni$word” file</strong></font><br>n表示在第几行行首插入，i表示插入操作，$word表示要插入的字符串（变量）,file为待处理文本</p>
+<h3 id="替换字符串"><a href="#替换字符串" class="headerlink" title="替换字符串"></a>替换字符串</h3><h4 id="替换字符"><a href="#替换字符" class="headerlink" title="替换字符"></a>替换字符</h4><p><font face="Arial" color=blue size=4><strong>sed -n ‘s/string1/string2/g’ string</strong></font><br>将string中所有匹配string1的字符串替换为string2</p>
+<h4 id="删除首字符"><a href="#删除首字符" class="headerlink" title="删除首字符"></a>删除首字符</h4><p><font face="Arial" color=blue size=4><strong>sed ‘s/^.//‘ string</strong></font></p>
+<h4 id="删除指定行"><a href="#删除指定行" class="headerlink" title="删除指定行"></a>删除指定行</h4><p><font face="Arial" color=blue size=4><strong>sed ‘nd’ file</strong></font><br>n表示第几行，d表示删除操作，不同行号用逗号隔开，不同命令用分号隔开，$可表示末行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed <span class="string">&#x27;1,2d;$d&#x27;</span> file  <span class="comment"># 删除第一行第二行和最后一行</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除空行"><a href="#删除空行" class="headerlink" title="删除空行"></a>删除空行</h4><p><font face="Arial" color=blue size=4><strong>sed ‘/^$/d’ file</strong></font><br>符号^表示行首，$表示行尾；行首行尾间为空字符的情况即表示空行</p>
+<h3 id="提取字符串"><a href="#提取字符串" class="headerlink" title="提取字符串"></a>提取字符串</h3><h4 id="按子串分割截取"><a href="#按子串分割截取" class="headerlink" title="按子串分割截取"></a>按子串分割截取</h4><p><font face="Arial" color=blue size=4>**${varible#*string}**</font>    从左往右，删除最短的一个以string结尾的子串，即截取第一个string子串之后的字符串</p>
+<p><font face="Arial" color=blue size=4>**${varible##*string}**</font>     从左往右，删除最长的一个以string结尾的子串，即截取最后一个string子串之后的字符串</p>
+<p><font face="Arial" color=blue size=4><em><em>${varible%string</em>}</em>*</font>       从右往左，删除最短的一个以string开头的子串，即截取最后一个string子串之前的字符串</p>
+<p><font face="Arial" color=blue size=4><em><em>${varible%%string</em>}</em>*</font>  从右往左，删除最长的一个以string开头的子串，即截取第一个string子串之前的字符串</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">test</span>=<span class="string">&#x27;./NNH/SideOn-out/opt&#x27;</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> <span class="variable">$&#123;test%/*&#125;</span></span><br><span class="line">./NNH/SideOn-out</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> <span class="variable">$&#123;test#*/&#125;</span></span><br><span class="line">NNH/SideOn-out/opt</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> <span class="variable">$&#123;test:0:5&#125;</span></span><br><span class="line">./NNH</span><br></pre></td></tr></table></figure>
+<h4 id="按位置及长度提取字符串"><a href="#按位置及长度提取字符串" class="headerlink" title="按位置及长度提取字符串"></a>按位置及长度提取字符串</h4><p><font face="Arial" color=blue size=4><strong>${varible:start:len}</strong></font>:截取变量varible从位置start开始长度为len的子串。第一个字符的位置为0。</p>
+<p><font face="Arial" color=blue size=4><strong>awk ‘{print substr($1,1,2)}’ file</strong></font><br>$1代表文件file的第一列，第二项1表示字符位置，第三项表示提取字符长度</p>
+<h4 id="单个指定字符串"><a href="#单个指定字符串" class="headerlink" title="单个指定字符串"></a>单个指定字符串</h4><h4 id="两个指定字符串间的文本（单行）"><a href="#两个指定字符串间的文本（单行）" class="headerlink" title="两个指定字符串间的文本（单行）"></a>两个指定字符串间的文本（单行）</h4><p><font face="Arial" color=blue size=4><strong>sed -r ‘s/string1(.*)string2/\1/g’ string</strong></font><br>\1 表示表示前面括号中匹配到的字符串</p>
+<h4 id="两个指定字符串间的文本（多行）"><a href="#两个指定字符串间的文本（多行）" class="headerlink" title="两个指定字符串间的文本（多行）"></a>两个指定字符串间的文本（多行）</h4><p><font face="Arial" color=blue size=4><strong>sed -n ‘/string1/,/string2/p’ file</strong></font><br>//之间的字符为指定的字符串，前后用逗号隔开</p>
+<h2 id="文本输出"><a href="#文本输出" class="headerlink" title="文本输出"></a>文本输出</h2><h3 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h3><p><font face="Arial" color=blue size=4><strong>column -t</strong></font> 生成表格，将文本按列左对齐<br><font face="Arial" color=blue size=4><strong>column -t -R1,2,3</strong></font> 生成表格，将文本按列左对齐，其中1,2,3列右对齐<br><font face="Arial" color=blue size=4><strong>awk ‘{printf “%16s%.6f\n”,$1,$2}’ file</strong></font> 将file文件中第1列占据16个字符右对齐，第2列按浮点数打印，并打印到小数点后六位</p>
+<h3 id="echo-打印输出"><a href="#echo-打印输出" class="headerlink" title="echo 打印输出"></a>echo 打印输出</h3><p><font face="Arial" color=blue size=4><strong>echo string</strong></font>  # 普通字符串双引号可加可不加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> <span class="string">&quot;OK!&quot;</span>;<span class="built_in">echo</span> <span class="string">&quot;It is a test&quot;</span></span><br><span class="line">OK!</span><br><span class="line">It is a <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; name=Tom;<span class="built_in">echo</span> -e <span class="string">&quot;OK! \c&quot;</span>;<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$name</span> is coming.&quot;</span> <span class="comment"># -e 开启转义, \c 不换行</span></span><br><span class="line">OK! Tom is coming.</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> <span class="string">&quot;It is a test&quot;</span> &gt; myfile <span class="comment"># 重定向至文件myfile</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> <span class="string">&#x27;$name\&quot;&#x27;</span> <span class="comment"># 用单引号，原样输出字符串，不转义或取变量</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> `date` <span class="comment"># 反引号，显示命令执行结果</span></span><br></pre></td></tr></table></figure>
+<h3 id="printf打印输出"><a href="#printf打印输出" class="headerlink" title="printf打印输出"></a>printf打印输出</h3><p><font face="Arial" color=blue size=4><strong>printf  format-string  [arguments…]</strong></font> # format-string: 为格式控制字符串； arguments: 为参数列表。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">printf</span> <span class="string">&quot;Hello, Tom\n&quot;</span></span><br><span class="line">Hello, Tom</span><br><span class="line">&gt;&gt;&gt; <span class="built_in">printf</span> <span class="string">&quot;%-10s %-8s %-4.2f\n&quot;</span> 郭靖 男 66.1234</span><br><span class="line">郭靖     男      66.12</span><br></pre></td></tr></table></figure>
+<p>%s %c %d %f都是格式替代符；<br>%-10s 指宽度为10个字符（-表示左对齐，没有则表示右对齐），任何字符都会被显示在10个字符宽的字符内，如果不足则自动以空格填充，超过也会将内容全部显示出来。<br>%-4.2f 指格式化为小数，其中.2指保留2位小数。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>Shell只支持一维数组，数组用括号来表示，元素用”空格”符号分割开，初始化时不需要定义数组大小，数组元素的下标由0开始：<br>array_name=(value1 value2 … valuen)  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; atoms=() <span class="comment"># 定义空数组</span></span><br><span class="line">&gt;&gt;&gt; atoms=(Pt1 O1 O2) <span class="comment"># </span></span><br><span class="line">&gt;&gt;&gt; <span class="variable">$&#123;atoms[0]&#125;</span> <span class="comment"># 调用数组中第一个元素Pt1</span></span><br><span class="line">&gt;&gt;&gt; <span class="variable">$&#123;atoms[3]&#125;</span> = N1 <span class="comment"># 给数组添加元素N1</span></span><br><span class="line">&gt;&gt;&gt; <span class="variable">$&#123;my_array[@]&#125;</span> <span class="comment"># 使用@ 或 * 可以获取数组中的所有元素</span></span><br><span class="line">&gt;&gt;&gt; <span class="variable">$&#123;#my_array[@]&#125;</span> <span class="comment"># 获取数组长度，与获取字符串长度的方法相同，加#号</span></span><br><span class="line">&gt;&gt;&gt; <span class="variable">$&#123;!names[@]&#125;</span> <span class="comment"># 获取数组索引指数，for i in $&#123;!names[@]&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h2><h3 id="运算执行命令"><a href="#运算执行命令" class="headerlink" title="运算执行命令"></a>运算执行命令</h3><p>a. 用let指示数学运算，变量计算中不需要加上 $ 来表示变量。注意运算符号前后不能有空格！如果表达式中包含了空格或其他特殊字符，则必须用单（双）引号引起来。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">let</span> b=1+2;<span class="built_in">echo</span> <span class="variable">$b</span></span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; b=1+2;<span class="built_in">echo</span> <span class="variable">$b</span></span><br><span class="line">1+2</span><br></pre></td></tr></table></figure>
+
+<p>b. 用$[]表示数学运算。表达式在中括号内。有无空格都可以。例如命令echo $[1+2]，将输出结果3。</p>
+<p>c. 用expr改变运算顺序。注意运算符号需要用空格隔开！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; expr 1 + 2</span><br><span class="line">3</span><br><span class="line">&gt;&gt;&gt; expr 1+2</span><br><span class="line">1+2</span><br></pre></td></tr></table></figure>
+
+<p>d. 用bc表示数学运算。可以结合echo命令一起使用。若表达式有空格时须加引号。<br>e. 使用awk表示数学命令。<br>注意：只有bc和awk可做浮点运算！优先选用awk。也可将运算结果赋值给新的变量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; <span class="built_in">echo</span> 2 | awk <span class="string">&#x27;&#123;printf &quot;%.3f\n&quot;, $1**0.5&#125;&#x27;</span></span><br><span class="line">1.414</span><br><span class="line">&gt;&gt;&gt; a=1.2;b=2.1;awk -v a=<span class="variable">$a</span> -v b=<span class="variable">$b</span> <span class="string">&#x27;BEGIN&#123;print a+b&#125;&#x27;</span></span><br><span class="line">3.3</span><br><span class="line">&gt;&gt;&gt; a=1.2;b=2.1;<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$a</span>+<span class="variable">$b</span>&quot;</span> | bc</span><br><span class="line">3.3</span><br><span class="line">&gt;&gt;&gt; a=1.2;b=2.1;c=$(<span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$a</span>+<span class="variable">$b</span>&quot;</span> | bc);<span class="built_in">echo</span> <span class="variable">$c</span></span><br><span class="line">3.3</span><br></pre></td></tr></table></figure>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><h4 id="算数运算符"><a href="#算数运算符" class="headerlink" title="算数运算符"></a>算数运算符</h4><p><strong>+ - * / %</strong>  加 减 乘 除 取余<br><strong>==</strong>  用于比较两个数字，相同则返回true<br><strong>!=</strong>  用于比较两个数字，不相同则返回true<br>注意：<font face="Arial" color=blue size=4>条件表达式要放在方括号之间</font>，并且要有空格，例如: [$a==$b] 是错误的，必须写成 [ $a == $b ]。<br>   使用expr运算时，乘号(*)前边必须加反斜杠(\)才能实现乘法运算；</p>
+<h4 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h4><p>关系运算符只支持数字，不支持字符串，除非字符串的值是数字。<br>-eq 检测两个数是否相等，相等返回 true。<br>-ne 检测两个数是否不相等，不相等返回 true。<br>-gt 检测左边的数是否大于右边的，如果是，则返回 true。<br>-lt 检测左边的数是否小于右边的，如果是，则返回 true。<br>-ge 检测左边的数是否大于等于右边的，如果是，则返回 true。<br>-le 检测左边的数是否小于等于右边的，如果是，则返回 true。</p>
+<h4 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h4><p>!   非运算，表达式为 true 则返回 false，否则返回 true。<br>&amp;&amp;  逻辑的 AND ，或着用 -a<br>||  逻辑的 OR ，或者用 -o</p>
+<h4 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h4><p>以a=”abc”, b=”def”为例<br>=   检测两个字符串是否相等，相等返回 true。  [ $a = $b ] 返回 false。<br>!=  检测两个字符串是否相等，不相等返回 true。 [ $a != $b ] 返回 true。<br>-z  检测字符串长度是否为0，为0返回 true。  [ -z $a ] 返回 false。<br>-n  检测字符串长度是否为0，不为0返回 true。 [ -n “$a” ] 返回 true。<br>$   检测字符串是否为空，不为空返回 true。   [ $a ] 返回 true。</p>
+<h4 id="文件测试运算符"><a href="#文件测试运算符" class="headerlink" title="文件测试运算符"></a>文件测试运算符</h4><p>文件测试运算符用于检测 Unix 文件的各种属性。<br>-d file 检测文件是否是目录，如果是，则返回 true。 [ -d $file ] 返回 false。<br>-f file 检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。    [ -f $file ] 返回 true。<br>-r file 检测文件是否可读，如果是，则返回 true。  [ -r $file ] 返回 true。<br>-w file 检测文件是否可写，如果是，则返回 true。  [ -w $file ] 返回 true。<br>-x file 检测文件是否可执行，如果是，则返回 true。 [ -x $file ] 返回 true。<br>-s file 检测文件是否为空（文件大小是否大于0），不为空返回 true。 [ -s $file ] 返回 true。<br>-e file 检测文件（包括目录）是否存在，如果是，则返回 true。    [ -e $file ] 返回 true。</p>
+<h2 id="shell流程控制"><a href="#shell流程控制" class="headerlink" title="shell流程控制"></a>shell流程控制</h2><h3 id="管道"><a href="#管道" class="headerlink" title="管道|"></a>管道|</h3><h3 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h3><h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    command1 </span><br><span class="line">    command2</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ condition ]; <span class="keyword">then</span> command1; <span class="keyword">fi</span>  <span class="comment"># 单行写法，常用于awk中或终端命令提示符</span></span><br></pre></td></tr></table></figure>
+<h4 id="if-else"><a href="#if-else" class="headerlink" title="if else"></a>if else</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    command1 </span><br><span class="line">    command2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    command3</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h4 id="if-elif-else"><a href="#if-elif-else" class="headerlink" title="if elif else"></a>if elif else</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> condition1</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    command1</span><br><span class="line"><span class="keyword">elif</span> condition2 </span><br><span class="line"><span class="keyword">then</span> </span><br><span class="line">    command2</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    commandN</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> item1 item2 ... itemN</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> var <span class="keyword">in</span> item1 item2 ... itemN; <span class="keyword">do</span> command1; command2… <span class="keyword">done</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p>while循环用于不断执行一系列命令，也用于从输入文件中读取数据；命令通常为测试条件。<br>跳出循环，使用break跳出所有循环和continue跳出当前循环。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> condition</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    command1</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># while循环可用于读取键盘信息。输入信息被设置为变量FILM，按&lt;Ctrl-D&gt;结束循环。</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;按下 &lt;CTRL-D&gt; 退出&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> -n <span class="string">&#x27;输入你最喜欢的网站名: &#x27;</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> MUSIC</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;是的！<span class="variable">$MUSIC</span> 是一个好网站&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 无限循环</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">command</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> :</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">command</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (( ; ; ))</span><br></pre></td></tr></table></figure>
+<h3 id="case多选择语句"><a href="#case多选择语句" class="headerlink" title="case多选择语句"></a>case多选择语句</h3><p>多分枝选择结构，每个case分支用右圆括号开始，用两个分号;;表示break，即执行结束，跳出整个case … esac语句，esac作为结束标记。<br>取值后面必须为单词in。取值可以为变量或常数。匹配发现取值符合某一模式后，其间所有命令开始执行直至 ;;。如果无一匹配模式，使用星号*捕获该值，再执行后面的命令。模式支持正则表达式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> values <span class="keyword">in</span></span><br><span class="line">value1)</span><br><span class="line">    command1</span><br><span class="line">    ;;</span><br><span class="line">value2）</span><br><span class="line">    command1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;输入 1 到 3 之间的数字:&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;你输入的数字为:&#x27;</span></span><br><span class="line"><span class="built_in">read</span> aNum</span><br><span class="line"><span class="keyword">case</span> <span class="variable">$aNum</span> <span class="keyword">in</span></span><br><span class="line">    1)  <span class="built_in">echo</span> <span class="string">&#x27;你选择了 1&#x27;</span></span><br><span class="line">    ;;</span><br><span class="line">    2)  <span class="built_in">echo</span> <span class="string">&#x27;你选择了 2&#x27;</span></span><br><span class="line">    ;;</span><br><span class="line">    3)  <span class="built_in">echo</span> <span class="string">&#x27;你选择了 3&#x27;</span></span><br><span class="line">    ;;</span><br><span class="line">    *)  <span class="built_in">echo</span> <span class="string">&#x27;你没有输入 1 到 3 之间的数字&#x27;</span></span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<h2 id="shell函数"><a href="#shell函数" class="headerlink" title="shell函数"></a>shell函数</h2><h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="外部脚本引用"><a href="#外部脚本引用" class="headerlink" title="外部脚本引用"></a>外部脚本引用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ./test.sh</span><br><span class="line">. ./test.sh</span><br></pre></td></tr></table></figure>
+<h3 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h3>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/Shell/" rel="tag"># Shell</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/08/22/Python%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="Python之正则表达式">
+                  <i class="fa fa-chevron-left"></i> Python之正则表达式
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/09/26/shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C/" rel="next" title="shell脚本之提取频率计算结果">
+                  shell脚本之提取频率计算结果 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

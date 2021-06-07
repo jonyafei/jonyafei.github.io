@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Hexo安装与设置，GitHub仓库创建，博客创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+GitHub博客创建">
+<meta property="og:url" content="http://jonyafei.com/2019/03/24/Hexo%20GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%93%8D%E4%BD%9C20190324/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="Hexo安装与设置，GitHub仓库创建，博客创建">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-03-24T13:15:55.000Z">
+<meta property="article:modified_time" content="2019-08-22T10:28:06.414Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="博客创建">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/03/24/Hexo%20GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%93%8D%E4%BD%9C20190324/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;03&#x2F;24&#x2F;Hexo%20GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%93%8D%E4%BD%9C20190324&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;03&#x2F;24&#x2F;Hexo GitHub博客搭建操作20190324&#x2F;&quot;,&quot;title&quot;:&quot;Hexo+GitHub博客创建&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Hexo+GitHub博客创建 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E5%AE%89%E8%A3%85git%E5%92%8Cnodejs%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">1. 下载并安装git和nodejs软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85hexo"><span class="nav-number">2.</span> <span class="nav-text">2. 安装hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-GitHub%E4%B8%8A%E5%88%9B%E5%BB%BA%E4%BB%93%E5%BA%93"><span class="nav-number">3.</span> <span class="nav-text">3. GitHub上创建仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BC%80%E5%A7%8B%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">4. 开始部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E8%AE%BE%E7%BD%AESSH-key"><span class="nav-number">5.</span> <span class="nav-text">5. 设置SSH key</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%8D%9A%E5%AE%A2%E5%88%9B%E5%BB%BA%E4%B8%8E%E5%8F%91%E5%B8%83"><span class="nav-number">6.</span> <span class="nav-text">6. 博客创建与发布</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/03/24/Hexo%20GitHub%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%93%8D%E4%BD%9C20190324/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo+GitHub博客创建
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-24 21:15:55" itemprop="dateCreated datePublished" datetime="2019-03-24T21:15:55+08:00">2019-03-24</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-08-22 18:28:06" itemprop="dateModified" datetime="2019-08-22T18:28:06+08:00">2019-08-22</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>Hexo安装与设置，GitHub仓库创建，博客创建</p>
+<span id="more"></span>
+
+<h2 id="1-下载并安装git和nodejs软件"><a href="#1-下载并安装git和nodejs软件" class="headerlink" title="1. 下载并安装git和nodejs软件"></a>1. 下载并安装git和nodejs软件</h2><ul>
+<li>git的下载地址：<a target="_blank" rel="noopener" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></li>
+<li>nodejs的下载地址：<a target="_blank" rel="noopener" href="http://nodejs.cn/">http://nodejs.cn/</a></li>
+<li>安装完成后，在cmd命令框中输入<code>node -v</code> 和 <code>npm -v</code> 查看是否安装成功。若安装成功，会显示版本号</li>
+</ul>
+<h2 id="2-安装hexo"><a href="#2-安装hexo" class="headerlink" title="2. 安装hexo"></a>2. 安装hexo</h2><ul>
+<li>2.1. 在空闲位置新建hexo文件夹，打开hexo文件夹，右键选择Git Bash，输入命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2.2. 初始化搭建博客所需要的所有文件，输入命令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2.3. 安装依赖包。 安装结束后，会出现node_modules文件夹。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-GitHub上创建仓库"><a href="#3-GitHub上创建仓库" class="headerlink" title="3. GitHub上创建仓库"></a>3. GitHub上创建仓库</h2><ul>
+<li><p>3.1 Github账号注册</p>
+</li>
+<li><p>3.2 建立一个仓库，所填内容为 <code>username.github.io</code>，比如我的就是<code>jonyafei.github.io</code></p>
+</li>
+</ul>
+<h2 id="4-开始部署"><a href="#4-开始部署" class="headerlink" title="4. 开始部署"></a>4. 开始部署</h2><ul>
+<li>4.1 配置 hexo目录下的 <code>_config.yml</code> 文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">author: jonyafei</span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: Asia/Shanghai</span><br><span class="line"></span><br><span class="line">url: http://jonyafei.com</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其中，url地址中.com 前为用户名</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/jonyafei/jonyafei.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>repo地址为GitHub上建立的仓库地址</li>
+</ul>
+<h2 id="5-设置SSH-key"><a href="#5-设置SSH-key" class="headerlink" title="5. 设置SSH key"></a>5. 设置SSH key</h2><ul>
+<li>5.1 在Git bash输入以下指令，检查是否已存在SSH Keys。若存在，直接删除.ssh文件夹里所有文件；</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al ~/.ssh</span><br></pre></td></tr></table></figure>
+<ul>
+<li>5.2 输入以下命令（邮箱为注册GitHub时的邮箱)，提示输入passphrase时可直接按Enter键忽略。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;jiang_yafei730@163.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>5.3 依次输入命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-agent -s</span><br><span class="line">ssh-add ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+若出错，输入以下指令：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> `ssh-agent -s`</span><br><span class="line">ssh-add</span><br></pre></td></tr></table></figure>
+<ul>
+<li>5.4 输入以下命令，拷贝Key，也可以直接打开文件复制：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clip &lt; ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>5.5 在GitHub里设置SSH Key：</p>
+</li>
+<li><p>GitHub 界面右上角 点击层级菜单里的Settings，然后点击右侧的SSH keys，点击Add SSH Key，输入Title描述，粘贴刚刚拷贝的Key内容，点击Add Key，输入GitHub密码完成SSH Key的添加，输入以下命令测试，有警告时输入yes就可以。</p>
+</li>
+</ul>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-博客创建与发布"><a href="#6-博客创建与发布" class="headerlink" title="6. 博客创建与发布"></a>6. 博客创建与发布</h2><p>打开Git Bash软件，进入hexo目录</p>
+<ul>
+<li>6.1 常用命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo n  <span class="comment">#完整命令为hexo new，用于新建一篇文章</span></span><br><span class="line">hexo g  <span class="comment">#完整命令为hexo generate，用于生成静态文件</span></span><br><span class="line">hexo s  <span class="comment">#完整命令为hexo server，用于启动服务器，主要用于本地预览</span></span><br><span class="line">hexo d  <span class="comment">#完整命令为hexo deploy，用于将本地文件发布到GitHub上</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Q1. 若出现<code>error deployer not found:github</code>错误，执行以下命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Q2. 若输入<code>hexo d</code>报下面的错误：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to auto-detect email address (got &#x27;yafei@DESKTOP-IMNML8J.(none)&#x27;)</span><br><span class="line">error: src refspec HEAD does not match any</span><br><span class="line">error: failed to push some refs to &#x27;https://github.com/jonyafei/jonyafei.github.io.git&#x27;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>解决方案：依次输入如下两条命令，来指定GitHub上的Email和用户名</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">&quot;jiang_yafei730@163.com&quot;</span></span><br><span class="line">git config --global user.name <span class="string">&quot;jonyafei&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再次尝试<code>hexo deploy</code>命令，如出现以下提示应该就发布上去了</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">remote: Resolving deltas: 100% (6/6), done.</span><br><span class="line">To https://github.com/jonyafei/jonyafei.github.io.git</span><br><span class="line">new branch      HEAD -&gt; master</span><br><span class="line">Branch &#x27;master&#x27; set up to track remote branch &#x27;master&#x27; from &#x27;https://github.com/jonyafei/jonyafei.github.io.git&#x27;.</span><br><span class="line">INFO  Deploy done: git</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>6.2 本地查看博客输入以下两个命令，然后用浏览器访问<a target="_blank" rel="noopener" href="http://localhost:4000/%EF%BC%8C">http://localhost:4000/，</a></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Q3. 若用<code>hexo s</code>启动本地博客时访问失败，可能是4000端口被占用，可用下面的命令指定端口，然后浏览器访问<a target="_blank" rel="noopener" href="http://localhost:5000/%E5%B0%B1%E5%8F%AF%E4%BB%A5%E4%BA%86%E3%80%82">http://localhost:5000/就可以了。</a></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s -p 5000</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>6.3 更新当前博客</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean <span class="comment">#可不清理</span></span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/%E5%8D%9A%E5%AE%A2%E5%88%9B%E5%BB%BA/" rel="tag"># 博客创建</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/03/29/Hexo%20Next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE20190329/" rel="next" title="Next 主题配置">
+                  Next 主题配置 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

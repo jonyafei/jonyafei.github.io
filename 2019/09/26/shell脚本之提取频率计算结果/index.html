@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="VASP频率计算完成后，每次都需要调用vaspkit，依次输入命令代码来产生零点能校正、焓变与熵变校正，较为繁琐。本文基于shell脚本语法编写了批处理频率分析脚本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell脚本之提取频率计算结果">
+<meta property="og:url" content="http://jonyafei.com/2019/09/26/shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="VASP频率计算完成后，每次都需要调用vaspkit，依次输入命令代码来产生零点能校正、焓变与熵变校正，较为繁琐。本文基于shell脚本语法编写了批处理频率分析脚本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jonyafei.com/2019/09/26/shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C/energy.png">
+<meta property="article:published_time" content="2019-09-26T11:15:32.000Z">
+<meta property="article:modified_time" content="2020-05-29T11:01:46.252Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jonyafei.com/2019/09/26/shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C/energy.png">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/09/26/shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;09&#x2F;26&#x2F;shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;09&#x2F;26&#x2F;shell脚本之提取频率计算结果&#x2F;&quot;,&quot;title&quot;:&quot;shell脚本之提取频率计算结果&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>shell脚本之提取频率计算结果 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96VASP%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C"><span class="nav-number">1.</span> <span class="nav-text">提取VASP频率计算结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96Gaussian%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C"><span class="nav-number">2.</span> <span class="nav-text">提取Gaussian频率计算结果</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/09/26/shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          shell脚本之提取频率计算结果
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-09-26 19:15:32" itemprop="dateCreated datePublished" datetime="2019-09-26T19:15:32+08:00">2019-09-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-05-29 19:01:46" itemprop="dateModified" datetime="2020-05-29T19:01:46+08:00">2020-05-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>VASP频率计算完成后，每次都需要调用vaspkit，依次输入命令代码来产生零点能校正、焓变与熵变校正，较为繁琐。本文基于shell脚本语法编写了批处理频率分析脚本。</p>
+<span id="more"></span>
+
+<h2 id="提取VASP频率计算结果"><a href="#提取VASP频率计算结果" class="headerlink" title="提取VASP频率计算结果"></a>提取VASP频率计算结果</h2><p>运行命令：脚本+温度参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./freq_vaspkit0.73.sh 298.15</span><br></pre></td></tr></table></figure>
+<p>freq_vaspkit0.73.sh脚本内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">touch run.sh  <span class="comment"># 创建vaspkit命令输入文件run.sh</span></span><br><span class="line">chmod +x run.sh  <span class="comment"># 修改为可执行文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找到当前目录下包含freq目录的所有子目录，并以绝对路径输出</span></span><br><span class="line"><span class="comment"># 遍历所有的freq目录，调用vaspkit，依次5,501，Temperature，得到频率分析结果</span></span><br><span class="line"><span class="keyword">for</span> dir <span class="keyword">in</span> `find ./ -<span class="built_in">type</span> d | grep <span class="string">&#x27;freq&#x27;</span>`; <span class="keyword">do</span></span><br><span class="line"><span class="keyword">if</span> [ ! -f <span class="string">&quot;<span class="variable">$dir</span>/OUTCAR&quot;</span> ];<span class="keyword">then</span>  <span class="comment"># 判断freq目录下是否有OUTCAR文件</span></span><br><span class="line"><span class="built_in">continue</span></span><br><span class="line"><span class="keyword">else</span>  <span class="comment"># 若freq目录下有OUTCAR文件，执行以下代码</span></span><br><span class="line">cat &gt; run.sh &lt;&lt;<span class="string">EOR</span></span><br><span class="line"><span class="string">#!/bin/sh</span></span><br><span class="line"><span class="string">cd $dir</span></span><br><span class="line"><span class="string">vaspkit &lt;&lt;!</span></span><br><span class="line"><span class="string">5</span></span><br><span class="line"><span class="string">501</span></span><br><span class="line"><span class="string">$1</span></span><br><span class="line"><span class="string">!</span></span><br><span class="line"><span class="string">EOR</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$dir</span>  <span class="comment"># 打印对应的freq路径</span></span><br><span class="line">./run.sh | tee out.log  <span class="comment"># 执行run.sh文件，并将输出结果保存到out.log文件中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 依次提取文件名、电子能E0、零点能Ezpe、 焓变校正H、熵变校正TS、自由能校正G，单位：eV</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$dir</span> | sed <span class="string">&#x27;s/freq//&#x27;</span> | sed <span class="string">&#x27;s/^..//&#x27;</span> | awk <span class="string">&#x27;&#123;printf &quot;%-30s\n&quot;,$1&#125;&#x27;</span> &gt;&gt; name</span><br><span class="line">grep entropy <span class="variable">$dir</span>/OUTCAR | tail -1 | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$7&#125;&#x27;</span> &gt;&gt; E0</span><br><span class="line">grep <span class="string">&quot;Zero-point energy E_ZPE&quot;</span> out.log | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$5&#125;&#x27;</span> &gt;&gt; Ezpe</span><br><span class="line">grep <span class="string">&quot;Enthalpy contribution E_H&quot;</span> out.log | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$5&#125;&#x27;</span> &gt;&gt; H</span><br><span class="line">grep <span class="string">&quot;Entropy contribution T*S&quot;</span> out.log | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$5&#125;&#x27;</span> &gt;&gt; TS</span><br><span class="line">grep <span class="string">&quot;Thermal correction to G(T)&quot;</span> out.log | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$6&#125;&#x27;</span> &gt;&gt; G</span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将所有的提取信息整合到一个文本中</span></span><br><span class="line">index=<span class="string">&quot;name\t\t\t\tE0\t\tEzpe\t\tH(T)\t\tG(T)&quot;</span></span><br><span class="line">paste name E0 Ezpe H TS G | sed -r <span class="string">&quot;1i<span class="variable">$index</span>&quot;</span> &gt; energy.out</span><br><span class="line">rm name E0 Ezpe H TS G out.log run.sh</span><br></pre></td></tr></table></figure>
+<p>energy.out输出文件格式示例如下：<br><img src="energy.png" width = "90%" alt="energy"></p>
+<p><a href="freq_vaspkit0.73.sh">点击下载代码freq_vaspkit0.73.sh</a></p>
+<p>因新版vaspkit对输出做了修改，使用vaspkit1.00的用户可下载下面的脚本：<br><a href="freq_vaspkit1.00.sh">点击下载代码freq_vaspkit1.00.sh</a></p>
+<h2 id="提取Gaussian频率计算结果"><a href="#提取Gaussian频率计算结果" class="headerlink" title="提取Gaussian频率计算结果"></a>提取Gaussian频率计算结果</h2><p>前提条件：频率计算的结果需放在freq目录下，不能有其他以log为后缀的文件</p>
+<p>运行命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./freq_Gaussian.sh</span><br></pre></td></tr></table></figure>
+<p>freq_Gaussian.sh脚本内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找到当前目录下包含freq目录的所有子目录，并以绝对路径输出</span></span><br><span class="line"><span class="keyword">for</span> dir <span class="keyword">in</span> `find ./ -<span class="built_in">type</span> d | grep <span class="string">&#x27;freq&#x27;</span>`; <span class="keyword">do</span></span><br><span class="line"><span class="keyword">if</span> [ ! -f <span class="variable">$dir</span>/*.<span class="built_in">log</span> ];<span class="keyword">then</span>  判断freq目录下是否有*.<span class="built_in">log</span>文件</span><br><span class="line"><span class="built_in">continue</span></span><br><span class="line"><span class="keyword">else</span>  <span class="comment"># 若freq目录下有*.log文件，执行以下代码</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;file in <span class="variable">$dir</span> is processing&quot;</span> </span><br><span class="line"><span class="comment"># 依次提取文件名、电子能E0、零点能Ezpe、 焓变校正H、自由能校正G，单位：a.u.</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$dir</span> | sed <span class="string">&#x27;s/freq//&#x27;</span> | sed <span class="string">&#x27;s/^..//&#x27;</span> | awk <span class="string">&#x27;&#123;printf &quot;%-30s\n&quot;,$1&#125;&#x27;</span> &gt;&gt; name</span><br><span class="line">cat <span class="variable">$dir</span>/*.<span class="built_in">log</span> | grep <span class="string">&quot;SCF Done&quot;</span> | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$5&#125;&#x27;</span> &gt;&gt; E0</span><br><span class="line">cat <span class="variable">$dir</span>/*.<span class="built_in">log</span> | grep <span class="string">&quot;Zero-point correction&quot;</span> | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$3&#125;&#x27;</span> &gt;&gt; Ezpe</span><br><span class="line">cat <span class="variable">$dir</span>/*.<span class="built_in">log</span> | grep <span class="string">&quot;Thermal correction to Enthalpy&quot;</span> | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$5&#125;&#x27;</span> &gt;&gt; Hcorr</span><br><span class="line">cat <span class="variable">$dir</span>/*.<span class="built_in">log</span> | grep <span class="string">&quot;Thermal correction to Gibbs Free Energy&quot;</span> | awk <span class="string">&#x27;&#123;printf &quot;%.6f\n&quot;,$7&#125;&#x27;</span> &gt;&gt; Gcorr</span><br><span class="line"></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将所有的提取信息整合到一个文本中</span></span><br><span class="line">index=<span class="string">&quot;name\t\t\t\tE0\t\tEzpe\t\tHcorr\t\tGcorr&quot;</span></span><br><span class="line">paste name E0 Ezpe Hcorr Gcorr | sed -r <span class="string">&quot;1i<span class="variable">$index</span>&quot;</span> &gt; energy.out</span><br><span class="line">rm name E0 Ezpe Hcorr Gcorr</span><br></pre></td></tr></table></figure>
+
+<p><a href="freq_Gaussian.sh">点击下载代码freq_Gaussian.sh</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/Shell/" rel="tag"># Shell</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" rel="prev" title="linux之shell语法基础">
+                  <i class="fa fa-chevron-left"></i> linux之shell语法基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/12/11/Python%E8%B0%83%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%9A%84%E6%96%B9%E6%B3%95/" rel="next" title="Python调用shell脚本命令的方法">
+                  Python调用shell脚本命令的方法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

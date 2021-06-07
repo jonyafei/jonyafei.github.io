@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="PyMol可以作出非常漂亮的蛋白质结构图，是一款很好用的画蛋白图像的软件。我在这里总结了PyMol的一些常用命令。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyMol常用命令">
+<meta property="og:url" content="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="PyMol可以作出非常漂亮的蛋白质结构图，是一款很好用的画蛋白图像的软件。我在这里总结了PyMol的一些常用命令。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/pdb_intro.png">
+<meta property="og:image" content="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/GUI.png">
+<meta property="og:image" content="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/show_pml.png">
+<meta property="article:published_time" content="2019-07-26T14:25:55.000Z">
+<meta property="article:modified_time" content="2019-09-02T06:49:45.423Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="PyMol">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/pdb_intro.png">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;07&#x2F;26&#x2F;PyMol%E6%95%99%E7%A8%8B&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;07&#x2F;26&#x2F;PyMol教程&#x2F;&quot;,&quot;title&quot;:&quot;PyMol常用命令&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>PyMol常用命令 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PDB%E6%96%87%E4%BB%B6%E4%B8%80%E8%A7%88"><span class="nav-number">1.</span> <span class="nav-text">PDB文件一览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GUI%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">GUI操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">命令行操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#select%E5%91%BD%E4%BB%A4"><span class="nav-number">3.1.</span> <span class="nav-text">select命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#show%E5%91%BD%E4%BB%A4%EF%BC%9A%E6%98%BE%E7%A4%BA%E4%B8%80%E7%A7%8D%E6%88%96%E5%A4%9A%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">show命令：显示一种或多种模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hide%E5%91%BD%E4%BB%A4%EF%BC%9A%E6%93%8D%E4%BD%9C%E5%90%8Cshow"><span class="nav-number">3.3.</span> <span class="nav-text">hide命令：操作同show</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#color%E5%91%BD%E4%BB%A4%EF%BC%9A%E7%9D%80%E8%89%B2"><span class="nav-number">3.4.</span> <span class="nav-text">color命令：着色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#label%E5%91%BD%E4%BB%A4"><span class="nav-number">3.5.</span> <span class="nav-text">label命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%88%96%E5%88%A0%E9%99%A4%E9%94%AE"><span class="nav-number">3.6.</span> <span class="nav-text">添加或删除键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E9%94%AE%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.7.</span> <span class="nav-text">虚键设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%A0%E5%90%88%E5%91%BD%E4%BB%A4Align"><span class="nav-number">3.8.</span> <span class="nav-text">叠合命令Align</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%B9%8B%E5%9B%BE%E7%89%87%E8%BE%93%E5%87%BA"><span class="nav-number">3.9.</span> <span class="nav-text">保存之图片输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E7%94%BB%E8%A7%86%E9%A2%91%E5%88%B6%E4%BD%9C"><span class="nav-number">3.10.</span> <span class="nav-text">动画视频制作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E9%9B%86%E6%88%90"><span class="nav-number">3.11.</span> <span class="nav-text">命令集成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%AC%94%E8%AE%B0"><span class="nav-number">4.</span> <span class="nav-text">文本笔记</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PyMol常用命令
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-26 22:25:55" itemprop="dateCreated datePublished" datetime="2019-07-26T22:25:55+08:00">2019-07-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-09-02 14:49:45" itemprop="dateModified" datetime="2019-09-02T14:49:45+08:00">2019-09-02</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/PyMol/" itemprop="url" rel="index"><span itemprop="name">PyMol</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>PyMol可以作出非常漂亮的蛋白质结构图，是一款很好用的画蛋白图像的软件。我在这里总结了PyMol的一些常用命令。</p>
+<span id="more"></span>
+
+<h2 id="PDB文件一览"><a href="#PDB文件一览" class="headerlink" title="PDB文件一览"></a>PDB文件一览</h2><ul>
+<li><img src="pdb_intro.png" alt="pdb-description"></li>
+<li>从左至右，依次有原子编号，原子名，残基名，链名，残基号，原子坐标，occupancy，B-factor，元素名，segment name；</li>
+</ul>
+<h2 id="GUI操作"><a href="#GUI操作" class="headerlink" title="GUI操作"></a>GUI操作</h2><ul>
+<li>鼠标左键：rotate；中键：move；右键：zoom；</li>
+<li>file &gt;&gt; save session, 保存文件为pse或psw格式，可保存设置的各种效果，但无法再编辑；</li>
+<li>H&gt;&gt;hydrogens&gt;&gt;all/nonpolar   #隐藏所有/非极性氢原子；</li>
+<li>选定原子后，鼠标点击S可改变显示模式，H可隐藏显示模式，C可改变显示颜色<div align=left><img src="GUI.png" width = "80%" alt="GUI"></div></li>
+</ul>
+<h2 id="命令行操作"><a href="#命令行操作" class="headerlink" title="命令行操作"></a>命令行操作</h2><p>主要包括选择命令、显示/隐藏命令、颜色命令、标签命令、设置命令、图像输出设置命令等。</p>
+<h3 id="select命令"><a href="#select命令" class="headerlink" title="select命令"></a>select命令</h3><p><font color=blue size=3>select 变量名,选择的原子</font> #变量名可以是任意的字母或数字组合,select命令可简写为sele;<br>如何选择原子呢？<font color=red>属性选择符有segi（segment），chain（链），resn（残基名），resi（残基号），name（原子名），symbol（元素符号）。逻辑运算符有 and 或者 &amp; （和）、or （或）、not（非）。</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select ligand,segi lig ##选择segment为lig的所有原子，赋给变量ligand；</span><br><span class="line">select alian,chain a ##选择A链的所有原子，赋给变量alian；</span><br><span class="line">select aspglu,resn asp+glu ##选择残基名为ASP和GLU的所有原子，赋给变量aspglu；单个的残基名或残基号间需用+号，不能加空格；</span><br><span class="line">select Y24,resi 24</span><br><span class="line">select loop, resi 21-29 #选择残基号21到29的所有残基，赋给loop；</span><br><span class="line">select Y24-OH,resi 24 and name OH #选择24号残基中的原子名为OH的原子，赋给变量Y24-OH;</span><br><span class="line">select Y24E27,resi 24 or resi 27 #选择24号残基和27残基；</span><br><span class="line">select site, not resi 100-200 #除100到200号残基外的所有残基；</span><br></pre></td></tr></table></figure>
+<p>另外还有稍复杂点的运算符 around，expand，within x of ，byres ，neighbor；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select coor,name fe around 4 #选择铁原子周围4埃内的所有原子（不包括铁原子）；s1 around x；</span><br><span class="line">select coor,subs expand 4 #选择变量subs周围4埃内的所有原子（包含subs）；s1 expand x；</span><br><span class="line">select Y24,byres resi 24 and name OH #扩充s1到残基; by s1;</span><br><span class="line">select key,neighbor s1 #选择直接以化学键连接s1的原子，赋给变量key；</span><br></pre></td></tr></table></figure>
+
+<h3 id="show命令：显示一种或多种模式"><a href="#show命令：显示一种或多种模式" class="headerlink" title="show命令：显示一种或多种模式"></a>show命令：显示一种或多种模式</h3><p><font color=blue size=3>show 显示形式，变量</font>  #也可以不用提前创建变量，直接在这里选择原子`<br>常用显示形式有lines，sticks，cartoon，ribbon，sphere，surface，mesh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show sticks,Y24  #显示变量为Y24的所有原子为棍棒形；</span><br><span class="line">show sphere, name fe #显示铁原子为球形；（set sphere_scale,0.4 #设置球形大小，0.4在显示的图形中大小正好）</span><br><span class="line">show cartoon     #可以不加操作对象，默认操作所有原子；</span><br></pre></td></tr></table></figure>
+
+<h3 id="hide命令：操作同show"><a href="#hide命令：操作同show" class="headerlink" title="hide命令：操作同show"></a>hide命令：操作同show</h3><p>由于PyMol没有撤销命令，显示命令操作后无法撤销，若之前操作将Y24显示为棍形，现在又不想显示它，可以输入命令<font color=blue size=3>hide sticks,Y24</font></p>
+<h3 id="color命令：着色"><a href="#color命令：着色" class="headerlink" title="color命令：着色"></a>color命令：着色</h3><p><font color=blue size=3>color 颜色，变量</font></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">color green  #整个蛋白着色为绿色；</span><br><span class="line">color red, ss h      #α螺旋着色，ss表示二级结构，h表示helix</span><br><span class="line">color red, ss s       #β片着色；s表示sheet</span><br><span class="line">color blue,ss l+&quot;   #loop着色；</span><br><span class="line">color grey, elem c  #所有碳原子着色为灰色；</span><br><span class="line">bg_color white #背景色设置命令,也可以设置成其他颜色，白色最常用好看；</span><br></pre></td></tr></table></figure>
+<h3 id="label命令"><a href="#label命令" class="headerlink" title="label命令"></a>label命令</h3><p><font color=blue size=3>label [selection,[expression]]</font>  #selection为选择的原子或对应的变量名，expression为显示的标签文字；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">label resi 24 and name OH,&quot;T24&quot;  #在24号残基的OH原子附近标记为T24；</span><br><span class="line">再输入label resi 24 and name OH,&quot;&quot; 可清除标签T24；</span><br><span class="line">label  #当有标签存在时，输入label可清除所有标签；</span><br></pre></td></tr></table></figure>
+<p>标签设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set label_color,color_name,selection #设置标签颜色</span><br><span class="line">set label_outline_color,color_name,[selection] #设置标签文字的轮廓的颜色</span><br><span class="line">set label_font_id,5 #PyMol内置12中字体，编号从5到16；</span><br><span class="line">set label_size,20  #设置字体大小；</span><br><span class="line">set label_position,(x,y,z)  #设置label位置，（x，y，z）为离默认位置的三维偏移值；  </span><br></pre></td></tr></table></figure>
+<h3 id="添加或删除键"><a href="#添加或删除键" class="headerlink" title="添加或删除键"></a>添加或删除键</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bond atom1,atom2  #可提前定义变量atom1和atom2，也可以在这里直接输入选择；</span><br><span class="line">unbond atom1,atom2 #删除键</span><br><span class="line">set stick_radius=0.15  #改变sticks显示半径；</span><br><span class="line">添加虚键（测量原子间距离）</span><br><span class="line">distance dist1,atom1,atom2 #distance可简写为dist；</span><br></pre></td></tr></table></figure>
+<h3 id="虚键设置"><a href="#虚键设置" class="headerlink" title="虚键设置"></a>虚键设置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set dash_length,0.015 #每截虚线的长度</span><br><span class="line">set dash_radius,0.015 #虚线的圆柱截面半径</span><br><span class="line">set dash_gap,0.6      #虚线间隔</span><br><span class="line">set dash_color,grey  #虚线颜色</span><br></pre></td></tr></table></figure>
+<h3 id="叠合命令Align"><a href="#叠合命令Align" class="headerlink" title="叠合命令Align"></a>叠合命令Align</h3><p><font color=blue size=3>align source,target</font> #source对象会被移动旋转来叠合到target对象上；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Align mol1 &amp; resi N1, mol2 &amp; resi N2   #按某一个残基叠合；</span><br><span class="line">Align prot1 and chain A, prot2 and chain B   #按整条链叠合；</span><br><span class="line">Align mol1 &amp; resi n1-n2 &amp; name n+ca+c+o, mol2 &amp; resi n3-n4 &amp; name n+ca+c+o   #按某段残基的主链进行叠合；</span><br></pre></td></tr></table></figure>
+<p>对整个蛋白叠合：鼠标操作：A&gt;&gt;align&gt;&gt;to molecule&gt;&gt;mol2</p>
+<h3 id="保存之图片输出"><a href="#保存之图片输出" class="headerlink" title="保存之图片输出"></a>保存之图片输出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set ray_shadows,0  #渲染时不显示投影；</span><br><span class="line">ray 3000,3000  #图片像素设置；</span><br><span class="line">png name  #输出name.png图片</span><br></pre></td></tr></table></figure>
+<h3 id="动画视频制作"><a href="#动画视频制作" class="headerlink" title="动画视频制作"></a>动画视频制作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">load xxx.top,mov,format=top      ##pymol要求载入轨迹前要先载入拓扑文件，除非后缀是top，后缀是prmtop的话除非定义一下格式，否则是不认的</span><br><span class="line">load_traj md.mdcrd,mov,format=trj     ##trj后缀得定义一下格式。</span><br><span class="line">save movie as XXX.mpg    ##保存成movie</span><br></pre></td></tr></table></figure>
+<h3 id="命令集成"><a href="#命令集成" class="headerlink" title="命令集成"></a>命令集成</h3><p>有时我们需要对同一研究体系不同构象作图像显示，或经常打开某一pdb文件，每次输入命令总是太麻烦，为节省时间，可以将所有要操作的命令写到文本文件name.pml中，然后在PyMol命令框中输入@name.pml，就可以执行文本中的命令。<br><img src="show_pml.png" width = "50%" alt="show.pml"></p>
+<h2 id="文本笔记"><a href="#文本笔记" class="headerlink" title="文本笔记"></a>文本笔记</h2><p><embed src="PyMol.pdf"
+         id="review" style="width:800px;  height:400px; margin-top:5px;margin-left:0px" ><br></embed></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/PyMol/" rel="tag"># PyMol</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/26/VMD-tcl%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" rel="prev" title="VMD之tcl命令操作">
+                  <i class="fa fa-chevron-left"></i> VMD之tcl命令操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" rel="next" title="Python之matplotlib操作">
+                  Python之matplotlib操作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="本文主要内容：  绘制折线图plt.plot 设置图片大小和分辨率plt.figure 图片保存plt.savefig 设置xy轴上的刻度和字符串xticks 解决刻度稀疏和密集的问题xticks 设置标题和xy轴的label(title,xlabel,ylabel) 文本标注text和annotate 设置字体(font_manager.fontProperties,matplotlib.rc)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之matplotlib操作">
+<meta property="og:url" content="http://jonyafei.com/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="本文主要内容：  绘制折线图plt.plot 设置图片大小和分辨率plt.figure 图片保存plt.savefig 设置xy轴上的刻度和字符串xticks 解决刻度稀疏和密集的问题xticks 设置标题和xy轴的label(title,xlabel,ylabel) 文本标注text和annotate 设置字体(font_manager.fontProperties,matplotlib.rc)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://jonyafei.com/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/pyplot_annotate.png">
+<meta property="og:image" content="http://jonyafei.com/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/text_attribute.png">
+<meta property="og:image" content="http://jonyafei.com/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/matplotlib_summary.png">
+<meta property="article:published_time" content="2019-08-07T12:25:55.000Z">
+<meta property="article:modified_time" content="2019-09-06T12:26:42.420Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="matplotlib">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jonyafei.com/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/pyplot_annotate.png">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;08&#x2F;07&#x2F;Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;08&#x2F;07&#x2F;Python之matplotlib基本命令&#x2F;&quot;,&quot;title&quot;:&quot;Python之matplotlib操作&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Python之matplotlib操作 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5matplotlib%E7%9A%84pyplot%E6%A8%A1%E5%9D%97"><span class="nav-number">1.</span> <span class="nav-text">导入matplotlib的pyplot模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E5%A4%A7%E5%B0%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">图片大小设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%9B%BE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">绘图类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E8%BD%B4%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">坐标轴设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEx%E8%BD%B4y%E8%BD%B4%E7%9A%84%E5%88%BB%E5%BA%A6%E5%8F%8A%E6%A0%87%E7%AD%BE%EF%BC%9Axticks%E5%92%8Cyticks%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">设置x轴y轴的刻度及标签：xticks和yticks方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E8%BD%B4%E6%A0%87%E9%A2%98%E5%90%8D%E7%A7%B0xlabel%E4%B8%8Eylabel"><span class="nav-number">4.2.</span> <span class="nav-text">坐标轴标题名称xlabel与ylabel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%90%E6%A0%87%E8%BD%B4%E8%8C%83%E5%9B%B4%EF%BC%9Axlim%E4%B8%8Eylim"><span class="nav-number">4.3.</span> <span class="nav-text">坐标轴范围：xlim与ylim</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%9D%A1%E6%A0%B7%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">线条样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%A0%87%E8%AE%B0"><span class="nav-number">6.</span> <span class="nav-text">文本标记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#text-%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">text()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#annotate-%E6%96%B9%E6%B3%95"><span class="nav-number">6.2.</span> <span class="nav-text">annotate()方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x%E8%BD%B4y%E8%BD%B4%E5%8F%8A%E5%9B%BE%E7%89%87%E6%A0%87%E9%A2%98%E6%B7%BB%E5%8A%A0"><span class="nav-number">6.3.</span> <span class="nav-text">x轴y轴及图片标题添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#matplotlib%E5%9C%A8%E4%BB%BB%E4%BD%95%E6%96%87%E6%9C%AC%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E6%8E%A5%E5%8F%97TeX%E6%96%B9%E7%A8%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%E3%80%82"><span class="nav-number">6.4.</span> <span class="nav-text">matplotlib在任何文本表达式中接受TeX方程表达式。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%BD%91%E6%A0%BC"><span class="nav-number">7.</span> <span class="nav-text">绘制网格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E6%9D%A1%E6%9B%B2%E7%BA%BF"><span class="nav-number">8.</span> <span class="nav-text">绘制多条曲线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9B%BE%E4%BE%8B"><span class="nav-number">9.</span> <span class="nav-text">添加图例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93%E6%98%BE%E7%A4%BA"><span class="nav-number">10.</span> <span class="nav-text">设置中文字体显示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87matplotlib-rc%E5%8F%AF%E4%BB%A5%E4%BF%AE%E6%94%B9-windows%E5%92%8Clinux%E4%B8%8B%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93"><span class="nav-number">10.1.</span> <span class="nav-text">通过matplotlib.rc可以修改(windows和linux下设置字体)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87matplotlib%E4%B8%8B%E7%9A%84font-manager%E5%8F%AF%E4%BB%A5%E8%A7%A3%E5%86%B3-windows-mac%E5%92%8Clinux%E4%B8%8B%E8%AE%BE%E7%BD%AE%E5%AD%97%E4%BD%93"><span class="nav-number">10.2.</span> <span class="nav-text">通过matplotlib下的font_manager可以解决(windows,mac和linux下设置字体)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E4%BF%9D%E5%AD%98"><span class="nav-number">11.</span> <span class="nav-text">图片保存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87"><span class="nav-number">12.</span> <span class="nav-text">显示图片</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python之matplotlib操作
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-07 20:25:55" itemprop="dateCreated datePublished" datetime="2019-08-07T20:25:55+08:00">2019-08-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-09-06 20:26:42" itemprop="dateModified" datetime="2019-09-06T20:26:42+08:00">2019-09-06</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/matplotlib/" itemprop="url" rel="index"><span itemprop="name">matplotlib</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要内容：</p>
+<ol>
+<li>绘制折线图plt.plot</li>
+<li>设置图片大小和分辨率plt.figure</li>
+<li>图片保存plt.savefig</li>
+<li>设置xy轴上的刻度和字符串xticks</li>
+<li>解决刻度稀疏和密集的问题xticks</li>
+<li>设置标题和xy轴的label(title,xlabel,ylabel)</li>
+<li>文本标注text和annotate</li>
+<li>设置字体(font_manager.fontProperties,matplotlib.rc)</li>
+<li>在一个图上绘制多个图形(多次plot即可)</li>
+<li>为不同的图形添加图例<span id="more"></span></li>
+</ol>
+<h2 id="导入matplotlib的pyplot模块"><a href="#导入matplotlib的pyplot模块" class="headerlink" title="导入matplotlib的pyplot模块"></a>导入matplotlib的pyplot模块</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt  <span class="comment"># 导入pyplot模块，并重命名为plt</span></span><br></pre></td></tr></table></figure>
+<h2 id="图片大小设置"><a href="#图片大小设置" class="headerlink" title="图片大小设置"></a>图片大小设置</h2><p>设置宽高及分辨率</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">8</span>),dpi=<span class="number">80</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="绘图类型"><a href="#绘图类型" class="headerlink" title="绘图类型"></a>绘图类型</h2><p>有折线图，散点图，直方图，条形图等，可参考另一篇博客<a target="_blank" rel="noopener" href="https://jonyafei.github.io/2019/08/08/Python%E4%B9%8Bmatplotlib%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%9B%BE/">Python之matplotlib常用统计图</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,y)</span><br><span class="line">plt.scatter(x,y)</span><br></pre></td></tr></table></figure>
+
+<h2 id="坐标轴设置"><a href="#坐标轴设置" class="headerlink" title="坐标轴设置"></a>坐标轴设置</h2><h3 id="设置x轴y轴的刻度及标签：xticks和yticks方法"><a href="#设置x轴y轴的刻度及标签：xticks和yticks方法" class="headerlink" title="设置x轴y轴的刻度及标签：xticks和yticks方法"></a>设置x轴y轴的刻度及标签：xticks和yticks方法</h3><ul>
+<li><font color=blue size=3>xticks</font>方法，可传入包含数字的可迭代对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.xticks(<span class="built_in">range</span>(<span class="number">2</span>,<span class="number">26</span>))</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过控制列表的步长（间隔取值）调整刻度密集程度[::3]</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">_xtick_labels = [i/<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>,<span class="number">49</span>)]</span><br><span class="line">plt.xticks(_xtick_labels[::<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置字符串与刻度一一对应，传入两个参数，分别是两个可迭代对象，数字和字符串一一一对应，只显示字符串</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">_xtick_labels = [<span class="string">&quot;10点&#123;&#125;分&quot;</span>.<span class="built_in">format</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>)]</span><br><span class="line">_xtick_labels += [<span class="string">&quot;11点&#123;&#125;分&quot;</span>.<span class="built_in">format</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">60</span>)]</span><br><span class="line"><span class="comment"># 取步长，数字和字符串一一对应，数据的长度一样</span></span><br><span class="line">plt.xticks(<span class="built_in">list</span>(x)[::<span class="number">3</span>],_xtick_labels[::<span class="number">3</span>],rotation = <span class="number">45</span>,HorizontalAlignment=<span class="string">&quot;left&quot;</span>) <span class="comment"># rotation旋转的度数，HorizontalAlignment旋转中心</span></span><br></pre></td></tr></table></figure>
+<h3 id="坐标轴标题名称xlabel与ylabel"><a href="#坐标轴标题名称xlabel与ylabel" class="headerlink" title="坐标轴标题名称xlabel与ylabel"></a>坐标轴标题名称<font color=blue size=3>xlabel与ylabel</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.xlabel(<span class="string">&quot;时间&quot;</span>,fontproperties=my_font)</span><br><span class="line">plt.ylabel(<span class="string">&quot;温度 单位(°C)&quot;</span>,fontproperties=my_font)</span><br><span class="line">plt.title(<span class="string">&quot;10点到12点每分钟的气温变化情况&quot;</span>,fontproperties=my_font)</span><br></pre></td></tr></table></figure>
+<h3 id="坐标轴范围：xlim与ylim"><a href="#坐标轴范围：xlim与ylim" class="headerlink" title="坐标轴范围：xlim与ylim"></a>坐标轴范围：<font color=blue size=3>xlim与ylim</font></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.xlim((<span class="number">1</span>, <span class="number">10</span>))</span><br><span class="line">plt.ylim((<span class="number">1</span>, <span class="number">15</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="线条样式"><a href="#线条样式" class="headerlink" title="线条样式"></a>线条样式</h2><p>在调用plot时可指定线条颜色、风格、粗细，透明度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,y,color=<span class="string">&#x27;r&#x27;</span>,linestyle=<span class="string">&#x27;--&#x27;</span>,linewidth=<span class="number">5</span>,alpha=<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>颜色字符（r红色，g绿色，b蓝色，w白色，c青色，m洋红，y黄色，k黑色，也可写全名，也可使用16进制表示）</li>
+<li>风格字符（’-‘实线，’<font color=blue size=3>-</font><font color=blue size=3>-</font>‘虚线，’-.’点划线，’:’点虚线，’’留空，无线条）</li>
+</ul>
+<h2 id="文本标记"><a href="#文本标记" class="headerlink" title="文本标记"></a>文本标记</h2><h3 id="text-方法"><a href="#text-方法" class="headerlink" title="text()方法"></a>text()方法</h3><p>必须写的参数：第一个参数是x轴坐标，第二个参数是y轴坐标，第三个参数是要显式的内容，<br>可选参数：alpha 设置字体的透明度，family 设置字体，size 设置字体的大小，style 设置字体的风格，weight 字体的粗细，bbox 给字体添加框(alpha 设置框体的透明度， facecolor 设置框体的颜色)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.text(<span class="number">2</span>, <span class="number">10</span>, <span class="string">&quot;function: y = x * x&quot;</span>, size = <span class="number">15</span>, alpha=<span class="number">0.2</span>\</span><br><span class="line">         family = <span class="string">&quot;fantasy&quot;</span>, color = <span class="string">&quot;r&quot;</span>, style = <span class="string">&quot;italic&quot;</span>, weight = <span class="string">&quot;light&quot;</span>,\</span><br><span class="line">         bbox = <span class="built_in">dict</span>(facecolor = <span class="string">&quot;r&quot;</span>, alpha = <span class="number">0.2</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="annotate-方法"><a href="#annotate-方法" class="headerlink" title="annotate()方法"></a>annotate()方法</h3><p>annotate方法可以添加箭头指向来标记<br>在注释中，由参数xy表示的注释位置和文本xytext的位置。 这两个参数都是（x，y）元组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ax = plt.subplot(<span class="number">111</span>)</span><br><span class="line">t = np.arange(<span class="number">0.0</span>, <span class="number">5.0</span>, <span class="number">0.01</span>)</span><br><span class="line">s = np.cos(<span class="number">2</span>*np.pi*t)</span><br><span class="line">line, = plt.plot(t, s, lw=<span class="number">2</span>)</span><br><span class="line">plt.annotate(<span class="string">&#x27;local max&#x27;</span>, xy=(<span class="number">2</span>, <span class="number">1</span>), xytext=(<span class="number">3</span>, <span class="number">1.5</span>),</span><br><span class="line">             arrowprops=<span class="built_in">dict</span>(facecolor=<span class="string">&#x27;black&#x27;</span>, shrink=<span class="number">0.05</span>),</span><br><span class="line">             )</span><br><span class="line">plt.ylim(-<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="pyplot_annotate.png" width = "40%" alt="pyplot_annotate">
+
+<h3 id="x轴y轴及图片标题添加"><a href="#x轴y轴及图片标题添加" class="headerlink" title="x轴y轴及图片标题添加"></a>x轴y轴及图片标题添加</h3><p>xlabel(), ylabel() 和 title() 用于在指定位置添加文本<br>下图中的这些属性都可以设置到title, xlabel, ylabel中<br><img src="text_attribute.png" width = "50%" alt="text_attribute"></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://matplotlib.org/tutorials/text/text_props.html"><font face="黑体" color=blue size=3>文本属性和布局</font></a></li>
+</ul>
+<h3 id="matplotlib在任何文本表达式中接受TeX方程表达式。"><a href="#matplotlib在任何文本表达式中接受TeX方程表达式。" class="headerlink" title="matplotlib在任何文本表达式中接受TeX方程表达式。"></a>matplotlib在任何文本表达式中接受TeX方程表达式。</h3><p>matplotlib支持绘制数学公式，以<code>$</code>作为开始和结束符中间包含数学公式；<br>例如，要在(60, .025)位置写入表达式μ=100, σ= 15，可以编写由美元符号包围的TeX表达式。</p>
+<ul>
+<li>字符串前面的r很重要,它表示该字符串是一个原始字符串，而不是将反斜杠视为python转义。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.xlabel(<span class="string">&#x27;Smarts&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Probability&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Histogram of IQ&#x27;</span>)</span><br><span class="line">plt.text(<span class="number">60</span>, <span class="number">.025</span>, <span class="string">r&#x27;$\mu=100,\ \sigma=15$&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="绘制网格"><a href="#绘制网格" class="headerlink" title="绘制网格"></a>绘制网格</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.grid(alpha=<span class="number">0.4</span>,linestyle=<span class="string">&#x27;:&#x27;</span>) </span><br><span class="line"><span class="comment"># 添加网格，alpha值为透明度，网格密集程度通过xticks和yticks调整</span></span><br></pre></td></tr></table></figure>
+<h2 id="绘制多条曲线"><a href="#绘制多条曲线" class="headerlink" title="绘制多条曲线"></a>绘制多条曲线</h2><ul>
+<li>多次调用plt.plot就可以，并设置曲线标签及图例</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,y_1,label=<span class="string">&quot;自己&quot;</span>)</span><br><span class="line">plt.plot(x,y_2,label=<span class="string">&quot;同桌&quot;</span>)</span><br><span class="line">plt.legend(prop=my_font)</span><br></pre></td></tr></table></figure>
+<h2 id="添加图例"><a href="#添加图例" class="headerlink" title="添加图例"></a>添加图例</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.legend(prop=my_font,loc=<span class="string">&#x27;best&#x27;</span>)</span><br><span class="line"><span class="comment"># prop指定图例字体</span></span><br><span class="line"><span class="comment"># loc指定图例位置，有best，upper right，upper left，lower left，lower right，right，center left，center right，lower center，upper center，center，编号依次为从0到10</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="设置中文字体显示"><a href="#设置中文字体显示" class="headerlink" title="设置中文字体显示"></a>设置中文字体显示</h2><p>matplotlib默认不支持中文字符，可以通过指定中文字体设置</p>
+<ul>
+<li>查看linux/mac下面支持的字体<ul>
+<li>fc-list # 查看支持的字体</li>
+<li>fc-list :lang=zh #查看支持的中文（冒号前有空格）</li>
+</ul>
+</li>
+</ul>
+<h3 id="通过matplotlib-rc可以修改-windows和linux下设置字体"><a href="#通过matplotlib-rc可以修改-windows和linux下设置字体" class="headerlink" title="通过matplotlib.rc可以修改(windows和linux下设置字体)"></a>通过matplotlib.rc可以修改(windows和linux下设置字体)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">font = &#123;<span class="string">&#x27;family&#x27;</span>: <span class="string">&#x27;MicroSoft YaHei&#x27;</span>, <span class="string">&#x27;weight&#x27;</span>: <span class="string">&#x27;bold&#x27;</span>, <span class="string">&#x27;size&#x27;</span>: <span class="string">&#x27;large&#x27;</span>&#125;</span><br><span class="line">matplotlib.rc(<span class="string">&quot;font&quot;</span>,**font)</span><br><span class="line"><span class="comment">## size: Either an relative value of &#x27;xx-small&#x27;,&#x27;x-small&#x27;,&#x27;small&#x27;,&#x27;medium&#x27;,&#x27;large&#x27;,&#x27;x-large&#x27;,&#x27;xx-large&#x27; or an absolute font size, e.g., 12</span></span><br><span class="line"><span class="comment">## 或者不用字典，直接写成下面的形式</span></span><br><span class="line">matplotlib.rc(<span class="string">&quot;font&quot;</span>,family=<span class="string">&#x27;MicroSoft YaHei&#x27;</span>,weight=<span class="string">&#x27;bold&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="通过matplotlib下的font-manager可以解决-windows-mac和linux下设置字体"><a href="#通过matplotlib下的font-manager可以解决-windows-mac和linux下设置字体" class="headerlink" title="通过matplotlib下的font_manager可以解决(windows,mac和linux下设置字体)"></a>通过matplotlib下的font_manager可以解决(windows,mac和linux下设置字体)</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> font_manager</span><br><span class="line"></span><br><span class="line">my_font = font_manager.FontProperties(fname=<span class="string">&quot;/System/Library/Fonts/PingFang.ttc&quot;</span>) <span class="comment"># 字体文件的路径，通过fc-list查看</span></span><br><span class="line">plt.xticks(<span class="built_in">list</span>(x)[::<span class="number">3</span>],_xtick_labels[::<span class="number">3</span>],rotation=<span class="number">45</span>,fontproperties=my_font)</span><br><span class="line"><span class="comment"># 要显示中文的地方添加fontproperties=my_font</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="图片保存"><a href="#图片保存" class="headerlink" title="图片保存"></a>图片保存</h2><ul>
+<li>保存路径与保存格式<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.savefig(<span class="string">&quot;./sig_size.png&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="显示图片"><a href="#显示图片" class="headerlink" title="显示图片"></a>显示图片</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<img src="matplotlib_summary.png" width = "100%" alt="matplotlib_summary">
+
+<p><a target="_blank" rel="noopener" href="https://www.matplotlib.org.cn/gallery/index.html"><font face="黑体" color=blue size=3>详细说明请查看matplotlib中文文档</font></a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/matplotlib/" rel="tag"># matplotlib</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/07/26/PyMol%E6%95%99%E7%A8%8B/" rel="prev" title="PyMol常用命令">
+                  <i class="fa fa-chevron-left"></i> PyMol常用命令
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/08/08/Python%E4%B9%8Bmatplotlib%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%9B%BE/" rel="next" title="Python之matplotlib常用统计图">
+                  Python之matplotlib常用统计图 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

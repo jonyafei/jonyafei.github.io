@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="本文基于Python和shell脚本语法编写了根据CONTCAR&#x2F;POSCAR文件批量计算键长的脚本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python调用shell脚本命令的方法">
+<meta property="og:url" content="http://jonyafei.com/2019/12/11/Python%E8%B0%83%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="本文基于Python和shell脚本语法编写了根据CONTCAR&#x2F;POSCAR文件批量计算键长的脚本。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-11T13:10:30.000Z">
+<meta property="article:modified_time" content="2020-05-29T09:21:59.492Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/12/11/Python%E8%B0%83%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;12&#x2F;11&#x2F;Python%E8%B0%83%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%9A%84%E6%96%B9%E6%B3%95&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;12&#x2F;11&#x2F;Python调用shell脚本命令的方法&#x2F;&quot;,&quot;title&quot;:&quot;Python调用shell脚本命令的方法&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Python调用shell脚本命令的方法 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E8%B0%83%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">Python调用shell脚本命令的方法：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%86%85%E5%AE%B9"><span class="nav-number">2.</span> <span class="nav-text">脚本内容</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/12/11/Python%E8%B0%83%E7%94%A8shell%E8%84%9A%E6%9C%AC%E5%91%BD%E4%BB%A4%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python调用shell脚本命令的方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-11 21:10:30" itemprop="dateCreated datePublished" datetime="2019-12-11T21:10:30+08:00">2019-12-11</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-05-29 17:21:59" itemprop="dateModified" datetime="2020-05-29T17:21:59+08:00">2020-05-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/Shell/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文基于Python和shell脚本语法编写了根据CONTCAR/POSCAR文件批量计算键长的脚本。</p>
+<span id="more"></span>
+
+<h2 id="Python调用shell脚本命令的方法："><a href="#Python调用shell脚本命令的方法：" class="headerlink" title="Python调用shell脚本命令的方法："></a>Python调用shell脚本命令的方法：</h2><ol>
+<li>os.system<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">os.system(<span class="string">&quot;rm atom_* extract.sh&quot;</span>)  <span class="comment"># 删除以atom_开头的文件和extract.sh文件</span></span><br><span class="line">os.system(<span class="string">&quot;bash extract.sh&quot;</span>)  <span class="comment"># 执行无外参的extract.sh脚本文件</span></span><br><span class="line">os.system(<span class="string">&quot;bash extract.sh tonny&quot;</span>)  <span class="comment"># 执行extract.sh文件，并将tonny字符串传给extract.sh脚本</span></span><br><span class="line">os.system(<span class="string">&quot;python test.py tonny&quot;</span>)  <span class="comment">#执行test.py文件，并将tonny字符串传给test.py</span></span><br></pre></td></tr></table></figure></li>
+<li>os.popen 可以将执行结果返回给一个对象<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">files = os.popen(<span class="string">&#x27;bash -c &quot;find -type f -name CONTCAR&quot;&#x27;</span>)  <span class="comment"># 列出当前目录下所有含有CONTCAR文件的文件路径，并返回files对象</span></span><br><span class="line">file_path = files.read().split()  <span class="comment"># 读取files对象中的内容，并切割字符串</span></span><br></pre></td></tr></table></figure></li>
+<li>subprocess库<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cmd1 = <span class="string">&quot;sed -n 6p &quot;</span> + CONTCAR + <span class="string">&quot; &gt; atom_names&quot;</span></span><br><span class="line">subprocess.call(cmd1,shell=<span class="literal">True</span>)</span><br><span class="line">subprocess.run(<span class="string">&quot;rm atom_* vect&quot;</span>,shell=<span class="literal">True</span>)  <span class="comment"># delete temporary files</span></span><br><span class="line"><span class="comment"># find folders containing CONTCAR file and save file path into a list</span></span><br><span class="line">files = subprocess.Popen(<span class="string">&#x27;bash -c &quot;find -type f -name CONTCAR&quot;&#x27;</span>,stdout=subprocess.PIPE).stdout.read().decode(encoding=<span class="string">&quot;utf-8&quot;</span>).split()</span><br></pre></td></tr></table></figure></li>
+<li>envy模块</li>
+</ol>
+<h2 id="脚本内容"><a href="#脚本内容" class="headerlink" title="脚本内容"></a>脚本内容</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#########################################################################################</span></span><br><span class="line"><span class="comment">#### usage:   python dist_in_CONTCAR.py Atom1 Atom2 [Atom3 [Atom4]]                  ####</span></span><br><span class="line"><span class="comment">#### example: python dist_in_CONTCAR.py Pt1 O1                                       ####</span></span><br><span class="line"><span class="comment">####          python dist_in_CONTCAR.py Pt1 O1 O2                                    ####</span></span><br><span class="line"><span class="comment">####          python dist_in_CONTCAR.py N1 Pt1 O1 O2                                 ####</span></span><br><span class="line"><span class="comment">#### The Atom Names are specified same with those Atom Names shown in VESTA software ####</span></span><br><span class="line"><span class="comment">#########################################################################################</span></span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dist</span>(<span class="params">a,b</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot; read coordinates of two points and return distance of two points&quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;vector module --&gt;  |A - B|&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># distance = np.sqrt(np.dot(a - b, a - b))</span></span><br><span class="line">    distance = np.linalg.norm(a-b)</span><br><span class="line">    <span class="keyword">return</span> distance</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">angle</span>(<span class="params">a,b,c</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;read coordinates of three points and return angle of &lt;a_b_c&quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;cos_AB = A * B / (|A| * |B|)&quot;&quot;&quot;</span></span><br><span class="line">    cos_abc = np.dot(a-b, c-b) / (np.linalg.norm(a-b) * np.linalg.norm(c-b))</span><br><span class="line">    angle_abc = np.arccos(cos_abc) * <span class="number">180</span> / np.pi</span><br><span class="line">    <span class="keyword">return</span> angle_abc</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">diheral_angle</span>(<span class="params">a,b,c,d</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;read coordinates of four points and return diheral angle of plane abc and bcd&quot;&quot;&quot;</span></span><br><span class="line">    NormVect_abc = np.cross(b-a,c-a)  <span class="comment"># NormalVector = A X B</span></span><br><span class="line">    NormVect_bcd = np.cross(b-c,d-c)</span><br><span class="line">    cosA = np.dot(NormVect_abc,NormVect_bcd) / (np.linalg.norm(NormVect_abc) * np.linalg.norm(NormVect_bcd))</span><br><span class="line">    angle_A = np.arccos(cosA) * <span class="number">180</span> / np.pi</span><br><span class="line">    <span class="keyword">if</span> angle_A &gt; <span class="number">90</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">180</span> - angle_A</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> angle_A</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_process</span>(<span class="params">CONTCAR</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;read data from CONTCAR file and return the distance between ATOM1 and Atom2&quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#1. use bash script to extract atom coordinate, atom name and cell parameter into temporary files</span></span><br><span class="line">    cmd1 = <span class="string">&quot;sed -n 6p &quot;</span> + CONTCAR + <span class="string">&quot; &gt; atom_names&quot;</span></span><br><span class="line">    cmd2 = <span class="string">&quot;sed -n 7p &quot;</span> + CONTCAR + <span class="string">&quot; &gt; atom_nums&quot;</span></span><br><span class="line">    cmd3 = <span class="string">&quot;sed -n 3,5p &quot;</span> + CONTCAR + <span class="string">&quot; &gt; vect&quot;</span></span><br><span class="line">    cmd4 = <span class="string">&quot;sed 1,8d &quot;</span> + CONTCAR + <span class="string">&quot; | grep -v E &gt; atom_coors&quot;</span></span><br><span class="line">    subprocess.call(cmd1,shell=<span class="literal">True</span>)</span><br><span class="line">    subprocess.call(cmd2,shell=<span class="literal">True</span>)</span><br><span class="line">    subprocess.call(cmd3,shell=<span class="literal">True</span>)</span><br><span class="line">    subprocess.call(cmd4,shell=<span class="literal">True</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#2. data process</span></span><br><span class="line">    matrix_trans = np.loadtxt(<span class="string">&#x27;vect&#x27;</span>)  <span class="comment"># read cell parameters into an array</span></span><br><span class="line">    atom_nums = np.loadtxt(<span class="string">&#x27;atom_nums&#x27;</span>).astype(<span class="built_in">int</span>)  <span class="comment"># read atom nums into an array</span></span><br><span class="line">    coor = np.loadtxt(<span class="string">&#x27;atom_coors&#x27;</span>)  <span class="comment"># read atom coordinates into an array</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;atom_names&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        atom_names = f.readline().split()  <span class="comment"># read atom names into a list</span></span><br><span class="line">        name = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(atom_names)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(atom_nums[i]):</span><br><span class="line">                name.append(atom_names[i]+<span class="built_in">str</span>(j+<span class="number">1</span>))  <span class="comment"># add nums on atoms and save into name list</span></span><br><span class="line">                </span><br><span class="line">    subprocess.run(<span class="string">&quot;rm atom_* vect&quot;</span>,shell=<span class="literal">True</span>)  <span class="comment"># delete temporary files</span></span><br><span class="line">    <span class="keyword">return</span> matrix_trans,coor,name</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distAB</span>(<span class="params">CONTCAR,Atom1,Atom2</span>):</span>    </span><br><span class="line">    matrix_trans,coor,name = file_process(CONTCAR) </span><br><span class="line">    a = np.dot(matrix_trans.T,coor[name.index(Atom1)])</span><br><span class="line">    b = np.dot(matrix_trans.T,coor[name.index(Atom2)])                      </span><br><span class="line">    dist_value = dist(a,b)    </span><br><span class="line">    <span class="keyword">return</span> dist_value</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">angleABC</span>(<span class="params">CONTCAR,Atom1,Atom2,Atom3</span>):</span></span><br><span class="line">    matrix_trans,coor,name = file_process(CONTCAR)</span><br><span class="line">    a = np.dot(matrix_trans.T,coor[name.index(Atom1)])</span><br><span class="line">    b = np.dot(matrix_trans.T,coor[name.index(Atom2)])</span><br><span class="line">    c = np.dot(matrix_trans.T,coor[name.index(Atom3)])             </span><br><span class="line">    angle_value = angle(a,b,c)    </span><br><span class="line">    <span class="keyword">return</span> angle_value</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">diheralABCD</span>(<span class="params">CONTCAR,Atom1,Atom2,Atom3,Atom4</span>):</span></span><br><span class="line">    matrix_trans,coor,name = file_process(CONTCAR)          </span><br><span class="line">    a = np.dot(matrix_trans.T,coor[name.index(Atom1)])</span><br><span class="line">    b = np.dot(matrix_trans.T,coor[name.index(Atom2)])</span><br><span class="line">    c = np.dot(matrix_trans.T,coor[name.index(Atom3)])</span><br><span class="line">    d = np.dot(matrix_trans.T,coor[name.index(Atom4)])</span><br><span class="line">    angle_value = diheral_angle(a,b,c,d)    </span><br><span class="line">    <span class="keyword">return</span> angle_value</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment">#1. find folders containing CONTCAR file and save file path into a list</span></span><br><span class="line">ArgvNum = <span class="built_in">len</span>(sys.argv)</span><br><span class="line">Atom = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(ArgvNum):</span><br><span class="line">    Atom.append(sys.argv[i])</span><br><span class="line">cmd5 = <span class="string">&#x27;bash -c &quot;find -type f -name CONTCAR&quot;&#x27;</span></span><br><span class="line">files = subprocess.Popen(cmd5,stdout=subprocess.PIPE).stdout.read().decode(encoding=<span class="string">&quot;utf-8&quot;</span>).split()</span><br><span class="line"><span class="comment">#2. for each CONTCAR file, calculate the distance between two atoms</span></span><br><span class="line">value_list = []</span><br><span class="line">file_name_list = []</span><br><span class="line"><span class="keyword">for</span> CONTCAR <span class="keyword">in</span> files:</span><br><span class="line">    file_name_list.append(CONTCAR.lstrip(<span class="string">&#x27;./&#x27;</span>).rstrip(<span class="string">&#x27;CONTCAR&#x27;</span>).replace(<span class="string">&#x27;/&#x27;</span>,<span class="string">&#x27;__&#x27;</span>))</span><br><span class="line">    <span class="keyword">if</span> ArgvNum == <span class="number">3</span>:</span><br><span class="line">        value = distAB(CONTCAR,Atom[<span class="number">1</span>],Atom[<span class="number">2</span>])</span><br><span class="line">    <span class="keyword">elif</span> ArgvNum == <span class="number">4</span>:</span><br><span class="line">        value = angleABC(CONTCAR,Atom[<span class="number">1</span>],Atom[<span class="number">2</span>],Atom[<span class="number">3</span>])</span><br><span class="line">    <span class="keyword">elif</span> ArgvNum == <span class="number">5</span>:</span><br><span class="line">        value = diheralABCD(CONTCAR,Atom[<span class="number">1</span>],Atom[<span class="number">2</span>],Atom[<span class="number">3</span>],Atom[<span class="number">4</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    value_list.append(value)</span><br><span class="line"><span class="comment">#3. write the file name and distance value into a file &#x27;dist_between_Atom1_and_Atom2.dat&#x27;</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output.dat&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> file:</span><br><span class="line">    file.write(<span class="string">&quot;species&quot;</span>+<span class="string">&quot; &quot;</span> * <span class="number">13</span> + <span class="string">&quot;values\n&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(files)):</span><br><span class="line">        file.write(<span class="string">&quot;&#123;:&lt;20&#125;&#123;:&gt;.3f&#125;\n&quot;</span>.<span class="built_in">format</span>(file_name_list[i],value_list[i]))</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/Shell/" rel="tag"># Shell</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/09/26/shell%E8%84%9A%E6%9C%AC%E4%B9%8B%E6%8F%90%E5%8F%96%E9%A2%91%E7%8E%87%E8%AE%A1%E7%AE%97%E7%BB%93%E6%9E%9C/" rel="prev" title="shell脚本之提取频率计算结果">
+                  <i class="fa fa-chevron-left"></i> shell脚本之提取频率计算结果
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/12/18/shell%E4%B9%8B%E6%8F%90%E5%8F%96Gaussian%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%83%BD%E9%87%8F%E6%95%B0%E6%8D%AE/" rel="next" title="shell之提取Gaussian输出文件中的能量数据">
+                  shell之提取Gaussian输出文件中的能量数据 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

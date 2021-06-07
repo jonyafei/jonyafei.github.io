@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="From Zero to the DevOps">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jonyafei&#39;s blog">
+<meta property="og:url" content="http://jonyafei.com/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="From Zero to the DevOps">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="jonyafei">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://jonyafei.com/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:true,&quot;isPost&quot;:false,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:&quot;&quot;,&quot;permalink&quot;:&quot;&quot;,&quot;path&quot;:&quot;index.html&quot;,&quot;title&quot;:&quot;&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2021/06/06/Python%E8%84%9A%E6%9C%AC%E6%8F%90%E5%8F%96COHP%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/06/Python%E8%84%9A%E6%9C%AC%E6%8F%90%E5%8F%96COHP%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">Python脚本提取COHP数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-06 20:00:00" itemprop="dateCreated datePublished" datetime="2021-06-06T20:00:00+08:00">2021-06-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-06-07 15:57:50" itemprop="dateModified" datetime="2021-06-07T15:57:50+08:00">2021-06-07</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在多相催化体系计算中，经常会讨论原子间的成键相互作用，比如吸附原子与金属原子间的COHP(Crystal Orbital Hamilton Populations)，但lobster计算输出文件COHPCAR.lobster经常包含多个轨道作用，手动提取比较繁琐。使用wxdragon尽管可以查看相应的轨道作用，但无法一次性导出多组数据。为了偷懒，写了个Python小程序，可以方便快速地根据需要查看和输出指定轨道的COHP及ICOHP数据。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/06/Python%E8%84%9A%E6%9C%AC%E6%8F%90%E5%8F%96COHP%E6%95%B0%E6%8D%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/" class="post-title-link" itemprop="url">matplotlib绘制势能面剖面图</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-09 20:25:55" itemprop="dateCreated datePublished" datetime="2019-08-09T20:25:55+08:00">2019-08-09</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-10-14 20:06:51" itemprop="dateModified" datetime="2019-10-14T20:06:51+08:00">2019-10-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/matplotlib/" itemprop="url" rel="index"><span itemprop="name">matplotlib</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>作为计算化学工作者，工作中经常需要绘制势能面剖面图，采用Origin绘制大量这种图时显得特别耗时。本文基于Python中的matplotlib库编写了一键生成势能面剖面图的脚本，可画出平滑曲线图和实虚线相间的折线图。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">linux之shell语法基础</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-27 22:00:55" itemprop="dateCreated datePublished" datetime="2019-08-27T22:00:55+08:00">2019-08-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-05-29 17:17:19" itemprop="dateModified" datetime="2020-05-29T17:17:19+08:00">2020-05-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Shell脚本和编程语言很相似，也有变量和流程控制语句，但Shell脚本是解释执行的，不需要编译，Shell程序从脚本中一行一行读取并执行这些命令，相当于一个用户把脚本中的命令一行一行敲到Shell提示符下执行。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/08/27/linux%E4%B9%8Bshell%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/" class="post-title-link" itemprop="url">Markdown 常用语法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-29 19:10:55" itemprop="dateCreated datePublished" datetime="2019-03-29T19:10:55+08:00">2019-03-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-09-02 22:45:11" itemprop="dateModified" datetime="2019-09-02T22:45:11+08:00">2019-09-02</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Markdown/" itemprop="url" rel="index"><span itemprop="name">Markdown</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Markdown文件以.md为后缀名，语法简单清晰，是Hexo博客环境下博客写作的常用文件。本文将简要介绍Markdown常用的语法结构，希望能对读者有所帮助。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/07/26/PyMol%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/07/26/PyMol%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">PyMol常用命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-26 22:25:55" itemprop="dateCreated datePublished" datetime="2019-07-26T22:25:55+08:00">2019-07-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-09-02 14:49:45" itemprop="dateModified" datetime="2019-09-02T14:49:45+08:00">2019-09-02</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/PyMol/" itemprop="url" rel="index"><span itemprop="name">PyMol</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>PyMol可以作出非常漂亮的蛋白质结构图，是一款很好用的画蛋白图像的软件。我在这里总结了PyMol的一些常用命令。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/07/26/PyMol%E6%95%99%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/specialCharacters/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/specialCharacters/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-06 20:33:20" itemprop="dateCreated datePublished" datetime="2021-06-06T20:33:20+08:00">2021-06-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-09-02 23:08:18" itemprop="dateModified" datetime="2019-09-02T23:08:18+08:00">2019-09-02</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <html>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<head>
+    	<title>Markdown转义字符</title>
+  	</head>
+	<body>
+		<div align="center"><strong>Markdown转义字符</strong></div>
+		<div align="center">
+			<table cellpadding="0" border="1"><tbody><tr><td>
+<p align="center"><span><strong><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="center"><span><strong><span>说明</span></strong></span></p>
+</td>
+<td>
+<p align="center"><span><strong><span>编码</span></strong></span></p>
+</td>
+
+<td>
+<p align="center"><span><strong><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="center"><span><strong><span>说明</span></strong></span></p>
+</td>
+<td>
+<p align="center"><span><strong><span>编码</span></strong></span></p>
+</td>
+
+<td>
+<p align="center"><span><strong><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="center"><span><strong><span>说明</span></strong></span></p>
+</td>
+<td>
+<p align="center"><span><strong><span>编码</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">”</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双引号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;quot;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>×</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>乘号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;times;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>←</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>向左箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;larr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">&amp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">AND</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;amp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>÷</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>除号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;divide;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>↑</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>向上箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;uarr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">&lt;&nbsp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>小于符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;lt;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>±</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>正负符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;plusmn;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>→</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>向右箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;rarr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">&gt;&nbsp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>大于符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;gt;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span>ƒ</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">function</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;fnof;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>↓</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>向下箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;darr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">&nbsp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>空格</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;nbsp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>√</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>根号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;radic;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">↑</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双向箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;harr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">?</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>倒问号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;iquest;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>∞</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>无限大符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;infin;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us"><span>⇐</span></span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双线向左箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;lArr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">?</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双左箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;laquo;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>∠</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>角度符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;ang;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us"><span>⇑</span></span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双线向上箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;uArr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us">?</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双右箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;raquo;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>∫</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>微积分符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;int;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span>⇒</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双线向右箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;rArr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>‘</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>左单引号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;lsquo;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>°</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>度数符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;deg;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span>⇓</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双线向下箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;dArr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>’</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>右单引号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;rsquo;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>≠</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>不等于符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;ne;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span>⇔</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>双线双向箭头</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;hArr;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>“</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>左双引号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;ldquo;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>≡</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>相等符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;equiv;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">♠</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>黑桃符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;spades;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>”</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>右双引号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;rdquo;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>≤</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>小于等于符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;le;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">♣</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>梅花符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;clubs;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span>¶</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>段落符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;para;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>≥</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>大于等于符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;ge;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">♥</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>红心符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;hearts;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>§</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>章节符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;sect;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>⊥</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>垂直符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;perp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span>♦</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>方块符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;diams;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span lang="en-us"><span>©</span></span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>版权所有符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;copy;</span></strong></span></p>
+</td>
+<td>
+<p align="left">&nbsp;<span>½</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>二分之一符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;frac12;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>α</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Alpha</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;alpha;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span>®</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>注册商标符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;reg;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span>¼</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>四分之一符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;frac14;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>β</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Bata</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;beta;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span>™</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>商标符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;trade;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span>¾</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>四分之三符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;frac34;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>γ</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Gamma</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;gamma;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span>€</span><br></p>
+</td>
+<td>
+<p align="left"><span><strong><span>欧元符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;euro;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>‰</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>百分符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;permil;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>Δ</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Delta</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;Delta;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>￠</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>美分符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;cent;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>∴</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>所以符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;there4;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>θ</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Theta</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;theta;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>￡</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>英镑符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;pound;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>π</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>圆周率符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;pi;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>λ</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Lambda</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;lambda;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>￥</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>日圆符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;yen;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">1</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>批注<span lang="en-us">1</span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;sup1;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>Σ</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Sigma</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;Sigma;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span>…</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">…</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;hellip;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">2</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>批注<span lang="en-us">2</span>符号、平方</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;sup2;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span>τ</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">Tau</span><span>符号</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;tau;</span></strong></span></p>
+</td>
+</tr><tr><td>
+<p align="left"><span><strong><span><span>⊕</span></span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&nbsp;</span></strong></span></p>
+</td>
+<td>
+<p align="left"><span><strong><span lang="en-us">&amp;oplus;</span></strong></span></p>
+</td>
+
+</tr></tbody></table>
+		</div>
+	</body>
+</html>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/jquery_dotStar/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/jquery_dotStar/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-06 20:33:20" itemprop="dateCreated datePublished" datetime="2021-06-06T20:33:20+08:00">2021-06-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-03-22 10:50:51" itemprop="dateModified" datetime="2019-03-22T10:50:51+08:00">2019-03-22</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          ! function () {
+    function o(w, v, i) {
+        return w.getAttribute(v) || i
+    }
+
+    function j(i) {
+        return document.getElementsByTagName(i)
+    }
+
+    function l() {
+        var i = j("script"),
+            w = i.length,
+            v = i[w - 1];
+        return {
+            l: w,
+            z: o(v, "zIndex", -1),
+            o: o(v, "opacity", 0.5),
+            c: o(v, "color", "0,0,0"),
+            n: o(v, "count", 99)
+        }
+    }
+
+    function k() {
+        r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    }
+
+    function b() {
+        e.clearRect(0, 0, r, n);
+        var w = [f].concat(t);
+        var x, v, A, B, z, y;
+        t.forEach(function (i) {
+            i.x += i.xa, i.y += i.ya, i.xa *= i.x > r || i.x < 0 ? -1 : 1, i.ya *= i.y > n || i.y < 0 ? -1 : 1, e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);
+            for (v = 0; v < w.length; v++) {
+                x = w[v];
+                if (i !== x && null !== x.x && null !== x.y) {
+                    B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;
+                    y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
+                }
+            }
+            w.splice(w.indexOf(i), 1)
+        }), m(b)
+    }
+    var u = document.createElement("canvas"),
+        s = l(),
+        c = "c_n" + s.l,
+        e = u.getContext("2d"),
+        r, n, m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
+            window.setTimeout(i, 1000 / 45)
+        },
+        a = Math.random,
+        f = {
+            x: null,
+            y: null,
+            max: 20000
+        };
+    u.id = c;
+    u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
+    j("body")[0].appendChild(u);
+    k(), window.onresize = k;
+    window.onmousemove = function (i) {
+        i = i || window.event, f.x = i.clientX, f.y = i.clientY
+    }, window.onmouseout = function () {
+        f.x = null, f.y = null
+    };
+    for (var t = [], p = 0; s.n > p; p++) {
+        var h = a() * r,
+            g = a() * n,
+            q = 2 * a() - 1,
+            d = 2 * a() - 1;
+        t.push({
+            x: h,
+            y: g,
+            xa: q,
+            ya: d,
+            max: 6000
+        })
+    }
+    setTimeout(function () {
+        b()
+    }, 100)
+}();
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/operator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/06/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/operator/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-06 20:33:20" itemprop="dateCreated datePublished" datetime="2021-06-06T20:33:20+08:00">2021-06-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-03-22 10:47:11" itemprop="dateModified" datetime="2019-03-22T10:47:11+08:00">2019-03-22</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>operator</title>
+	<style type="text/css">
+		div{
+			display: inline-block;
+		}
+		input{
+			width:70px;
+			background-color: #cecece
+		}
+		#check{
+			cursor:pointer;
+		}
+		#check:hover{
+			font-weight:bold;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oInput01 = document.getElementById('input01');
+			var oInput02 = document.getElementById('input02');
+			var oInput03 = document.getElementById('input03');
+			var oBtn = document.getElementById('check');
+
+			oBtn.onclick = function(){
+				var answer = parseInt(oInput01.value) + parseInt(oInput02.value);
+				if (answer == parseInt(oInput03.value))
+					alert("恭喜你答对了！");
+				else
+					alert("真遗憾，答错了。正确答案是" + oInput01.value + "+" + oInput02.value + "=" + answer);
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<input type="text" name="" id="input01">
+	<div>+</div>
+	<input type="text" name="" id="input02">
+	<div>=</div>
+	<input type="text" name="" id="input03">
+	<input type="button" name="" id="check" value="正确答案">
+
+	<script type="text/javascript" color="0,153,68" opacity="0.7" zindex="-2" count="100" src="jquery_dotStar.js"></script><canvas id="c_n5" width="1366" height="582" style="position: fixed; top: 0px; left: 0px; z-index: -2; opacity: 0.7;"></canvas>
+
+</body>
+</html>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2021/06/06/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/06/06/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-06-06 20:23:47" itemprop="dateCreated datePublished" datetime="2021-06-06T20:23:47+08:00">2021-06-06</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-03-23 22:35:11" itemprop="dateModified" datetime="2019-03-23T22:35:11+08:00">2019-03-23</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/12/18/shell%E4%B9%8B%E6%8F%90%E5%8F%96Gaussian%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%83%BD%E9%87%8F%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/12/18/shell%E4%B9%8B%E6%8F%90%E5%8F%96Gaussian%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%83%BD%E9%87%8F%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">shell之提取Gaussian输出文件中的能量数据</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-12-18 21:30:08" itemprop="dateCreated datePublished" datetime="2019-12-18T21:30:08+08:00">2019-12-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-12-27 11:18:39" itemprop="dateModified" datetime="2019-12-27T11:18:39+08:00">2019-12-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/Shell/" itemprop="url" rel="index"><span itemprop="name">Shell</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文基于shell语言编写了提取Gaussian计算输出文件中的能量数据的脚本。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/12/18/shell%E4%B9%8B%E6%8F%90%E5%8F%96Gaussian%E8%BE%93%E5%87%BA%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%83%BD%E9%87%8F%E6%95%B0%E6%8D%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="查找、打包压缩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux操作之常用命令">
+<meta property="og:url" content="http://jonyafei.com/2019/07/26/linux%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="查找、打包压缩">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-26T12:25:55.000Z">
+<meta property="article:modified_time" content="2020-05-29T10:57:49.662Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/07/26/linux%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;07&#x2F;26&#x2F;linux%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;07&#x2F;26&#x2F;linux操作之常用命令&#x2F;&quot;,&quot;title&quot;:&quot;linux操作之常用命令&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>linux操作之常用命令 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E4%B8%8E%E6%A3%80%E7%B4%A2"><span class="nav-number">1.</span> <span class="nav-text">文件查找与检索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E6%96%87%E4%BB%B6%E5%B1%9E%E6%80%A7%E6%9F%A5%E6%89%BE"><span class="nav-number">1.1.</span> <span class="nav-text">按文件属性查找</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E6%96%87%E4%BB%B6%E5%90%8D%EF%BC%9A-find-target-dir-name-file-name"><span class="nav-number">1.1.1.</span> <span class="nav-text">按文件名： find target_dir -name file_name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F%EF%BC%9A-find-target-dir-size-10k-size-10M"><span class="nav-number">1.1.2.</span> <span class="nav-text">按文件大小： find target_dir -size +10k -size -10M</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%89%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%EF%BC%9A-find-target-dir-type-d-f-b-c-s-p-l"><span class="nav-number">1.1.3.</span> <span class="nav-text">按文件类型： find target_dir -type d&#x2F;f&#x2F;b&#x2F;c&#x2F;s&#x2F;p&#x2F;l</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%89%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E6%9F%A5%E6%89%BE"><span class="nav-number">1.2.</span> <span class="nav-text">按文件内容查找</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%8B%E7%BC%A9%E4%B8%8E%E6%89%93%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">压缩与打包</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/07/26/linux%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          linux操作之常用命令
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-07-26 20:25:55" itemprop="dateCreated datePublished" datetime="2019-07-26T20:25:55+08:00">2019-07-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-05-29 18:57:49" itemprop="dateModified" datetime="2020-05-29T18:57:49+08:00">2020-05-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>查找、打包压缩</p>
+<span id="more"></span>
+
+<h2 id="文件查找与检索"><a href="#文件查找与检索" class="headerlink" title="文件查找与检索"></a>文件查找与检索</h2><h3 id="按文件属性查找"><a href="#按文件属性查找" class="headerlink" title="按文件属性查找"></a>按文件属性查找</h3><h4 id="按文件名：-find-target-dir-name-file-name"><a href="#按文件名：-find-target-dir-name-file-name" class="headerlink" title="按文件名： find target_dir -name file_name"></a>按文件名： find target_dir -name file_name</h4><h4 id="按文件大小：-find-target-dir-size-10k-size-10M"><a href="#按文件大小：-find-target-dir-size-10k-size-10M" class="headerlink" title="按文件大小： find target_dir -size +10k -size -10M"></a>按文件大小： find target_dir -size +10k -size -10M</h4><p>等于 -size 10k<br>大于 -size +10k<br>小于 -size -10M</p>
+<h4 id="按文件类型：-find-target-dir-type-d-f-b-c-s-p-l"><a href="#按文件类型：-find-target-dir-type-d-f-b-c-s-p-l" class="headerlink" title="按文件类型： find target_dir -type d/f/b/c/s/p/l"></a>按文件类型： find target_dir -type d/f/b/c/s/p/l</h4><h3 id="按文件内容查找"><a href="#按文件内容查找" class="headerlink" title="按文件内容查找"></a>按文件内容查找</h3><p>grep -r target_content target_path</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 在当前目录下查找文件名为WAVECAR的文件，并显示其所在路径</span><br><span class="line">&gt;&gt;&gt; find ./ -name WAVECAR</span><br><span class="line">./Cox/Co4/NN/WAVECAR</span><br><span class="line">./Cox/Co13/NN/WAVECAR</span><br><span class="line">./Cox/Co13/dos/WAVECAR</span><br><span class="line">./Cox/Co55/NN/WAVECAR</span><br><span class="line">&gt;&gt;&gt; find ./ -name WAVECAR | xargs rm -rf</span><br></pre></td></tr></table></figure>
+
+<h2 id="压缩与打包"><a href="#压缩与打包" class="headerlink" title="压缩与打包"></a>压缩与打包</h2><p>压缩gzip与bzip2<br>压缩并打包tar、rar、zip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 压缩gzip与打包tar</span><br><span class="line">gzip -9 test.mdcrd     #以最高压缩比压缩文件test.mdcrd</span><br><span class="line">gunzip test.mdcrd.gz   #解压缩文件</span><br><span class="line">gzip -r test.tar       #压缩test.tar备份文件</span><br><span class="line">gzip -rv  test         #压缩test文件夹下的所有文件 （-r 是递归参数）</span><br><span class="line">tar -czvf test.tar.gz test  #打包并压缩test文件夹，打包压缩后文件名为test.tar.gz</span><br><span class="line">tar -xzvf test.tar.gz        #解压缩test.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>如何在不同服务器间传输文件?<br>如远程服务器的IP是 59.64.37.3，用户名是jiangyf ,在命令行模式下输入<br><font color=blue size=3>sftp <a href="mailto:&#106;&#x69;&#97;&#x6e;&#x67;&#x79;&#x66;&#x40;&#53;&#x39;&#46;&#54;&#x34;&#46;&#x33;&#x37;&#x2e;&#x33;">&#106;&#x69;&#97;&#x6e;&#x67;&#x79;&#x66;&#x40;&#53;&#x39;&#46;&#54;&#x34;&#46;&#x33;&#x37;&#x2e;&#x33;</a></font>，回车提示输入密码。进入提示符</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sftp&gt;</span><br><span class="line">sftp&gt; get /home/jiangyf/test.gjf  /home/jiangyf/</span><br><span class="line">sftp&gt; put /home/jiangyf/test.log /home/jiangyf/</span><br></pre></td></tr></table></figure>
+<p>get语句是从远程服务器的/home/jiangyf/目录下将test.gjf下载到本地/home/jiangyf/目录下。<br>put语句将把当前服务器/home/jiangyf/目录下的test.log文件上传至远程服务器/home/jiangyf/目录下。<br>路径也可以是相对路径；<br>改变路径可以用cd ，改变当前服务器路径可以用lcd;<br>ls rm rmdir mkdir 这些命令都可以使用。同理调用当前服务器都是加l , 即lls lrm.<br>要离开sftp，用exit 或quit、 bye 均可。</p>
+<p>如果登陆远程机器不是为了上传下载文件，而是要修改远程主机上的某些文件。可以<br><font color=blue size=3><em>ssh <a href="mailto:&#106;&#x69;&#97;&#110;&#103;&#121;&#102;&#x40;&#x35;&#x39;&#x2e;&#54;&#x34;&#x2e;&#51;&#55;&#x2e;&#51;">&#106;&#x69;&#97;&#110;&#103;&#121;&#102;&#x40;&#x35;&#x39;&#x2e;&#54;&#x34;&#x2e;&#51;&#55;&#x2e;&#51;</a></em></font></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/03/29/Markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%9520190329/" rel="prev" title="Markdown 常用语法">
+                  <i class="fa fa-chevron-left"></i> Markdown 常用语法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/07/26/VMD-tcl%E5%91%BD%E4%BB%A4%E6%93%8D%E4%BD%9C/" rel="next" title="VMD之tcl命令操作">
+                  VMD之tcl命令操作 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

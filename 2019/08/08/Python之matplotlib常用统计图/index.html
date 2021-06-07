@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{&quot;hostname&quot;:&quot;jonyafei.com&quot;,&quot;root&quot;:&quot;&#x2F;&quot;,&quot;images&quot;:&quot;&#x2F;images&quot;,&quot;scheme&quot;:&quot;Gemini&quot;,&quot;version&quot;:&quot;8.5.0&quot;,&quot;exturl&quot;:false,&quot;sidebar&quot;:{&quot;position&quot;:&quot;left&quot;,&quot;display&quot;:&quot;post&quot;,&quot;padding&quot;:18,&quot;offset&quot;:12},&quot;copycode&quot;:false,&quot;bookmark&quot;:{&quot;enable&quot;:false,&quot;color&quot;:&quot;#222&quot;,&quot;save&quot;:&quot;auto&quot;},&quot;fancybox&quot;:false,&quot;mediumzoom&quot;:false,&quot;lazyload&quot;:false,&quot;pangu&quot;:false,&quot;comments&quot;:{&quot;style&quot;:&quot;tabs&quot;,&quot;active&quot;:null,&quot;storage&quot;:true,&quot;lazyload&quot;:false,&quot;nav&quot;:null},&quot;motion&quot;:{&quot;enable&quot;:true,&quot;async&quot;:false,&quot;transition&quot;:{&quot;post_block&quot;:&quot;fadeIn&quot;,&quot;post_header&quot;:&quot;fadeInDown&quot;,&quot;post_body&quot;:&quot;fadeInDown&quot;,&quot;coll_header&quot;:&quot;fadeInLeft&quot;,&quot;sidebar&quot;:&quot;fadeInUp&quot;}},&quot;prism&quot;:false,&quot;i18n&quot;:{&quot;placeholder&quot;:&quot;搜索...&quot;,&quot;empty&quot;:&quot;没有找到任何搜索结果：${query}&quot;,&quot;hits_time&quot;:&quot;找到 ${hits} 个搜索结果（用时 ${time} 毫秒）&quot;,&quot;hits&quot;:&quot;找到 ${hits} 个搜索结果&quot;}}</script><script src="/js/config.js"></script>
+<meta name="description" content="本文主要内容：  绘制散点图 绘制条形图 绘制直方图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之matplotlib常用统计图">
+<meta property="og:url" content="http://jonyafei.com/2019/08/08/Python%E4%B9%8Bmatplotlib%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%9B%BE/index.html">
+<meta property="og:site_name" content="Jonyafei&#39;s blog">
+<meta property="og:description" content="本文主要内容：  绘制散点图 绘制条形图 绘制直方图">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-08-08T12:25:55.000Z">
+<meta property="article:modified_time" content="2019-08-20T14:40:39.451Z">
+<meta property="article:author" content="jonyafei">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="matplotlib">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://jonyafei.com/2019/08/08/Python%E4%B9%8Bmatplotlib%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%9B%BE/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{&quot;sidebar&quot;:&quot;&quot;,&quot;isHome&quot;:false,&quot;isPost&quot;:true,&quot;lang&quot;:&quot;zh-CN&quot;,&quot;comments&quot;:true,&quot;permalink&quot;:&quot;http:&#x2F;&#x2F;jonyafei.com&#x2F;2019&#x2F;08&#x2F;08&#x2F;Python%E4%B9%8Bmatplotlib%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%9B%BE&#x2F;&quot;,&quot;path&quot;:&quot;2019&#x2F;08&#x2F;08&#x2F;Python之matplotlib常用统计图&#x2F;&quot;,&quot;title&quot;:&quot;Python之matplotlib常用统计图&quot;}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">&quot;&quot;</script>
+<title>Python之matplotlib常用统计图 | Jonyafei's blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Jonyafei's blog</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Never hesitate to do what you like to do!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%95%A3%E7%82%B9%E5%9B%BE-plt-scatter-x-y"><span class="nav-number">1.</span> <span class="nav-text">绘制散点图 plt.scatter(x,y)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E6%9D%A1%E5%BD%A2%E5%9B%BE-plt-bar-x-y"><span class="nav-number">2.</span> <span class="nav-text">绘制条形图 plt.bar(x,y)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E7%9B%B4%E6%96%B9%E5%9B%BEplt-hist"><span class="nav-number">3.</span> <span class="nav-text">绘制直方图plt.hist()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E4%B8%8D%E7%AD%89%E9%97%B4%E8%B7%9D%E6%9D%A1%E5%BD%A2%E5%9B%BE"><span class="nav-number">4.</span> <span class="nav-text">绘制不等间距条形图</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jonyafei"
+      src="/img/nezha.jpg">
+  <p class="site-author-name" itemprop="name">jonyafei</p>
+  <div class="site-description" itemprop="description">From Zero to the DevOps</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jonyafei.com/2019/08/08/Python%E4%B9%8Bmatplotlib%E5%B8%B8%E7%94%A8%E7%BB%9F%E8%AE%A1%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/nezha.jpg">
+      <meta itemprop="name" content="jonyafei">
+      <meta itemprop="description" content="From Zero to the DevOps">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonyafei's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python之matplotlib常用统计图
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-08 20:25:55" itemprop="dateCreated datePublished" datetime="2019-08-08T20:25:55+08:00">2019-08-08</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2019-08-20 22:40:39" itemprop="dateModified" datetime="2019-08-20T22:40:39+08:00">2019-08-20</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/matplotlib/" itemprop="url" rel="index"><span itemprop="name">matplotlib</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要内容：</p>
+<ol>
+<li>绘制散点图</li>
+<li>绘制条形图</li>
+<li>绘制直方图<span id="more"></span></li>
+</ol>
+<h2 id="绘制散点图-plt-scatter-x-y"><a href="#绘制散点图-plt-scatter-x-y" class="headerlink" title="绘制散点图 plt.scatter(x,y)"></a>绘制散点图 plt.scatter(x,y)</h2><ul>
+<li>与绘制折线图plt.plot(x,y)类似，唯一区别是调用scatter方法</li>
+<li>绘制2016年北京3月份与10月份的气温变化</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> font_manager</span><br><span class="line"></span><br><span class="line">my_font = font_manager.FontProperties(fname=<span class="string">&quot;C:\Windows\Fonts\msyh.ttc&quot;</span>)  <span class="comment"># windows系统下获取微软雅黑字体</span></span><br><span class="line">y_3 = [<span class="number">11</span>,<span class="number">17</span>,<span class="number">16</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">15</span>,<span class="number">14</span>,<span class="number">17</span>,<span class="number">18</span>,<span class="number">21</span>,<span class="number">16</span>,<span class="number">17</span>,<span class="number">20</span>,<span class="number">14</span>,<span class="number">15</span>,<span class="number">15</span>,<span class="number">15</span>,<span class="number">19</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">22</span>,<span class="number">22</span>,<span class="number">23</span>]</span><br><span class="line">y_10 = [<span class="number">26</span>,<span class="number">26</span>,<span class="number">28</span>,<span class="number">19</span>,<span class="number">21</span>,<span class="number">17</span>,<span class="number">16</span>,<span class="number">19</span>,<span class="number">28</span>,<span class="number">20</span>,<span class="number">20</span>,<span class="number">19</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">17</span>,<span class="number">20</span>,<span class="number">21</span>,<span class="number">20</span>,<span class="number">22</span>,<span class="number">15</span>,<span class="number">11</span>,<span class="number">15</span>,<span class="number">5</span>,<span class="number">13</span>,<span class="number">17</span>,<span class="number">10</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line">x_3 = <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">32</span>)</span><br><span class="line">x_10 = <span class="built_in">range</span>(<span class="number">51</span>,<span class="number">82</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置图形大小</span></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">8</span>),dpi=<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用scatter方法绘制散点图，和之前绘制折线图的唯一区别</span></span><br><span class="line">plt.scatter(x_3,y_3,label=<span class="string">&quot;3月份&quot;</span>)</span><br><span class="line">plt.scatter(x_10,y_10,label=<span class="string">&quot;10月份&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#调整x轴的刻度</span></span><br><span class="line">_x = <span class="built_in">list</span>(x_3)+<span class="built_in">list</span>(x_10)</span><br><span class="line">_xtick_labels = [<span class="string">&quot;3月&#123;&#125;日&quot;</span>.<span class="built_in">format</span>(i) <span class="keyword">for</span> i <span class="keyword">in</span> x_3]</span><br><span class="line">_xtick_labels += [<span class="string">&quot;10月&#123;&#125;日&quot;</span>.<span class="built_in">format</span>(i-<span class="number">50</span>) <span class="keyword">for</span> i <span class="keyword">in</span> x_10]</span><br><span class="line">plt.xticks(_x[::<span class="number">3</span>],_xtick_labels[::<span class="number">3</span>],fontproperties=my_font,rotation=<span class="number">45</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加图例</span></span><br><span class="line">plt.legend(loc=<span class="string">&quot;upper left&quot;</span>,prop=my_font)</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加描述信息</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;时间&quot;</span>,fontproperties=my_font)</span><br><span class="line">plt.ylabel(<span class="string">&quot;温度&quot;</span>,fontproperties=my_font)</span><br><span class="line">plt.title(<span class="string">&quot;标题&quot;</span>,fontproperties=my_font)</span><br><span class="line"><span class="comment">#展示</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="绘制条形图-plt-bar-x-y"><a href="#绘制条形图-plt-bar-x-y" class="headerlink" title="绘制条形图 plt.bar(x,y)"></a>绘制条形图 plt.bar(x,y)</h2><ul>
+<li>绘制2017年内地电影票房前20的电影及票房</li>
+<li>绘制竖着的条形图<font color=blue size=3>plt.bar</font>,条形宽度通过<font color=blue size=3>width</font>控制</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#绘制条形图</span></span><br><span class="line">plt.bar(<span class="built_in">range</span>(<span class="built_in">len</span>(a)),b,width=<span class="number">0.3</span>)</span><br><span class="line"><span class="comment">#设置字符串到x轴</span></span><br><span class="line">plt.xticks(<span class="built_in">range</span>(<span class="built_in">len</span>(a)),a,fontproperties=my_font,rotation=<span class="number">45</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>绘制横着的条形图<font color=blue size=3>plt.barh</font>,条形宽度通过<font color=blue size=3>height</font>控制</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#绘制横着的条形图</span></span><br><span class="line">plt.barh(<span class="built_in">range</span>(<span class="built_in">len</span>(a)),b,height=<span class="number">0.3</span>,color=<span class="string">&quot;orange&quot;</span>)</span><br><span class="line"><span class="comment">#设置字符串到y轴</span></span><br><span class="line">plt.yticks(<span class="built_in">range</span>(<span class="built_in">len</span>(a)),a,fontproperties=my_font)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>绘制多个条形图</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pypot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> font_manager</span><br><span class="line"></span><br><span class="line">my_font = font_manager.FontProperties(fname=<span class="string">&quot;C:\Windows\Fonts\msyh.ttc&quot;</span>)</span><br><span class="line"></span><br><span class="line">a = [<span class="string">&quot;猩球崛起3：终极之战&quot;</span>,<span class="string">&quot;敦刻尔克&quot;</span>,<span class="string">&quot;蜘蛛侠：英雄归来&quot;</span>,<span class="string">&quot;战狼2&quot;</span>]</span><br><span class="line">b_16 = [<span class="number">15746</span>,<span class="number">312</span>,<span class="number">4497</span>,<span class="number">319</span>]</span><br><span class="line">b_15 = [<span class="number">12357</span>,<span class="number">156</span>,<span class="number">2045</span>,<span class="number">168</span>]</span><br><span class="line">b_14 = [<span class="number">2358</span>,<span class="number">399</span>,<span class="number">2358</span>,<span class="number">362</span>]</span><br><span class="line"></span><br><span class="line">bar_width = <span class="number">0.2</span></span><br><span class="line"></span><br><span class="line">x_14 = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">len</span>(a)))</span><br><span class="line">x_15 = [i+bar_width <span class="keyword">for</span> i <span class="keyword">in</span> x_14]  <span class="comment"># 向右移动width的距离</span></span><br><span class="line">x_16 = [i+bar_width*<span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> x_14]</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置图形大小</span></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">8</span>),dpi=<span class="number">80</span>)</span><br><span class="line"></span><br><span class="line">plt.bar(<span class="built_in">range</span>(<span class="built_in">len</span>(a)),b_14,width=bar_width,label=<span class="string">&quot;9月14日&quot;</span>)</span><br><span class="line">plt.bar(x_15,b_15,width=bar_width,label=<span class="string">&quot;9月15日&quot;</span>)</span><br><span class="line">plt.bar(x_16,b_16,width=bar_width,label=<span class="string">&quot;9月16日&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置图例</span></span><br><span class="line">plt.legend(prop=my_font)</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置x轴的刻度</span></span><br><span class="line">plt.xticks(x_15,a,fontproperties=my_font)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="绘制直方图plt-hist"><a href="#绘制直方图plt-hist" class="headerlink" title="绘制直方图plt.hist()"></a>绘制直方图plt.hist()</h2><p>把数据分为若干组进行统计，组数要适当</p>
+<ul>
+<li>组数：将数据分组，当数据在100个以内时，按数据多少常分5到12组</li>
+<li>组距：指每个小组的两个端点的距离</li>
+<li>组数：极差/组距</li>
+<li>注意组数最好是整数，不然刻度会有偏差</li>
+<li>若数据是分组统计之后的数据，无法做hist直方图，可用bar做无间隔的条形图</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bin_width = <span class="number">3</span> <span class="comment"># 设置组距为3</span></span><br><span class="line">num_bins = (<span class="built_in">max</span>(a)-<span class="built_in">min</span>(a))//bin_width <span class="comment"># 分为多少组</span></span><br><span class="line">plt.hist(a,num_bins) <span class="comment">#传入需要统计的数据以及组数</span></span><br><span class="line"><span class="comment"># plt.hist(a,[min(a)+i*bin_width for i in range(num_bins)]) #可传入一个列表，长度为组数，值为分组依据，当组距不均匀时使用</span></span><br><span class="line"><span class="comment"># plt.hist(a,num_bins,normed=1) #normed:bool 是否绘制频率分布直方图，默认为频数直方图</span></span><br><span class="line">plt.xticks(<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="built_in">min</span>(a),<span class="built_in">max</span>(a)))[::bin_width],rotation=<span class="number">45</span>)</span><br><span class="line">plt.grid(<span class="literal">True</span>,linestyle=<span class="string">&quot;-.&quot;</span>,alpha=<span class="number">0.5</span>) <span class="comment">#显示网格</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="绘制不等间距条形图"><a href="#绘制不等间距条形图" class="headerlink" title="绘制不等间距条形图"></a>绘制不等间距条形图</h2><ul>
+<li>若数据是分组统计之后的数据，无法做hist直方图，可用bar做无间隔的条形图</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">interval = [<span class="number">0</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">25</span>,<span class="number">30</span>,<span class="number">35</span>,<span class="number">40</span>,<span class="number">45</span>,<span class="number">60</span>,<span class="number">90</span>]</span><br><span class="line">width = [<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">15</span>,<span class="number">30</span>,<span class="number">60</span>]</span><br><span class="line">quantity = [<span class="number">836</span>,<span class="number">2737</span>,<span class="number">3723</span>,<span class="number">3926</span>,<span class="number">3596</span>,<span class="number">1438</span>,<span class="number">3273</span>,<span class="number">642</span>,<span class="number">824</span>,<span class="number">613</span>,<span class="number">215</span>,<span class="number">47</span>]</span><br><span class="line"></span><br><span class="line">plt.figure(figsize=(<span class="number">20</span>,<span class="number">8</span>),dpi=<span class="number">80</span>)</span><br><span class="line">plt.bar(<span class="built_in">range</span>(<span class="number">12</span>),quantity,width=<span class="number">1</span>) <span class="comment">#加宽条形使其重叠</span></span><br><span class="line">_x = [i-<span class="number">0.5</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">13</span>)]</span><br><span class="line">_xtick_labels = interval + [<span class="number">150</span>]</span><br><span class="line">plt.xticks(_x,_xtick_labels)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.matplotlib.org.cn/gallery/index.html"><font face="黑体" color=blue size=3>详细说明请查看matplotlib中文文档</font></a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/matplotlib/" rel="tag"># matplotlib</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/08/07/Python%E4%B9%8Bmatplotlib%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4/" rel="prev" title="Python之matplotlib操作">
+                  <i class="fa fa-chevron-left"></i> Python之matplotlib操作
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/" rel="next" title="matplotlib绘制势能面剖面图">
+                  matplotlib绘制势能面剖面图 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80NjQxOC8yMjkyOQ=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jonyafei</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+  <script class="next-config" data-name="pdf" type="application/json">{&quot;object_url&quot;:{&quot;url&quot;:&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;pdfobject@2.2.5&#x2F;pdfobject.min.js&quot;,&quot;integrity&quot;:&quot;sha256-YuNlP9i6s&#x2F;WH7EaU2kErloo9Vc85C3WVqhoMDgsEVpY&#x3D;&quot;},&quot;url&quot;:&quot;&#x2F;lib&#x2F;pdf&#x2F;web&#x2F;viewer.html&quot;}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+
+
+  
+
+
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>
