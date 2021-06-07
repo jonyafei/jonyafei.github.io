@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://jonyafei.com/2021/06/06/Python%E8%84%9A%E6%9C%AC%E6%8F%90%E5%8F%96COHP%E6%95%B0%E6%8D%AE/fig4.jpg">
 <meta property="og:image" content="http://jonyafei.com/2021/06/06/Python%E8%84%9A%E6%9C%AC%E6%8F%90%E5%8F%96COHP%E6%95%B0%E6%8D%AE/fig5.jpg">
 <meta property="article:published_time" content="2021-06-06T12:00:00.000Z">
-<meta property="article:modified_time" content="2021-06-07T07:57:50.355Z">
+<meta property="article:modified_time" content="2021-06-07T14:01:32.733Z">
 <meta property="article:author" content="jonyafei">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
@@ -225,7 +225,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-06-07 15:57:50" itemprop="dateModified" datetime="2021-06-07T15:57:50+08:00">2021-06-07</time>
+        <time title="修改时间：2021-06-07 22:01:32" itemprop="dateModified" datetime="2021-06-07T22:01:32+08:00">2021-06-07</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,7 +252,7 @@
 
 <h2 id="脚本运行"><a href="#脚本运行" class="headerlink" title="脚本运行"></a>脚本运行</h2><p>运行环境：Python3<br>在COHP计算结束后，在所在文件夹运行python cohp.py，如下图：<br><img src="fig1.jpg" width = "90%" alt="fig1"></p>
 <p>程序会自动打印出当前文件夹中COHPCAR.lobster包含的COHP对应的名字，程序处于用户待输入状态；<br>输入all all，程序会画出总的COHP图：<br><img src="fig2.jpg" width = "70%" alt="fig2"></p>
-<p>关闭图形界面，程序会提示是否保存当前的COHP数据，输入yes，会把该组数据cohp_all-all.dat保存到当前文件夹；敲击Enter键，不保存数据，程序进入待输入状态，可输入下一组COHP名称；<br>输入3dyz 3dxz等，可查看轨道分量的COHP；<br>可输入多组数据名称，用分号隔开，如3d 3d; 4s 4s，程序会弹出对应的COHP图：<br><img src="fig3.jpg" width = "70%" alt="fig3"><br>脚本运行窗口同时会打印出相应的ICOHP值<br><img src="fig4.jpg" width = "90%" alt="fig4"></p>
+<p>关闭图形界面，程序会提示是否保存当前的COHP数据，输入y，会把该组数据cohp_all-all.dat保存到当前文件夹；敲击Enter键，不保存数据，程序进入待输入状态，可输入下一组COHP名称；<br>输入3dyz 3dxz等，可查看轨道分量的COHP；<br>可输入多组数据名称，用分号隔开，如3d 3d; 4s 4s，程序会弹出对应的COHP图：<br><img src="fig3.jpg" width = "70%" alt="fig3"><br>脚本运行窗口同时会打印出相应的ICOHP值<br><img src="fig4.jpg" width = "90%" alt="fig4"></p>
 <p>关闭图形窗口后，可输入y保存当前数据到文件cohp_3d-3d_4s-4s.dat中，敲击Enter键不保存数据；<br>再次敲击Enter键，退出程序。<br>程序输出的COHP数据格式如下：<br><img src="fig5.jpg" width = "70%" alt="fig5"></p>
 <p>可导入到Origin中作图，或编写python脚本作图。</p>
 <p>请注意：<br>仅适用于ISPIN=2自旋极化的计算结果;<br>脚本依赖于lobster-3.2.0版本计算结果文件；<br>当前目录需存在COHPCAR.lobster文件。</p>
