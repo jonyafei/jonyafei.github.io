@@ -32,6 +32,7 @@ def process_file(file_name):
         data.append(list(map(float,lines[num+2+i].split())))
     
     cohp = np.array(data).T
+    print(len(cohp))
     print("Including cohp of "+str(num))
     print(titles)
     # energy = cohp[0]
@@ -58,8 +59,12 @@ def get_cohp(num,titles,cohp,orbital):
         else: 
             cohp_alpha = -cohp[index0*2+1]
             icohp_alpha = cohp[index0*2+2][int(np.argwhere(cohp[0]==0))]
-            cohp_beta = -cohp[num*2+index0*2+1]
-            icohp_beta = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]
+            if len(cohp) == num * 4 + 1: # spin polarization
+                cohp_beta = -cohp[num*2+index0*2+1]
+                icohp_beta = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]  # icohp value at E-Ef=0eV
+            else:  # spin unpolarization
+                cohp_beta = np.zeros(len(cohp[0]))
+                icohp_beta = 0
     elif type(orbital[0]) is list and type(orbital[1]) is not list:
         cohp_alpha = np.zeros(len(cohp[0]))
         cohp_beta = np.zeros(len(cohp[0]))
@@ -69,14 +74,24 @@ def get_cohp(num,titles,cohp,orbital):
             for i in range(num):
                 if orbital[0][j] in titles[i][0] and orbital[1] in titles[i][1]:
                     index0 = i
-            cohp_alpha_one = -cohp[index0*2+1]
-            icohp_alpha_one = cohp[index0*2+2][int(np.argwhere(cohp[0]==0))]
-            cohp_beta_one = -cohp[num*2+index0*2+1]
-            icohp_beta_one = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]
-            cohp_alpha = cohp_alpha + cohp_alpha_one
-            cohp_beta = cohp_beta + cohp_beta_one
-            icohp_alpha = icohp_alpha + icohp_alpha_one
-            icohp_beta = icohp_beta + icohp_beta_one
+            try:
+                index0
+            except NameError:
+                print("Your input orbitals are not in COHPCAR.lobster!")
+                return None,None,None,None
+            else: 
+                cohp_alpha_one = -cohp[index0*2+1]
+                icohp_alpha_one = cohp[index0*2+2][int(np.argwhere(cohp[0]==0))]            
+                cohp_alpha = cohp_alpha + cohp_alpha_one            
+                icohp_alpha = icohp_alpha + icohp_alpha_one
+                if len(cohp) == num * 4 + 1: # spin polarization
+                    cohp_beta_one = -cohp[num*2+index0*2+1]
+                    icohp_beta_one = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]
+                    cohp_beta = cohp_beta + cohp_beta_one
+                    icohp_beta = icohp_beta + icohp_beta_one
+                else:  # spin unpolarization
+                    cohp_beta = np.zeros(len(cohp[0]))
+                    icohp_beta = 0
     elif type(orbital[0]) is not list and type(orbital[1]) is list:
         cohp_alpha = np.zeros(len(cohp[0]))
         cohp_beta = np.zeros(len(cohp[0]))
@@ -86,14 +101,25 @@ def get_cohp(num,titles,cohp,orbital):
             for i in range(num):
                 if orbital[0] in titles[i][0] and orbital[1][j] in titles[i][1]:
                     index0 = i
-            cohp_alpha_one = -cohp[index0*2+1]
-            icohp_alpha_one = cohp[index0*2+2][int(np.argwhere(cohp[0]==0))]
-            cohp_beta_one = -cohp[num*2+index0*2+1]
-            icohp_beta_one = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]
-            cohp_alpha = cohp_alpha + cohp_alpha_one
-            cohp_beta = cohp_beta + cohp_beta_one
-            icohp_alpha = icohp_alpha + icohp_alpha_one
-            icohp_beta = icohp_beta + icohp_beta_one
+            try:
+                index0
+            except NameError:
+                print("Your input orbitals are not in COHPCAR.lobster!")
+                return None,None,None,None
+            else: 
+                cohp_alpha_one = -cohp[index0*2+1]
+                icohp_alpha_one = cohp[index0*2+2][int(np.argwhere(cohp[0]==0))]            
+                cohp_alpha = cohp_alpha + cohp_alpha_one            
+                icohp_alpha = icohp_alpha + icohp_alpha_one
+                
+                if len(cohp) == num * 4 + 1: # spin polarization
+                    cohp_beta_one = -cohp[num*2+index0*2+1]
+                    icohp_beta_one = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]
+                    cohp_beta = cohp_beta + cohp_beta_one
+                    icohp_beta = icohp_beta + icohp_beta_one
+                else:  # spin unpolarization
+                    cohp_beta = np.zeros(len(cohp[0]))
+                    icohp_beta = 0
     else:
         cohp_alpha = np.zeros(len(cohp[0]))
         cohp_beta = np.zeros(len(cohp[0]))
@@ -104,14 +130,25 @@ def get_cohp(num,titles,cohp,orbital):
                 for i in range(num):
                     if orbital[0][j] in titles[i][0] and orbital[1][k] in titles[i][1]:
                         index0 = i
-                cohp_alpha_one = -cohp[index0*2+1]
-                icohp_alpha_one = cohp[index0*2+2][int(np.argwhere(cohp[0]==0))]
-                cohp_beta_one = -cohp[num*2+index0*2+1]
-                icohp_beta_one = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]
-                cohp_alpha = cohp_alpha + cohp_alpha_one
-                cohp_beta = cohp_beta + cohp_beta_one
-                icohp_alpha = icohp_alpha + icohp_alpha_one
-                icohp_beta = icohp_beta + icohp_beta_one
+                try:
+                    index0
+                except NameError:
+                    print("Your input orbitals are not in COHPCAR.lobster!")
+                    return None,None,None,None
+                else: 
+                    cohp_alpha_one = -cohp[index0*2+1]
+                    icohp_alpha_one = cohp[index0*2+2][int(np.argwhere(cohp[0]==0))]                
+                    cohp_alpha = cohp_alpha + cohp_alpha_one                
+                    icohp_alpha = icohp_alpha + icohp_alpha_one
+                    
+                    if len(cohp) == num * 4 + 1: # spin polarization
+                        cohp_beta_one = -cohp[num*2+index0*2+1]
+                        icohp_beta_one = cohp[num*2+index0*2+2][int(np.argwhere(cohp[0]==0))]
+                        cohp_beta = cohp_beta + cohp_beta_one
+                        icohp_beta = icohp_beta + icohp_beta_one
+                    else:  # spin unpolarization
+                        cohp_beta = np.zeros(len(cohp[0]))
+                        icohp_beta = 0
     return cohp_alpha,cohp_beta,icohp_alpha,icohp_beta
 
 
@@ -167,6 +204,7 @@ def get_orb():
     
 alpha,beta=chr(945),chr(946)
 num,titles,cohp = process_file("COHPCAR.lobster")
+
 status1 = 1
 while status1 == 1:
     status1,orb_cohp,orb_inp=get_orb()
@@ -181,13 +219,19 @@ while status1 == 1:
                 status2 = 0
                 break
             else:
-                cohps.append(cohp_a)
-                cohps.append(cohp_b)
-                icohps.append(icohp_a)
-                icohps.append(icohp_b)
-                orbs.append("_".join(orb_inp[i])+"_"+alpha)
-                orbs.append("_".join(orb_inp[i])+"_"+beta)
-                print("The ICOHP values of %s are \n   alpha \t beta\n %f\t%f" %("-".join(orb_inp[i]),icohp_a,icohp_b))
+                if len(cohp) == num * 4 + 1: # spin polarization
+                    print("The ICOHP values of %s are \n   alpha \t beta\n %f\t%f" %("-".join(orb_inp[i]),icohp_a,icohp_b))
+                    cohps.append(cohp_a)
+                    cohps.append(cohp_b)
+                    icohps.append(icohp_a)
+                    icohps.append(icohp_b)
+                    orbs.append("_".join(orb_inp[i])+"_"+alpha)
+                    orbs.append("_".join(orb_inp[i])+"_"+beta)
+                else:  # spin unpolarization
+                    cohps.append(cohp_a)
+                    icohps.append(icohp_a)
+                    orbs.append("_".join(orb_inp[i]))
+                    print("The ICOHP values of %s is %f.\n" %("-".join(orb_inp[i]),icohp_a))
         if status2 == 1:    
             df = pd.DataFrame(np.array(cohps).T,index = cohp[0].T,columns=orbs)
             df.plot()
@@ -199,7 +243,8 @@ while status1 == 1:
             check=input("Do you want to save the cohp data: y or [n]\n")
             if check=="y":
                 cohp_set = np.vstack((cohp[0],np.array(cohps))).T
-                header="  E-Ef(eV)   " + "    ".join(orbs) + "\n   ICOHP    " + "    ".join(map(str,icohps))
+                header="{:^12s}".format("E-Ef(eV)") + " ".join(map(lambda x: "{:^12s}".format(x),orbs)) + "\n" \
+                + "{:^12s}".format("ICOHP") + " ".join(map(lambda x: "{:^12.5f}".format(x),icohps))
                 output="cohp_"+'_'.join('-'.join(inner) for inner in orb_inp)+".dat"
                 np.savetxt(output,cohp_set,fmt="%12.5f",header=header)
                 print("Selected COHP data has been written into %s file." %output)
