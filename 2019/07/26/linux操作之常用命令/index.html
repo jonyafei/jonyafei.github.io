@@ -136,7 +136,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -258,10 +258,10 @@
 <h2 id="压缩与打包"><a href="#压缩与打包" class="headerlink" title="压缩与打包"></a>压缩与打包</h2><p>压缩gzip与bzip2<br>压缩并打包tar、rar、zip</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 压缩gzip与打包tar</span><br><span class="line">gzip -9 test.mdcrd     #以最高压缩比压缩文件test.mdcrd</span><br><span class="line">gunzip test.mdcrd.gz   #解压缩文件</span><br><span class="line">gzip -r test.tar       #压缩test.tar备份文件</span><br><span class="line">gzip -rv  test         #压缩test文件夹下的所有文件 （-r 是递归参数）</span><br><span class="line">tar -czvf test.tar.gz test  #打包并压缩test文件夹，打包压缩后文件名为test.tar.gz</span><br><span class="line">tar -xzvf test.tar.gz        #解压缩test.tar.gz</span><br></pre></td></tr></table></figure>
 
-<p>如何在不同服务器间传输文件?<br>如远程服务器的IP是 59.64.37.3，用户名是jiangyf ,在命令行模式下输入<br><font color=blue size=3>sftp <a href="mailto:&#106;&#x69;&#97;&#x6e;&#x67;&#x79;&#x66;&#x40;&#53;&#x39;&#46;&#54;&#x34;&#46;&#x33;&#x37;&#x2e;&#x33;">&#106;&#x69;&#97;&#x6e;&#x67;&#x79;&#x66;&#x40;&#53;&#x39;&#46;&#54;&#x34;&#46;&#x33;&#x37;&#x2e;&#x33;</a></font>，回车提示输入密码。进入提示符</p>
+<p>如何在不同服务器间传输文件?<br>如远程服务器的IP是 59.64.37.3，用户名是jiangyf ,在命令行模式下输入<br><font color=blue size=3>sftp <a href="mailto:&#106;&#105;&#97;&#x6e;&#103;&#121;&#x66;&#x40;&#x35;&#57;&#46;&#54;&#x34;&#46;&#51;&#x37;&#46;&#x33;">&#106;&#105;&#97;&#x6e;&#103;&#121;&#x66;&#x40;&#x35;&#57;&#46;&#54;&#x34;&#46;&#51;&#x37;&#46;&#x33;</a></font>，回车提示输入密码。进入提示符</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sftp&gt;</span><br><span class="line">sftp&gt; get /home/jiangyf/test.gjf  /home/jiangyf/</span><br><span class="line">sftp&gt; put /home/jiangyf/test.log /home/jiangyf/</span><br></pre></td></tr></table></figure>
 <p>get语句是从远程服务器的/home/jiangyf/目录下将test.gjf下载到本地/home/jiangyf/目录下。<br>put语句将把当前服务器/home/jiangyf/目录下的test.log文件上传至远程服务器/home/jiangyf/目录下。<br>路径也可以是相对路径；<br>改变路径可以用cd ，改变当前服务器路径可以用lcd;<br>ls rm rmdir mkdir 这些命令都可以使用。同理调用当前服务器都是加l , 即lls lrm.<br>要离开sftp，用exit 或quit、 bye 均可。</p>
-<p>如果登陆远程机器不是为了上传下载文件，而是要修改远程主机上的某些文件。可以<br><font color=blue size=3><em>ssh <a href="mailto:&#106;&#x69;&#97;&#110;&#103;&#121;&#102;&#x40;&#x35;&#x39;&#x2e;&#54;&#x34;&#x2e;&#51;&#55;&#x2e;&#51;">&#106;&#x69;&#97;&#110;&#103;&#121;&#102;&#x40;&#x35;&#x39;&#x2e;&#54;&#x34;&#x2e;&#51;&#55;&#x2e;&#51;</a></em></font></p>
+<p>如果登陆远程机器不是为了上传下载文件，而是要修改远程主机上的某些文件。可以<br><font color=blue size=3><em>ssh <a href="mailto:&#x6a;&#105;&#x61;&#110;&#103;&#121;&#x66;&#x40;&#x35;&#57;&#46;&#54;&#52;&#46;&#51;&#55;&#x2e;&#x33;">&#x6a;&#105;&#x61;&#110;&#103;&#121;&#x66;&#x40;&#x35;&#57;&#46;&#54;&#52;&#46;&#51;&#55;&#x2e;&#x33;</a></em></font></p>
 
     </div>
 
