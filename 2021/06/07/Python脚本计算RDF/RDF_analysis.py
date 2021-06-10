@@ -3,7 +3,7 @@
 # Written by Yafei Jiang                                                              ##
 # Email: jiangyafei730@163.com                                                        ##
 # Usage: python RDF_analysis.py filename orbital                                               ## 
-# Example: python out.Os 5d                                                           ##
+# Example: python RDF_analysis.py out.Os 5d                                                           ##
 # Note: the file such as out.Os should be obtained from ADF calculation               ##                                                           ##
 ########################################################################################
 import sys
