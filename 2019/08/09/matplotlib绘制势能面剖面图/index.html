@@ -28,15 +28,15 @@
 <meta property="og:description" content="作为计算化学工作者，工作中经常需要绘制势能面剖面图，采用Origin绘制大量这种图时显得特别耗时。本文基于Python中的matplotlib库编写了一键生成势能面剖面图的脚本，可画出平滑曲线图和实虚线相间的折线图。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/EnergyProfile_data.png">
+<meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/GUI.jpg">
 <meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/EnergyProfile_curve_pic.png">
 <meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/EnergyProfile_line_pic.png">
 <meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/EnergyProfile_linecurve_pic.png">
 <meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/EnergyProfile_MEP_curve_pic.png">
 <meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/EnergyProfile_MEP_line_pic.png">
 <meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/EnergyProfile_MEP_linecurve_pic.png">
-<meta property="og:image" content="http://jonyafei.com/2019/08/09/matplotlib%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE/GUI.png">
 <meta property="article:published_time" content="2019-08-09T12:25:55.000Z">
-<meta property="article:modified_time" content="2019-10-14T12:06:51.602Z">
+<meta property="article:modified_time" content="2022-01-19T05:28:09.844Z">
 <meta property="article:author" content="jonyafei">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="matplotlib">
@@ -130,7 +130,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#matplotlib%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">matplotlib运行环境及操作步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">脚本运行环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">脚本运行格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%BE%AE%E8%B0%83"><span class="nav-number">1.3.</span> <span class="nav-text">图像微调</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E5%B9%B3%E6%BB%91%E6%9B%B2%E7%BA%BF"><span class="nav-number">2.</span> <span class="nav-text">绘制势能面剖面图(平滑曲线)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD"><span class="nav-number">3.</span> <span class="nav-text">脚本下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%B8%8D%E5%90%8C%E8%87%AA%E6%97%8B%E6%80%81%EF%BC%8C%E5%8F%AA%E7%BB%98%E5%88%B6MEP"><span class="nav-number">4.</span> <span class="nav-text">对不同自旋态，只绘制MEP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E5%B9%B3%E6%BB%91%E6%9B%B2%E7%BA%BF-1"><span class="nav-number">4.1.</span> <span class="nav-text">绘制势能面剖面图(平滑曲线)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#windows%E4%B8%8B%E5%8F%AF%E8%BF%90%E8%A1%8C%E7%9A%84exe%E7%A8%8B%E5%BA%8F"><span class="nav-number">5.</span> <span class="nav-text">windows下可运行的exe程序</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#matplotlib%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%8F%8A%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">matplotlib运行环境及操作步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">脚本运行环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E8%BF%90%E8%A1%8C%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">脚本运行格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Excel%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.3.</span> <span class="nav-text">Excel模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%BE%AE%E8%B0%83"><span class="nav-number">1.4.</span> <span class="nav-text">图像微调</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">绘制势能面剖面图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E5%B9%B3%E6%BB%91%E6%9B%B2%E7%BA%BFCurve"><span class="nav-number">2.1.</span> <span class="nav-text">绘制势能面剖面图(平滑曲线Curve)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E8%99%9A%E5%AE%9E%E6%8A%98%E7%BA%BFLine-Dot"><span class="nav-number">2.2.</span> <span class="nav-text">绘制势能面剖面图(虚实折线Line_Dot)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E6%A8%AA%E7%BA%BF-amp-%E5%B9%B3%E6%BB%91%E6%9B%B2%E7%BA%BFLine-Curve"><span class="nav-number">2.3.</span> <span class="nav-text">绘制势能面剖面图(横线&amp;平滑曲线Line_Curve)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%B8%8D%E5%90%8C%E8%87%AA%E6%97%8B%E6%80%81%EF%BC%8C%E5%8F%AA%E7%BB%98%E5%88%B6MEP"><span class="nav-number">3.</span> <span class="nav-text">对不同自旋态，只绘制MEP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E5%B9%B3%E6%BB%91%E6%9B%B2%E7%BA%BFMEP-Curve"><span class="nav-number">3.1.</span> <span class="nav-text">绘制势能面剖面图(平滑曲线MEP_Curve)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E8%99%9A%E5%AE%9E%E6%8A%98%E7%BA%BFMEP-Line-Dot"><span class="nav-number">3.2.</span> <span class="nav-text">绘制势能面剖面图(虚实折线MEP_Line_Dot)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E5%8A%BF%E8%83%BD%E9%9D%A2%E5%89%96%E9%9D%A2%E5%9B%BE-%E6%A8%AA%E7%BA%BF-amp-%E5%B9%B3%E6%BB%91%E6%9B%B2%E7%BA%BFMEP-Line-Curve"><span class="nav-number">3.3.</span> <span class="nav-text">绘制势能面剖面图(横线&amp;平滑曲线MEP_Line_Curve)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.</span> <span class="nav-text">脚本下载</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,7 +234,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2019-10-14 20:06:51" itemprop="dateModified" datetime="2019-10-14T20:06:51+08:00">2019-10-14</time>
+        <time title="修改时间：2022-01-19 13:28:09" itemprop="dateModified" datetime="2022-01-19T13:28:09+08:00">2022-01-19</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,56 +275,37 @@
 <li>anaconda3下载地址：<a target="_blank" rel="noopener" href="https://www.anaconda.com/distribution/"><font face="黑体" color=blue size=3>https://www.anaconda.com/distribution/</font></a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.anaconda.com/anaconda/install/windows/"><font face="黑体" color=blue size=3>Anaconda3安装</font></a>完成后，打开Anaconda Prompt，<a target="_blank" rel="noopener" href="https://anaconda.org/conda-forge/matplotlib"><font face="黑体" color=blue size=3>安装matplotlib</font></a>模块，运行命令：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge matplotlib</span><br></pre></td></tr></table></figure></li>
 <li>需安装adjustText模块，可改善文本标签重叠情况<br>打开Anaconda Prompt，<a target="_blank" rel="noopener" href="https://github.com/Phlya/adjustText"><font face="黑体" color=blue size=3>安装adjustText</font></a>模块，运行命令：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c phlya adjusttext</span><br></pre></td></tr></table></figure></li>
+<li>需安装PySimpleGUI模块，显示参数调整面板<br>打开Anaconda Prompt，<a target="_blank" rel="noopener" href="https://github.com/PySimpleGUI"><font face="黑体" color=blue size=3>安装PySimpleGUI</font></a>模块，运行命令：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c conda-forge pysimplegui</span><br></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="脚本运行格式"><a href="#脚本运行格式" class="headerlink" title="脚本运行格式"></a>脚本运行格式</h3><ul>
-<li><p>打开Anaconda Prompt，进入脚本所在目录，运行命令即可得到能垒图EnergyProfile.png：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py EnergyProfile.xlsx 3 True</span><br></pre></td></tr></table></figure></li>
-<li><p>第一个参数plot_energyProfile.py为脚本名；第二个参数EnergyProfile.xlsx为存放能量数据的Excel文件；第三个参数1表示绘制平滑曲线，2表示绘制虚实折线，3表示绘制横线&amp;平滑曲线图；第四个参数True表示显示每个能量文本标签，False表示不显示；</p>
-</li>
-<li><p>EnergyProfile.xlsx 格式如图，B1、B2、B3分别为图片、X轴、Y轴的标题，第四行为不同路径的名称，第五行为不同路径显示的颜色，对路径个数无要求，可按需求添加更改。脚本支持能量数据点部分缺省。</p>
-</li>
+<li>打开Anaconda Prompt，进入脚本所在目录，运行命令<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Excel模板"><a href="#Excel模板" class="headerlink" title="Excel模板"></a>Excel模板</h3><ul>
+<li>EnergyProfile.xlsx 格式如图，第一行为不同路径的名称，第二行为不同路径显示的颜色，对路径个数无要求，可按需求添加更改，第三行为线条类型（-表示实现，–表示虚线）。脚本支持能量数据点部分缺省。</li>
 </ul>
 <p><a href="EnergyProfile.xlsx">点击下载模板文件EnergyProfile.xlsx</a><br><img src="EnergyProfile_data.png" width = "60%" alt="EnergyProfile_data"></p>
-<h3 id="图像微调"><a href="#图像微调" class="headerlink" title="图像微调"></a>图像微调</h3><ul>
-<li><p>能量值文本大小调整：搜索脚本中FontSize变量，找到FontSize=22，重新赋值即可；</p>
-</li>
-<li><p>若修改能量值小数点后位数，可搜索{:.1f}，将字母f前的数字修改为对应的数字；</p>
-</li>
-<li><p>若不想安装adjust_text模块进行能量值文本位置优化，可将脚本中含有adjust_text的命令行用#号注释掉；</p>
-</li>
-<li><p>若能量值文本相互重叠或与所绘曲线重叠，也可将图片保存为eps格式，用Adobe Illustrator打开，删除背景，选中能量值，可移动到合适位置；</p>
-</li>
-<li><p>坐标轴标签及标题文字大小调整：搜索脚本中Axis_FontSize变量，找到Axis_FontSize=20，重新赋值即可；若想分别调整坐标轴标签及标题文字大小，也可在脚本末尾寻找（plt.xticks, plt.yticks, plt.xlabel, plt.ylabel, plt.title, plt.legend）等命令中的fontsize，重新指定文本字号即可；</p>
-</li>
-<li><p>若x轴标签过长产生重叠，可在plt.xticks里设置旋转角度及旋转中心，比如rotation=-45, HorizontalAlignment=”left”</p>
-</li>
-<li><p>matplotlib支持绘制数学公式，以<code>$</code>作为开始和结束符中间包含数学公式；因此，若x轴y轴标签中有上下标，可以用<font face="Arial" color=blue size=3><strong>$ $</strong></font>括起来，上标用<font face="Arial" color=blue size=3><strong>^</strong></font>，下标用<font face="Arial" color=blue size=3><strong>_</strong></font>，比如<code>$NH_3$</code>表示NH<sub>3</sub>；但是这样处理，显示出来的字体是斜体样式，可在对应的命令（plt.xticks, plt.yticks, plt.xlabel, plt.ylabel）中添加fontstyle=”normal”即可恢复正常字体样式；</p>
-</li>
-<li><p>对于11, 22, 33不同自旋态的能量图绘制，MEP曲线颜色默认设置为灰色grey，若需修改可在脚本中搜索grey字符进行修改；</p>
-</li>
+<p>如若xlrd版本过高，无法读取xlsx文件，可转换为旧版格式xls</p>
+<h3 id="图像微调"><a href="#图像微调" class="headerlink" title="图像微调"></a>图像微调</h3><img src="GUI.jpg" width = "80%" alt="GUI">
+
+<ul>
+<li>若修改能量值小数点后位数，可搜索{:.1f}，将字母f前的数字修改为对应的数字；</li>
+<li>若能量值文本相互重叠或与所绘曲线重叠，也可将图片保存为eps格式，用Adobe Illustrator打开，删除背景，选中能量值，可移动到合适位置；</li>
+<li>matplotlib支持绘制数学公式，以<code>$</code>作为开始和结束符中间包含数学公式；因此，若x轴y轴标签中有上下标，可以用<font face="Arial" color=blue size=3><strong>$ $</strong></font>括起来，上标用<font face="Arial" color=blue size=3><strong>^</strong></font>，下标用<font face="Arial" color=blue size=3><strong>_</strong></font>，比如<code>$NH_3$</code>表示NH<sub>3</sub>；但是这样处理，显示出来的字体是斜体样式，可在对应的命令（plt.xticks, plt.yticks, plt.xlabel, plt.ylabel）中添加fontstyle=”normal”即可恢复正常字体样式；</li>
+<li>对于不同自旋态的能量图绘制，MEP曲线颜色默认设置为灰色grey，若需修改可在脚本中搜索grey字符进行修改；</li>
 </ul>
-<h2 id="绘制势能面剖面图-平滑曲线"><a href="#绘制势能面剖面图-平滑曲线" class="headerlink" title="绘制势能面剖面图(平滑曲线)"></a>绘制势能面剖面图(平滑曲线)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py EnergyProfile.xlsx 1 True</span><br></pre></td></tr></table></figure>
-<img src="EnergyProfile_curve_pic.png" width = "90%" alt="EnergyProfile_curve_pic">
-## 绘制势能面剖面图(虚实折线)
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py EnergyProfile.xlsx 2 True</span><br></pre></td></tr></table></figure>
-<img src="EnergyProfile_line_pic.png" width = "90%" alt="EnergyProfile_line_pic">
-## 绘制势能面剖面图(横线&平滑曲线)
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py EnergyProfile.xlsx 3 True</span><br></pre></td></tr></table></figure>
+<h2 id="绘制势能面剖面图"><a href="#绘制势能面剖面图" class="headerlink" title="绘制势能面剖面图"></a>绘制势能面剖面图</h2><h3 id="绘制势能面剖面图-平滑曲线Curve"><a href="#绘制势能面剖面图-平滑曲线Curve" class="headerlink" title="绘制势能面剖面图(平滑曲线Curve)"></a>绘制势能面剖面图(平滑曲线Curve)</h3><img src="EnergyProfile_curve_pic.png" width = "90%" alt="EnergyProfile_curve_pic">
 
-<img src="EnergyProfile_linecurve_pic.png" width = "90%" alt="EnergyProfile_linecurve_pic">
+<h3 id="绘制势能面剖面图-虚实折线Line-Dot"><a href="#绘制势能面剖面图-虚实折线Line-Dot" class="headerlink" title="绘制势能面剖面图(虚实折线Line_Dot)"></a>绘制势能面剖面图(虚实折线Line_Dot)</h3><img src="EnergyProfile_line_pic.png" width = "90%" alt="EnergyProfile_line_pic">
 
-<h2 id="脚本下载"><a href="#脚本下载" class="headerlink" title="脚本下载"></a>脚本下载</h2><p><a href="Plot_EnergyProfile.py">点击下载代码</a></p>
-<h2 id="对不同自旋态，只绘制MEP"><a href="#对不同自旋态，只绘制MEP" class="headerlink" title="对不同自旋态，只绘制MEP"></a>对不同自旋态，只绘制MEP</h2><h3 id="绘制势能面剖面图-平滑曲线-1"><a href="#绘制势能面剖面图-平滑曲线-1" class="headerlink" title="绘制势能面剖面图(平滑曲线)"></a>绘制势能面剖面图(平滑曲线)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py EnergyProfile.xlsx 11 True</span><br></pre></td></tr></table></figure>
-<img src="EnergyProfile_MEP_curve_pic.png" width = "90%" alt="EnergyProfile_MEP_curve_pic">
-### 绘制势能面剖面图(虚实折线)
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py EnergyProfile.xlsx 22 True</span><br></pre></td></tr></table></figure>
-<img src="EnergyProfile_MEP_line_pic.png" width = "90%" alt="EnergyProfile_MEP_line_pic">
-### 绘制势能面剖面图(横线&平滑曲线)
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python plot_energyProfile.py EnergyProfile.xlsx 33 True</span><br></pre></td></tr></table></figure>
+<h3 id="绘制势能面剖面图-横线-amp-平滑曲线Line-Curve"><a href="#绘制势能面剖面图-横线-amp-平滑曲线Line-Curve" class="headerlink" title="绘制势能面剖面图(横线&amp;平滑曲线Line_Curve)"></a>绘制势能面剖面图(横线&amp;平滑曲线Line_Curve)</h3><img src="EnergyProfile_linecurve_pic.png" width = "90%" alt="EnergyProfile_linecurve_pic">
 
-<img src="EnergyProfile_MEP_linecurve_pic.png" width = "90%" alt="EnergyProfile_MEP_linecurve_pic">
+<h2 id="对不同自旋态，只绘制MEP"><a href="#对不同自旋态，只绘制MEP" class="headerlink" title="对不同自旋态，只绘制MEP"></a>对不同自旋态，只绘制MEP</h2><h3 id="绘制势能面剖面图-平滑曲线MEP-Curve"><a href="#绘制势能面剖面图-平滑曲线MEP-Curve" class="headerlink" title="绘制势能面剖面图(平滑曲线MEP_Curve)"></a>绘制势能面剖面图(平滑曲线MEP_Curve)</h3><img src="EnergyProfile_MEP_curve_pic.png" width = "90%" alt="EnergyProfile_MEP_curve_pic">
 
-<h2 id="windows下可运行的exe程序"><a href="#windows下可运行的exe程序" class="headerlink" title="windows下可运行的exe程序"></a>windows下可运行的exe程序</h2><p>为了方便使用，我将其打包成了exe应用程序，直接双击exe程序，即可弹出参数设置界面，点击Submit按钮，弹出绘制的反应能垒图，点击保存即可。<br><img src="GUI.png" width = "60%" alt="GUI"><br>Excel模板文件稍作修改。感兴趣的可以点击下面的链接下载。提取码：ae90<br><a href="EnergyProfile2.xlsx">点击下载模板文件EnergyProfile.xlsx</a><br><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1JfEwlBcF3jy4cFDDAZcjZw">点击下载exe程序</a></p>
+<h3 id="绘制势能面剖面图-虚实折线MEP-Line-Dot"><a href="#绘制势能面剖面图-虚实折线MEP-Line-Dot" class="headerlink" title="绘制势能面剖面图(虚实折线MEP_Line_Dot)"></a>绘制势能面剖面图(虚实折线MEP_Line_Dot)</h3><img src="EnergyProfile_MEP_line_pic.png" width = "90%" alt="EnergyProfile_MEP_line_pic">
+
+<h3 id="绘制势能面剖面图-横线-amp-平滑曲线MEP-Line-Curve"><a href="#绘制势能面剖面图-横线-amp-平滑曲线MEP-Line-Curve" class="headerlink" title="绘制势能面剖面图(横线&amp;平滑曲线MEP_Line_Curve)"></a>绘制势能面剖面图(横线&amp;平滑曲线MEP_Line_Curve)</h3><img src="EnergyProfile_MEP_linecurve_pic.png" width = "90%" alt="EnergyProfile_MEP_linecurve_pic">
+
+<h2 id="脚本下载"><a href="#脚本下载" class="headerlink" title="脚本下载"></a>脚本下载</h2><p><a href="Plot_EnergyProfile-GUI.py">点击下载代码</a></p>
 
     </div>
 
@@ -384,7 +365,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
