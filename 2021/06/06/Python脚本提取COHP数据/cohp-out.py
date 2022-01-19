@@ -3,6 +3,7 @@
 # Written by Yafei Jiang                                                              ##
 # Email: jiangyafei730@163.com                                                        ##
 # Usage: python cohp.py                                                               ##
+# update including spin unpolarization condition                                      ##
 ########################################################################################
 import numpy as np
 from matplotlib import pyplot as plt
@@ -185,18 +186,48 @@ def get_orb():
         orbitals=[]  # orbital name in COHPCAR.lobster
         for ss in inp2:  ## ss: input orbital name list for each orbial pairs
             orb_pairs=[]
-            for sss in ss:  ## sss:input orbital name in input orbital name list for each orbial pairs
-                if sss in orb_p:  # such as 2p
-                    orb_temp=[sss+i for i in orb_p2]  # 2p --> [2p_x, 2p_y, 2p_z]
+            if ss[0] == 'all' and ss[1] == 'all':
+                orb_pairs = ss
+            elif ss[0] == 'all':  # such as all 2p, extend all into all orbitals list of atom 1
+                orb_pairs.append(orbA)
+                if ss[1] in orb_p:  # such as 2p
+                    orb_temp=[ss[1]+i for i in orb_p2]  # 2p --> [2p_x, 2p_y, 2p_z]
                     orb_pairs.append(orb_temp)
-                elif sss in orb_d:  # such as 3d
-                    orb_temp=[sss+i for i in orb_d2]  # 3d --> ["3d_xy","3d_yz","3d_xz","3d_z^2","3d_x^2-y^2"]
+                elif ss[1] in orb_d:  # such as 3d
+                    orb_temp=[ss[1]+i for i in orb_d2]  # 3d --> ["3d_xy","3d_yz","3d_xz","3d_z^2","3d_x^2-y^2"]
                     orb_pairs.append(orb_temp)
-                elif sss in orb_f:  # such as 4f
-                    orb_temp=[sss+i for i in orb_f2]  # 4f --> [...]
+                elif ss[1] in orb_f:  # such as 4f
+                    orb_temp=[ss[1]+i for i in orb_f2]  # 4f --> [...]
                     orb_pairs.append(orb_temp)
                 else:
-                    orb_pairs.append(orb2[orb1.index(sss)])  # 2px --> 2p_x
+                    orb_pairs.append(orb2[orb1.index(ss[1])])  # 2px --> 2p_x
+            elif ss[1] == 'all':  # such as 2p all, extend all into all orbitals list of atom 2
+                if ss[0] in orb_p:  # such as 2p
+                    orb_temp=[ss[0]+i for i in orb_p2]  # 2p --> [2p_x, 2p_y, 2p_z]
+                    orb_pairs.append(orb_temp)
+                elif ss[0] in orb_d:  # such as 3d
+                    orb_temp=[ss[0]+i for i in orb_d2]  # 3d --> ["3d_xy","3d_yz","3d_xz","3d_z^2","3d_x^2-y^2"]
+                    orb_pairs.append(orb_temp)
+                elif ss[0] in orb_f:  # such as 4f
+                    orb_temp=[ss[0]+i for i in orb_f2]  # 4f --> [...]
+                    orb_pairs.append(orb_temp)
+                else:
+                    orb_pairs.append(orb2[orb1.index(ss[0])])  # 2px --> 2p_x 
+                orb_pairs.append(orbB)
+            else:
+                for sss in ss:  ## sss:input orbital name in input orbital name list for each orbial pairs
+                    
+                    if sss in orb_p:  # such as 2p
+                        orb_temp=[sss+i for i in orb_p2]  # 2p --> [2p_x, 2p_y, 2p_z]
+                        orb_pairs.append(orb_temp)
+                    elif sss in orb_d:  # such as 3d
+                        orb_temp=[sss+i for i in orb_d2]  # 3d --> ["3d_xy","3d_yz","3d_xz","3d_z^2","3d_x^2-y^2"]
+                        orb_pairs.append(orb_temp)
+                    elif sss in orb_f:  # such as 4f
+                        orb_temp=[sss+i for i in orb_f2]  # 4f --> [...]
+                        orb_pairs.append(orb_temp)
+                    else:
+                        orb_pairs.append(orb2[orb1.index(sss)])  # 2px --> 2p_x
             orbitals.append(orb_pairs)
         print(orbitals)
         return status,orbitals,inp2  # status,orbital name list in COHPCAR.losber,input orbital name list for each orbital pairs
@@ -204,6 +235,9 @@ def get_orb():
     
 alpha,beta=chr(945),chr(946)
 num,titles,cohp = process_file("COHPCAR.lobster")
+
+orbA = list(set([i[0] for i in titles[2:]]))  # all orbitals in atom 1
+orbB = list(set([i[1] for i in titles[2:]]))  # all orbitals in atom 2
 
 status1 = 1
 while status1 == 1:
